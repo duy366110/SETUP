@@ -1,19 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Menu, MenuItemLink, useSidebarState } from "react-admin";
 import { Collapse, ListItem, ListItemIcon } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import {
-  Dashboard,
-  People,
   Settings,
-  ExpandLess,
   ExpandMore,
 } from "@mui/icons-material";
-import CottageIcon from "@mui/icons-material/Cottage";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HistoryIcon from "@mui/icons-material/History";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import styles from "./MenuCustom.module.css";
 
 const MenuCustom = (props: any) => {
@@ -55,7 +52,7 @@ const MenuCustom = (props: any) => {
             to="/tickets"
             primaryText="Tickets"
             selected={location.pathname === "/tickets"}
-            leftIcon={<CottageIcon />}
+            leftIcon={<BookmarkAddedIcon />}
           />
 
           <MenuItemLink
