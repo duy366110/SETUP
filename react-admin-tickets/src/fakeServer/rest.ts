@@ -2,7 +2,7 @@ import FakeRest from "fakerest";
 import fetchMock from "fetch-mock";
 import generateData from "data-generator-retail";
 
-import { StatusCrmTableRecords } from "../datas/posts";
+import { Tickets } from "@/datas/tickets";
 
 
 export default () => {
@@ -13,9 +13,7 @@ export default () => {
     }
     restServer.init({
       ...data,
-  
-      //- GCN
-      "posts": StatusCrmTableRecords,
+      "tickets": Tickets,
     });
     restServer.toggleLogging(); // logging is off by default, enable it
     fetchMock?.mock("begin:http://localhost:4000", restServer.getHandler());

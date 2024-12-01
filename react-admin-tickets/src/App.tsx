@@ -1,5 +1,6 @@
 import {
   Admin,
+  Resource,
   CustomRoutes,
   useTheme,
   useStore,
@@ -9,9 +10,9 @@ import LayoutCustom from "@/layouts/LayoutCustom";
 import dataProviderFactory from "@/providers/servers/index";
 import { authProvider } from "@/providers/authProvider";
 
-import { ThemeName, Themes } from "@/themes/themes";
-
+import { ThemeName, Themes } from "@/themes/Themes";
 import Dashboard from "@/containers/dashboard/Dashboard";
+import { resource as ResourceTicket } from "@/containers/tickets/Index";
 
 export const App = () => {
   const theme: any = useTheme();
@@ -38,6 +39,8 @@ export const App = () => {
       <CustomRoutes>
         <Route path="/" element={<Dashboard />} />
       </CustomRoutes>
+
+      <Resource name="tickets" {...ResourceTicket} />
     </Admin>
   );
 }

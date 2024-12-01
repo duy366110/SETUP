@@ -52,9 +52,9 @@ const MenuCustom = (props: any) => {
         <Menu className="!py-0">
           <MenuItemLink
             className="!py-2"
-            to="/dashboard"
-            primaryText="Dashboard"
-            selected={location.pathname === "/dashboard"}
+            to="/tickets"
+            primaryText="Tickets"
+            selected={location.pathname === "/tickets"}
             leftIcon={<CottageIcon />}
           />
 

@@ -1,7 +1,7 @@
 import { Layout } from "react-admin";
 import MenuCustom from "./menu/MenuCustom";
 import AppBarCustom from "./appBar/AppBarCustom";
-import Header from "./header/Heaer";
+import Header from "./header/Header";
 
 const LayoutCustom = (props: any) => {
   return (
