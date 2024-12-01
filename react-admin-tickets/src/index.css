@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.RaLayout-appFrame {
+    margin-top: 0px!important;
+}
