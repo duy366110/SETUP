@@ -5,9 +5,9 @@ import {
   EditGuesser,
   ShowGuesser,
 } from "react-admin";
-import { Layout } from "./Layout";
-import { dataProvider } from "./dataProvider";
-import { authProvider } from "./authProvider";
+import { Layout } from "@/layouts/Layout";
+import { dataProvider } from "@/providers/dataProvider";
+import { authProvider } from "@/providers/authProvider";
 
 export const App = () => (
   <Admin
