@@ -1,10 +1,17 @@
+import { Edit, EditBase, SimpleForm, TextInput } from "react-admin";
 
-const TicketEdit = (props: any) => {
+interface TicketEditProps {
+    id?:string;
+}
+
+const TicketEdit = (props: TicketEditProps | any) => {
 
     return (
-        <div>
-            Edit
-        </div>
+        <EditBase className="!border-0" title=" " id={props.id}>
+            <SimpleForm className="!border-0">
+                <TextInput source="id" />
+            </SimpleForm>
+        </EditBase>
     )
 }
 

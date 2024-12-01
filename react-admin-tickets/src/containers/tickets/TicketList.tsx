@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { List, Datagrid, TextField } from "react-admin";
 import { Drawer } from "@mui/material";
+import TicketEdit from "./TicketEdit";
 import styles from "./TicketList.module.css";
 
 const TicketList = (props: any) => {
@@ -41,7 +42,9 @@ const TicketList = (props: any) => {
           anchor="right"
           sx={{ zIndex: 5 }}
         >
-          <div className="w-[400px] bg-[red] h-full"></div>
+          <div className="w-[400px] h-full mt-[60px]">
+            <TicketEdit id={1} />
+          </div>
         </Drawer>
       </List>
     </div>
