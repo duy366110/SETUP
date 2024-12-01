@@ -1,5 +1,5 @@
 export interface TicketsType {
-  id?: string;
+  id?: number;
   title?: string;
   description?: string;
   status?: string;
@@ -14,7 +14,7 @@ export interface TicketsType {
 
 export const Tickets: TicketsType[] = [
   {
-    id: "TICKET-001",
+    id: 1,
     title: "Fix login page error",
     description:
       "Users cannot log in due to a server timeout error. Investigate and fix the issue.",
@@ -36,7 +36,7 @@ export const Tickets: TicketsType[] = [
     comments: [],
   },
   {
-    id: "TICKET-002",
+    id: 2,
     title: "Add dark mode to settings",
     description: "Implement a dark mode toggle in the user settings page.",
     status: "Open",
@@ -53,7 +53,7 @@ export const Tickets: TicketsType[] = [
     comments: [],
   },
   {
-    id: "TICKET-003",
+    id: 3,
     title: "Optimize database queries",
     description:
       "Certain database queries are slow and causing performance issues. Optimize the query logic and indexes.",
@@ -75,7 +75,7 @@ export const Tickets: TicketsType[] = [
     comments: [],
   },
   {
-    id: "TICKET-004",
+    id: 4,
     title: "Update homepage banner",
     description:
       "Design and replace the banner on the homepage for the holiday season.",
@@ -93,7 +93,7 @@ export const Tickets: TicketsType[] = [
     comments: [],
   },
   {
-    id: "TICKET-005",
+    id: 5,
     title: "Migrate user data to new database",
     description: "Migrate all user records to the new PostgreSQL database.",
     status: "In Progress",
@@ -114,7 +114,7 @@ export const Tickets: TicketsType[] = [
     comments: [],
   },
   {
-    id: "TICKET-006",
+    id: 6,
     title: "Fix CSS alignment issue on mobile",
     description:
       "The footer on the mobile version is misaligned. Fix the styling to ensure proper layout.",
@@ -132,7 +132,7 @@ export const Tickets: TicketsType[] = [
     comments: [],
   },
   {
-    id: "TICKET-007",
+    id: 7,
     title: "Add forgot password functionality",
     description:
       "Implement a 'Forgot Password' feature to allow users to reset their passwords.",
@@ -154,7 +154,7 @@ export const Tickets: TicketsType[] = [
     comments: [],
   },
   {
-    id: "TICKET-008",
+    id: 8,
     title: "Write documentation for API endpoints",
     description:
       "Document all the available REST API endpoints with examples and use cases.",
@@ -176,7 +176,7 @@ export const Tickets: TicketsType[] = [
     comments: [],
   },
   {
-    id: "TICKET-009",
+    id: 9,
     title: "Conduct penetration testing",
     description:
       "Test the application for security vulnerabilities and provide a detailed report.",
@@ -194,7 +194,7 @@ export const Tickets: TicketsType[] = [
     comments: [],
   },
   {
-    id: "TICKET-010",
+    id: 10,
     title: "Optimize image loading on website",
     description:
       "Reduce image sizes and implement lazy loading for better performance.",
