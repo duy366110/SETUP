@@ -1,15 +1,15 @@
 import {
-  Title,
+  // Title,
   AppBar,
   ToggleThemeButton,
   UserMenu,
   useSidebarState,
-  TitlePortal,
+  // TitlePortal,
 } from "react-admin";
 import { Button } from "@mui/material";
-import { IconButton } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
+// import { IconButton } from "@mui/material";
+// import MenuIcon from "@mui/icons-material/Menu";
+// import CloseIcon from "@mui/icons-material/Close";
 
 const AppBarCustom = (props: any) => {
   const [open, setOpen] = useSidebarState();
