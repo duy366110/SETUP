@@ -5,6 +5,7 @@ import { Drawer } from "@mui/material";
 
 import { RootState } from "@/store";
 import TicketViewEdit from "../view/TicketViewEdit";
+import { FieldFunction, RenderFieldFunction } from "@/components/fileds/FieldFunction";
 import styles from "./TicketPageList.module.css";
 
 const TicketPageList = (props: any) => {
@@ -39,7 +40,7 @@ const TicketPageList = (props: any) => {
           rowClick={(id, resource) => {
             if (!mediaQuery.md) {
               setIdTicket(id);
-              setIsRightViewEdit(idTicket < 0? !isRightViewEdit : true);
+              setIsRightViewEdit(idTicket < 0 ? !isRightViewEdit : true);
               return false;
             }
             redirect(`tickets/${idTicket}`);
@@ -47,8 +48,21 @@ const TicketPageList = (props: any) => {
           }}
         >
           <TextField source="id" />
-          <TextField source="id" />
-          <TextField source="id" />
+          <TextField source="title" />
+          <FieldFunction
+            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            label="Assignee"
+            field="assignee"
+            source="assignee"
+            types="custom"
+            customContent={(record: any) => {
+              console.log(record.assignee)
+              return (
+                <div>Developer</div>
+              );
+            }}
+            render={RenderFieldFunction}
+          />
           <TextField source="id" />
           <TextField source="id" />
           <TextField source="id" />
