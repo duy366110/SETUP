@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { List, Datagrid, TextField } from "react-admin";
+import { useSelector } from "react-redux";
 import { Drawer } from "@mui/material";
-import TicketEdit from "./TicketEdit";
+
+import { RootState } from "@/store";
+import TicketViewEdit from "../view/TicketViewEdit";
 import styles from "./TicketList.module.css";
 
 const TicketList = (props: any) => {
+  const mediaQuery = useSelector<RootState>((state: any) => state.mediaQuery);
   const [open, isOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    console.log(mediaQuery);
+  }, [mediaQuery])
 
   return (
     <div>
@@ -43,7 +51,7 @@ const TicketList = (props: any) => {
           sx={{ zIndex: 5 }}
         >
           <div className="w-[400px] h-full mt-[60px]">
-            <TicketEdit id={1} />
+            <TicketViewEdit id={1} />
           </div>
         </Drawer>
       </List>
