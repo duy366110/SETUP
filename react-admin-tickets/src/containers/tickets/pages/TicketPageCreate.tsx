@@ -13,11 +13,14 @@ import { RichTextInput } from "ra-input-rich-text";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { statuses, priorities } from "../constants/model";
 
-const TaskCreate = () => {
+const TicketPageCreate = () => {
   const redirect = useRedirect();
 
   return (
-    <Create redirect="list">
+    <Create
+      className="mt-16 md:mt-0"
+      redirect="list"
+    >
       <SimpleForm>
         <div className="col-span-12 mb-4">
           <h2 className="flex gap-2 items-center text-lg">
@@ -81,7 +84,7 @@ const TaskCreate = () => {
             <DateInput source="updatedAt" label="Updated At" />
           </div>
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+          <div className="col-span-12 md:col-span-6 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput source="labels" label="Labels">
               <SimpleFormIterator>
                 <TextInput source="" label="Label" />
@@ -89,7 +92,7 @@ const TaskCreate = () => {
             </ArrayInput>
           </div>
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+          <div className="col-span-12 md:col-span-6 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput source="comments" label="Comments">
               <SimpleFormIterator>
                 <TextInput source="" label="Comment" />
@@ -116,4 +119,4 @@ const TaskCreate = () => {
   );
 };
 
-export default TaskCreate;
+export default TicketPageCreate;

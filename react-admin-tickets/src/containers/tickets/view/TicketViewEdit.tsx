@@ -136,7 +136,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
             <DateInput source="updatedAt" label="Updated At" />
           </div>
 
-          <div className="col-span-12">
+          <div className="col-span-12 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput source="labels" label="Labels">
               <SimpleFormIterator>
                 <TextInput source="" label="Label" />
@@ -144,7 +144,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
             </ArrayInput>
           </div>
 
-          <div className="col-span-12">
+          <div className="col-span-12 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput source="comments" label="Comments">
               <SimpleFormIterator>
                 <TextInput source="" label="Comment" />

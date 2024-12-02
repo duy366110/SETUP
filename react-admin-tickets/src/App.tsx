@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import LayoutCustom from "@/layouts/LayoutCustom";
 import dataProviderFactory from "@/providers/servers/index";
 import { authProvider } from "@/providers/authProvider";
-
+import I18nProvider from "@/providers/I18nProvider";
 import { ThemeName, Themes } from "@/themes/Themes";
 import store from "@/store/index";
 import Dashboard from "@/containers/dashboard/Dashboard";
@@ -25,6 +25,7 @@ const App = () => {
         process.env.REACT_APP_DATA_PROVIDER || "",
       )}
       authProvider={authProvider}
+      i18nProvider={I18nProvider}
       disableTelemetry
       lightTheme={lightTheme}
       darkTheme={darkTheme}
