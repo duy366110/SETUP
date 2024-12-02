@@ -6,9 +6,17 @@
     margin-top: 0px!important;
 }
 
-/* RICH TEXT */
+/* FIELD TEXT */
 .ra-rich-text-editor .tiptap {
     min-height: 350px;
+}
+
+.ra-rich-text-editor p.RaLabeled-label {
+    font-size: 17px;
+}
+
+.RaArrayInput-root span.RaArrayInput-label span {
+    font-size: 22px;
 }
 
 /* TABLE LIST */

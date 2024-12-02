@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { List, Datagrid, TextField, DateField, useRedirect } from "react-admin";
+import { List, Datagrid, TextField, DateField, useRedirect, useTranslate } from "react-admin";
 import { useSelector } from "react-redux";
 import { Drawer } from "@mui/material";
 import AttachEmailIcon from "@mui/icons-material/AttachEmail";
@@ -18,6 +18,7 @@ const TicketPageList = (props: any) => {
     (state: any) => state.mediaQuery,
   );
   const redirect = useRedirect();
+  const translate = useTranslate();
   const [isRightViewEdit, setIsRightViewEdit] = useState<boolean>(false);
   const [idTicket, setIdTicket] = useState<any>(-1);
 
@@ -30,7 +31,7 @@ const TicketPageList = (props: any) => {
   return (
     <div>
       <List
-        title="Ticketsss"
+        title={translate("ticket.title")}
         className="mt-10 lg:mt-0"
         sx={{
           flexGrow: 1,
@@ -50,7 +51,7 @@ const TicketPageList = (props: any) => {
               );
               return false;
             }
-            redirect(`tickets/${idTicket}`);
+            redirect(`/tickets/${id}`);
             return false;
           }}
         >
