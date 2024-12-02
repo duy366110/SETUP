@@ -16,7 +16,6 @@ import {
 } from "react-admin";
 import { statuses, priorities } from "../constants/model";
 import { RichTextInput } from "ra-input-rich-text";
-import { Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface TicketViewEditProps {
@@ -70,10 +69,10 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
       <SimpleForm
         onSubmit={onSubmitHandler}
         toolbar={
-          <>
-            <SaveButton label="Edit" />
-            <DeleteButton onClick={handleDelete} label="Delete" />
-          </>
+          <div className="bg-[#f5f5f5] flex justify-between p-4">
+            <SaveButton label={translate("common.button.save")} />
+            <DeleteButton onClick={handleDelete} label={translate("common.button.delete")} />
+          </div>
         }
       >
         <div className="grid grid-cols-12 gap-4 w-full">
