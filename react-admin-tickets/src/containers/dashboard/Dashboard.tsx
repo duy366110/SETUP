@@ -1,9 +1,12 @@
+import { useTranslate } from "react-admin";
 import { Card, CardContent, Typography } from "@mui/material";
 import ChartBar from "@/components/charts/ChartBar";
 import ChartPie from "@/components/charts/ChartPie";
+import { deviceDataAccess, transactionData } from "./constants/chart";
 import styles from "./Dashboard.module.css";
 
 const Dashboard = (props: any) => {
+  const translate = useTranslate();
   const stats = [
     {
       title: "Total queries",
@@ -63,11 +66,11 @@ const Dashboard = (props: any) => {
       </div>
 
       <div className="col-span-12">
-        <ChartBar title="Lượt truy cập trong 24h" />
+        <ChartBar data={deviceDataAccess} title={translate("dashboard.chart.access")} />
       </div>
 
       <div className="col-span-12">
-        <ChartBar title="Lượt giao dịch trong 24h" />
+        <ChartBar data={transactionData} title={translate("dashboard.chart.transaction")} />
       </div>
 
       <div className="col-span-12 md:col-span-6">

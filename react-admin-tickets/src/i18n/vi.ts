@@ -1,6 +1,7 @@
 import { TranslationMessages } from 'react-admin';
 import vietnameseMessages from 'ra-language-vietnamese';
 import { translate as tickets } from '@/containers/tickets/translate';
+import { translate as dashboard} from "@/containers/dashboard/translate";
 
 const customVietnameseMessages: TranslationMessages = {
     ...vietnameseMessages,
@@ -48,10 +49,16 @@ const customVietnameseMessages: TranslationMessages = {
             },
         },
     },
-    commons: {
-            
+    common: {
+        button: {
+            save: "Lưu",
+            delete: "Xoá",
+            cancel: "Huỷ",
+            edit: "Cập nhật"
+        }
     },
     ticket:{...tickets.vi},
+    dashboard: {...dashboard.vi}
 };
 
 export default customVietnameseMessages;

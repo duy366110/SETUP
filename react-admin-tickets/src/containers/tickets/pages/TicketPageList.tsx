@@ -29,17 +29,17 @@ const TicketPageList = (props: any) => {
   }, [mediaQuery]);
 
   return (
-    <div>
+    <div className="grid grid-cols-12">
       <List
         title={translate("ticket.title")}
-        className="mt-10 lg:mt-0"
+        className={`${isRightViewEdit? "col-span-9" : "col-span-12"} mt-10 lg:mt-0`}
         sx={{
           flexGrow: 1,
           transition: (theme: any) =>
             theme.transitions.create(["all"], {
               duration: theme.transitions.duration.enteringScreen,
             }),
-          marginRight: !!isRightViewEdit ? "400px" : 0,
+          // marginRight: !!isRightViewEdit ? "400px" : 0,
         }}
       >
         <Datagrid

@@ -1,6 +1,7 @@
 import { TranslationMessages } from 'react-admin';
 import englishMessages from 'ra-language-english';
 import { translate as tickets } from '@/containers/tickets/translate';
+import { translate as dashboard} from "@/containers/dashboard/translate";
 
 const customEnglishMessages: TranslationMessages = {
     ...englishMessages,
@@ -48,10 +49,16 @@ const customEnglishMessages: TranslationMessages = {
             },
         },
     },
-    commons: {
-        
+    common: {
+        button: {
+            save: "Save",
+            delete: "Delete",
+            cancel: "Cancel",
+            edit: "Edit"
+        }
     },
-    ticket: {...tickets.en}
+    ticket: {...tickets.en},
+    dashboard: {...dashboard.en}
     
 };
 
