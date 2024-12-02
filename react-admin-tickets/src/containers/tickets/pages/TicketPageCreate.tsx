@@ -4,7 +4,7 @@ import {
     TextInput,
 } from "react-admin";
 
-const TicketCrate = (props: any) => {
+const TicketPageCrate = (props: any) => {
 
     return (
         <Create>
@@ -15,4 +15,4 @@ const TicketCrate = (props: any) => {
     )
 }
 
-export default TicketCrate;
+export default TicketPageCrate;

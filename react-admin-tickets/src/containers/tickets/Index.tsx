@@ -1,8 +1,9 @@
-import TicketList from "./pages/TicketList";
-import TicketCrate from "./pages/TicketCreate";
+import TicketPageList from "./pages/TicketPageList";
+import TicketPageCrate from "./pages/TicketPageCreate";
+import TicketPageEdit from "./pages/TicketPageEdit";
 
 export const resource = {
-    list: <TicketList />,
-    create: <TicketCrate />,
-    edit: <div></div>
-}
+  list: <TicketPageList />,
+  create: <TicketPageCrate />,
+  edit: <TicketPageEdit />,
+};
