@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { List, Datagrid, TextField, DateField, useRedirect } from "react-admin";
 import { useSelector } from "react-redux";
 import { Drawer } from "@mui/material";
+import AttachEmailIcon from "@mui/icons-material/AttachEmail";
+import PTheme from "@/components/themes/PTheme";
 
 import { RootState } from "@/store";
 import TicketViewEdit from "../view/TicketViewEdit";
@@ -52,9 +54,41 @@ const TicketPageList = (props: any) => {
             return false;
           }}
         >
-          <TextField source="id" />
-          <TextField source="title" />
-          <TextField source="status" />
+          <FieldFunction
+            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            label="ID"
+            field="id"
+            source="id"
+            types="typography"
+            render={RenderFieldFunction}
+          />
+          <TextField className="!line-clamp-2 max-w-[250px]" source="title" />
+
+          <FieldFunction
+            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            label="Status"
+            field="status"
+            source="status"
+            types="custom"
+            customContent={(record: any) => {
+              return (
+                <PTheme className={`
+                  ${record.status === "In Progress"? "!text-[#fff] bg-[#559ee5]" : ""}
+                  ${record.status === "Completed"? "!text-[#fff] bg-[#37a137]" : ""}
+                  ${record.status === "Pending"? "!text-[#fff] bg-[#e3c839]" : ""}
+                  ${record.status === "To Do"? "!text-[#fff] bg-[#4d6eb9]" : ""}
+                  ${record.status === "Done"? "!text-[#fff] bg-[#37a137]" : ""}
+                  ${record.status === "Close"? "!text-[#fff] bg-[#eb5a24]" : ""}
+                  ${record.status === "Open"? "!text-[#fff] bg-[#42c6f1]" : ""}
+                  min-h-[50px] h-full flex items-center pl-2
+                `}>
+                  <span>{record.status}</span>
+                </PTheme>
+              );
+            }}
+            render={RenderFieldFunction}
+          />
+
           <TextField source="priority" />
           <FieldFunction
             customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
@@ -63,8 +97,20 @@ const TicketPageList = (props: any) => {
             source="assignee"
             types="custom"
             customContent={(record: any) => {
-              console.log(record.assignee);
-              return <div>Developer</div>;
+              if (!record.assignee) {
+                return <p>Not assignee</p>;
+              }
+              return (
+                <div className="flex items-start gap-2">
+                  <div>
+                    <AttachEmailIcon fontSize="small" />
+                  </div>
+                  <p className="flex flex-col gap-2">
+                    <span>{record.assignee.email}</span>
+                    <span>{record.assignee.name}</span>
+                  </p>
+                </div>
+              );
             }}
             render={RenderFieldFunction}
           />
@@ -76,21 +122,41 @@ const TicketPageList = (props: any) => {
             source="reporter"
             types="custom"
             customContent={(record: any) => {
-              console.log(record.reporter);
-              return <div>Developer</div>;
+              if (!record.reporter) {
+                return <p>Not Reporter</p>;
+              }
+              return (
+                <div className="flex items-start gap-2">
+                  <div>
+                    <AttachEmailIcon fontSize="small" />
+                  </div>
+                  <p className="flex flex-col gap-2">
+                    <span>{record.reporter.email}</span>
+                    <span>{record.reporter.name}</span>
+                  </p>
+                </div>
+              );
             }}
             render={RenderFieldFunction}
           />
 
           <FieldFunction
-            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent !line-clamp-1"
             label="Labels"
             field="labels"
             source="labels"
             types="custom"
             customContent={(record: any) => {
-              console.log(record.labels);
-              return <div>Developer</div>;
+              if (!record.labels.length) {
+                return <p>Not Reporter</p>;
+              }
+              return (
+                <div className="flex items-start gap-2">
+                  {record.labels.map((label: string) => {
+                    return <div>{label}</div>;
+                  })}
+                </div>
+              );
             }}
             render={RenderFieldFunction}
           />
