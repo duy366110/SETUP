@@ -1,4 +1,4 @@
-import { TitlePortal, useSidebarState, ToggleThemeButton } from "react-admin";
+import { TitlePortal, useSidebarState, ToggleThemeButton, LocalesMenuButton } from "react-admin";
 import { Button } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -38,12 +38,7 @@ const Header = (props: any) => {
                 <span>hostname:</span>
                 <TitlePortal className="!text-[15px]" />
               </p>
-              <Button
-                className="!rounded-full !min-w-fit"
-                onClick={onToggleSidebar}
-              >
-                {open ? <ListIcon /> : <TocIcon />}
-              </Button>
+              <LocalesMenuButton />
             </div>
           </div>
         </div>
