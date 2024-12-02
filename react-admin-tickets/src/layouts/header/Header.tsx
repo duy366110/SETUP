@@ -2,8 +2,8 @@ import { TitlePortal, useSidebarState, ToggleThemeButton, LocalesMenuButton } fr
 import { Button } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import ListIcon from "@mui/icons-material/List";
-import TocIcon from "@mui/icons-material/Toc";
+// import ListIcon from "@mui/icons-material/List";
+// import TocIcon from "@mui/icons-material/Toc";
 import DivTheme from "../../components/themes/DivTheme";
 
 
@@ -34,10 +34,10 @@ const Header = (props: any) => {
           <div className="flex gap-4">
             <ToggleThemeButton />
             <div className="flex items-center gap-4">
-              <p className="flex items-center gap-4">
+              {/* <p className="flex items-center gap-4">
                 <span>hostname:</span>
                 <TitlePortal className="!text-[15px]" />
-              </p>
+              </p> */}
               <LocalesMenuButton />
             </div>
           </div>

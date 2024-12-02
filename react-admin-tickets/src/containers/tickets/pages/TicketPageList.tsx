@@ -55,11 +55,11 @@ const TicketPageList = (props: any) => {
             return false;
           }}
         >
-          <TextField className="!line-clamp-2 !max-w-[130px]" source="title" />
+          <TextField className="!line-clamp-2 !max-w-[130px]" source="title" label={translate("ticket.common.title")} />
 
           <FieldFunction
             customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
-            label="Status"
+            label={translate("ticket.common.status")}
             field="status"
             source="status"
             types="custom"
@@ -73,7 +73,7 @@ const TicketPageList = (props: any) => {
                   ${record.status === "Done"? "!text-[#fff] bg-[#37a137]" : ""}
                   ${record.status === "Close"? "!text-[#fff] bg-[#eb5a24]" : ""}
                   ${record.status === "Open"? "!text-[#fff] bg-[#42c6f1]" : ""}
-                  min-h-[50px] h-full flex items-center px-2
+                  min-h-[50px] h-full flex items-center px-2 !text-[14px]
                 `}>
                   <span>{record.status}</span>
                 </PTheme>
@@ -82,23 +82,23 @@ const TicketPageList = (props: any) => {
             render={RenderFieldFunction}
           />
 
-          <TextField source="priority" />
+          <TextField source="priority" label={translate("ticket.common.priority")} />
           <FieldFunction
             customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
-            label="Assignee"
+            label={translate("ticket.common.assignee")}
             field="assignee"
             source="assignee"
             types="custom"
             customContent={(record: any) => {
               if (!record.assignee) {
-                return <p>Not assignee</p>;
+                return <p className="py-1">Not assignee</p>;
               }
               return (
-                <div className="flex items-start gap-2">
+                <div className="flex items-start gap-2 py-1">
                   <div>
                     <AttachEmailIcon fontSize="small" />
                   </div>
-                  <p className="flex flex-col gap-2">
+                  <p className="flex flex-col gap-1">
                     <span>{record.assignee.email}</span>
                     <span>{record.assignee.name}</span>
                   </p>
@@ -110,20 +110,20 @@ const TicketPageList = (props: any) => {
 
           <FieldFunction
             customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
-            label="Reporter"
+            label={translate("ticket.common.reporter")}
             field="reporter"
             source="reporter"
             types="custom"
             customContent={(record: any) => {
               if (!record.reporter) {
-                return <p>Not Reporter</p>;
+                return <p className="py-1">Not Reporter</p>;
               }
               return (
-                <div className="flex items-start gap-2">
+                <div className="flex items-start gap-2 py-1">
                   <div>
                     <AttachEmailIcon fontSize="small" />
                   </div>
-                  <p className="flex flex-col gap-2">
+                  <p className="flex flex-col gap-1">
                     <span>{record.reporter.email}</span>
                     <span>{record.reporter.name}</span>
                   </p>
@@ -135,7 +135,7 @@ const TicketPageList = (props: any) => {
 
           <FieldFunction
             customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
-            label="Labels"
+            label={translate("ticket.common.label")}
             field="labels"
             source="labels"
             types="custom"
@@ -154,7 +154,7 @@ const TicketPageList = (props: any) => {
             render={RenderFieldFunction}
           />
 
-          <DateField source="createdAt" />
+          <DateField source="createdAt" label={translate("ticket.common.createdAt")} />
         </Datagrid>
 
         {idTicket && idTicket >= 0 && (
