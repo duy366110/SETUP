@@ -1,20 +1,21 @@
 import { useState } from "react";
-import { Menu, MenuItemLink, useSidebarState } from "react-admin";
-import { Collapse, ListItem, ListItemIcon } from "@mui/material";
+import { Menu, MenuItemLink, useSidebarState, useTranslate } from "react-admin";
+// import { Collapse, ListItem, ListItemIcon } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import {
-  Settings,
-  ExpandMore,
-} from "@mui/icons-material";
-import DescriptionIcon from "@mui/icons-material/Description";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import HistoryIcon from "@mui/icons-material/History";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+// import {
+//   Settings,
+//   ExpandMore,
+// } from "@mui/icons-material";
+// import DescriptionIcon from "@mui/icons-material/Description";
+// import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+// import HistoryIcon from "@mui/icons-material/History";
+// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
-import styles from "./MenuCustom.module.css";
+// import styles from "./MenuCustom.module.css";
 
 const MenuCustom = (props: any) => {
   const [open, setOpen] = useSidebarState();
+  const translate = useTranslate();
   const [openCollapse, setOpenCollapse] = useState<{ [key: string]: boolean }>(
     {},
   );
@@ -37,8 +38,8 @@ const MenuCustom = (props: any) => {
           selected={location.pathname === "/"}
           className={`!border-l-0 !bg-[#3575b7] text-[#ffffff] ${open? "!px-5" : "!px-1" } h-14 w-[-webkit-fill-available] ease-in-out`}
         >
-          <span className={`${open? 'text-[20px]' : 'text-[15px]'} text-white w-full text-center ease-in-out`}>
-            Pi-<span className="font-semibold">hole</span>
+          <span className={`${open? 'text-[20px]' : 'text-[11px]'} text-white w-full text-center ease-in-out`}>
+            <span className="font-semibold">Sconnect</span>
           </span>
         </MenuItemLink>
       </h1>
@@ -50,20 +51,20 @@ const MenuCustom = (props: any) => {
           <MenuItemLink
             className="!py-2"
             to="/tickets"
-            primaryText="Tickets"
+            primaryText={translate("ticket.title")}
             selected={location.pathname === "/tickets"}
             leftIcon={<BookmarkAddedIcon />}
           />
 
-          <MenuItemLink
+          {/* <MenuItemLink
             className="!py-3"
             to="/query"
             primaryText="Query Log"
             selected={location.pathname === "/query"}
             leftIcon={<DescriptionIcon />}
-          />
+          /> */}
 
-          <ListItem
+          {/* <ListItem
             className="!py-2 !w-[-webkit-fill-available] relative"
             onClick={() => toggleSubMenu("history")}
           >
@@ -78,9 +79,9 @@ const MenuCustom = (props: any) => {
                 {openCollapse["history"] ? <ExpandMore /> : <ChevronLeftIcon />}
               </span>
             )}
-          </ListItem>
+          </ListItem> */}
 
-          <Collapse in={openCollapse["history"]}>
+          {/* <Collapse in={openCollapse["history"]}>
             <Menu className="!py-0">
               <MenuItemLink
                 className="!py-2"
@@ -97,7 +98,7 @@ const MenuCustom = (props: any) => {
                 primaryText="Account"
               />
             </Menu>
-          </Collapse>
+          </Collapse> */}
         </Menu>
       </div>
     </Menu>
