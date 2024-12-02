@@ -66,4 +66,61 @@ export const transactionData = {
       },
     ],
   };
+
+
+  export const RevenueAndFinanceData = {
+    labels: [
+      "Doanh thu bán hàng", "Doanh thu từ dịch vụ", "Doanh thu từ quảng cáo",
+      "Doanh thu từ hợp đồng", "Doanh thu từ đầu tư tài chính", "Doanh thu từ online marketing",
+      "Chi phí vận hành", "Chi phí nhân sự", "Chi phí logistics", "Chi phí khuyến mãi",
+      "Chi phí marketing", "Chi phí thuê văn phòng", "Chi phí bảo trì hệ thống",
+      "Chi phí điện nước", "Chi phí hỗ trợ khách hàng", "Chi phí nghiên cứu phát triển (R&D)",
+      "Chi phí bảo hiểm", "Doanh thu từ bán sản phẩm kỹ thuật số", "Doanh thu từ hội thảo",
+      "Lợi nhuận khác"
+    ],
+    datasets: [
+      {
+        data: [300000, 150000, 100000, 70000, 50000, 80000, 60000, 90000, 50000, 40000,
+               30000, 45000, 20000, 15000, 30000, 25000, 10000, 70000, 35000, 15000],
+        backgroundColor: [
+          "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF",
+          "#FF9F40", "#E7E9ED", "#FF6384", "#36A2EB", "#FFCE56",
+          "#4BC0C0", "#9966FF", "#FF9F40", "#E7E9ED", "#FF6384",
+          "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40", "#E7E9ED"
+        ],
+        hoverBackgroundColor: [
+          "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF",
+          "#FF9F40", "#E7E9ED", "#FF6384", "#36A2EB", "#FFCE56",
+          "#4BC0C0", "#9966FF", "#FF9F40", "#E7E9ED", "#FF6384",
+          "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40", "#E7E9ED"
+        ],
+      },
+    ],
+  };
+
+export const systemPerformanceData = {
+    labels: [
+      "Tốc độ phản hồi (ms)", "Tỷ lệ lỗi (%)", "Số yêu cầu mỗi giây (req/s)", 
+      "Băng thông sử dụng (Mbps)", "Thời gian hoạt động (Uptime) (%)", "Dung lượng bộ nhớ (GB)",
+      "CPU sử dụng (%)", "Số lượng phiên người dùng", "Thời gian tải trung bình (s)",
+      "Số lỗi 500 (lỗi máy chủ)", "Số lỗi 404 (lỗi không tìm thấy)", "Tỷ lệ thành công (%)",
+      "Thời gian thực hiện giao dịch (ms)", "Số lượng dịch vụ đang chạy", "Tốc độ xử lý dữ liệu (MB/s)"
+    ],
+    datasets: [
+      {
+        data: [200, 1.5, 1200, 50, 99.9, 16, 45, 300, 2.3, 10, 15, 98, 450, 20, 8],
+        backgroundColor: [
+          "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40",
+          "#E7E9ED", "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF",
+          "#FF9F40", "#E7E9ED", "#FF6384"
+        ],
+        hoverBackgroundColor: [
+          "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40",
+          "#E7E9ED", "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF",
+          "#FF9F40", "#E7E9ED", "#FF6384"
+        ],
+      },
+    ],
+  };
+  
   
