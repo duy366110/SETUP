@@ -8,6 +8,7 @@ import {
   SimpleFormIterator,
   ReferenceInput,
   useRedirect,
+  useTranslate,
 } from "react-admin";
 import { RichTextInput } from "ra-input-rich-text";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -15,6 +16,7 @@ import { statuses, priorities } from "../constants/model";
 
 const TicketPageCreate = () => {
   const redirect = useRedirect();
+  const translate = useTranslate();
 
   return (
     <Create
@@ -29,23 +31,23 @@ const TicketPageCreate = () => {
               className="cursor-pointer"
               onClick={() => redirect("/tickets")}
             />
-            <span>Create ticket</span>
+            <span>{translate("ticket.form.create")}</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-12 gap-4 w-full">
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <TextInput source="title" label="Title" />
+            <TextInput source="title" label={translate("ticket.common.title")} />
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <SelectInput source="status" choices={statuses} label="Status" />
+            <SelectInput source="status" choices={statuses} label={translate("ticket.common.status")} />
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <SelectInput
               source="priority"
               choices={priorities}
-              label="Priority"
+              label={translate("ticket.common.priority")}
             />
           </div>
 
@@ -53,14 +55,14 @@ const TicketPageCreate = () => {
             <ReferenceInput
               source="assignee.id"
               reference="users"
-              label="Assignee ID"
+              label={translate("ticket.common.assignee")}
             >
-              <TextInput source="assignee.name" />
+              <TextInput source="assignee.name" label={translate("ticket.common.assignee")} />
             </ReferenceInput>
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <TextInput source="assignee.email" label="Assignee Email" />
+            <TextInput source="assignee.email" label={translate("ticket.common.assigneeEmail")} />
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
@@ -69,33 +71,33 @@ const TicketPageCreate = () => {
               reference="users"
               label="Reporter ID"
             >
-              <TextInput source="reporter.name" />
+              <TextInput source="reporter.name" label={translate("ticket.common.reporter")} />
             </ReferenceInput>
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <TextInput source="reporter.email" label="Reporter Email" />
+            <TextInput source="reporter.email" label={translate("ticket.common.reporterEmail")} />
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <DateInput source="createdAt" label="Created At" />
+            <DateInput source="createdAt" label={translate("ticket.common.createdAt")} />
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <DateInput source="updatedAt" label="Updated At" />
+            <DateInput source="updatedAt" label={translate("ticket.common.updatedAt")} />
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
-            <ArrayInput source="labels" label="Labels">
+            <ArrayInput source="labels" label={translate("ticket.common.label")}>
               <SimpleFormIterator>
-                <TextInput source="" label="Label" />
+                <TextInput source="" label={translate("ticket.common.label")} />
               </SimpleFormIterator>
             </ArrayInput>
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
-            <ArrayInput source="comments" label="Comments">
+            <ArrayInput source="comments" label={translate("ticket.common.comment")}>
               <SimpleFormIterator>
-                <TextInput source="" label="Comment" />
+                <TextInput source="" label={translate("ticket.common.comment")} />
               </SimpleFormIterator>
             </ArrayInput>
           </div>
@@ -104,7 +106,7 @@ const TicketPageCreate = () => {
             <RichTextInput
               className="ra-rich-text-editor"
               source="description"
-              label="Description"
+              label={translate("ticket.common.description")}
               sx={{
                 "& .ql-container": {
                   minHeight: "350px",
