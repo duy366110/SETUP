@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
-import { List, Datagrid, TextField, useRedirect } from "react-admin";
+import { List, Datagrid, TextField, DateField, useRedirect } from "react-admin";
 import { useSelector } from "react-redux";
 import { Drawer } from "@mui/material";
 
 import { RootState } from "@/store";
 import TicketViewEdit from "../view/TicketViewEdit";
-import { FieldFunction, RenderFieldFunction } from "@/components/fileds/FieldFunction";
+import {
+  FieldFunction,
+  RenderFieldFunction,
+} from "@/components/fileds/FieldFunction";
 import styles from "./TicketPageList.module.css";
 
 const TicketPageList = (props: any) => {
@@ -40,7 +43,9 @@ const TicketPageList = (props: any) => {
           rowClick={(id, resource) => {
             if (!mediaQuery.md) {
               setIdTicket(id);
-              setIsRightViewEdit(idTicket < 0 ? !isRightViewEdit : true);
+              setIsRightViewEdit(
+                idTicket < 0 || id === idTicket ? !isRightViewEdit : true,
+              );
               return false;
             }
             redirect(`tickets/${idTicket}`);
@@ -49,6 +54,8 @@ const TicketPageList = (props: any) => {
         >
           <TextField source="id" />
           <TextField source="title" />
+          <TextField source="status" />
+          <TextField source="priority" />
           <FieldFunction
             customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
             label="Assignee"
@@ -56,19 +63,42 @@ const TicketPageList = (props: any) => {
             source="assignee"
             types="custom"
             customContent={(record: any) => {
-              console.log(record.assignee)
-              return (
-                <div>Developer</div>
-              );
+              console.log(record.assignee);
+              return <div>Developer</div>;
             }}
             render={RenderFieldFunction}
           />
-          <TextField source="id" />
-          <TextField source="id" />
-          <TextField source="id" />
-          <TextField source="id" />
-          <TextField source="id" />
+
+          <FieldFunction
+            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            label="Reporter"
+            field="reporter"
+            source="reporter"
+            types="custom"
+            customContent={(record: any) => {
+              console.log(record.reporter);
+              return <div>Developer</div>;
+            }}
+            render={RenderFieldFunction}
+          />
+
+          <FieldFunction
+            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            label="Labels"
+            field="labels"
+            source="labels"
+            types="custom"
+            customContent={(record: any) => {
+              console.log(record.labels);
+              return <div>Developer</div>;
+            }}
+            render={RenderFieldFunction}
+          />
+
+          <DateField source="createdAt" />
+          <DateField source="updatedAt" />
         </Datagrid>
+
         {idTicket && idTicket >= 0 && (
           <Drawer
             className={styles["drawer-wrapper"]}
