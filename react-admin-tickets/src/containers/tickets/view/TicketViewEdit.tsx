@@ -1,10 +1,10 @@
-import { Edit, EditBase, SimpleForm, TextInput } from "react-admin";
+import { EditBase, SimpleForm, TextInput } from "react-admin";
 
-interface TicketEditProps {
+interface TicketViewEditProps {
     id?:string;
 }
 
-const TicketEdit = (props: TicketEditProps | any) => {
+const TicketViewEdit = (props: TicketViewEditProps | any) => {
 
     return (
         <EditBase className="!border-0" title=" " id={props.id}>
@@ -15,4 +15,4 @@ const TicketEdit = (props: TicketEditProps | any) => {
     )
 }
 
-export default TicketEdit;
+export default TicketViewEdit;
