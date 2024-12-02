@@ -5,3 +5,8 @@
 .RaLayout-appFrame {
     margin-top: 0px!important;
 }
+
+/* RICH TEXT */
+.ra-rich-text-editor .tiptap {
+    min-height: 350px;
+}
