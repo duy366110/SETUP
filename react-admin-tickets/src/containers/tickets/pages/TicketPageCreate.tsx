@@ -10,12 +10,16 @@ import {
   useRedirect,
 } from "react-admin";
 import { RichTextInput } from "ra-input-rich-text";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const statuses = [
   { id: "In Progress", name: "In Progress" },
   { id: "Completed", name: "Completed" },
   { id: "Pending", name: "Pending" },
+  { id: "To Do", name: "To Do" },
+  { id: "Done", name: "Done" },
+  { id: "Close", name: "Close" },
+  { id: "Open", name: "Open"},
 ];
 
 const priorities = [
@@ -27,13 +31,15 @@ const priorities = [
 const TaskCreate = () => {
   const redirect = useRedirect();
 
-
   return (
     <Create redirect="list">
       <SimpleForm>
         <div className="col-span-12 mb-4">
           <h2 className="flex gap-2 items-center text-lg">
-            <ArrowBackIosNewIcon className="cursor-pointer !w-[15px]" onClick={() => redirect("/tickets")} />
+            <ArrowBackIosNewIcon
+              className="cursor-pointer !w-[15px]"
+              onClick={() => redirect("/tickets")}
+            />
             <span>Create ticket</span>
           </h2>
         </div>
@@ -92,7 +98,7 @@ const TaskCreate = () => {
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <ArrayInput source="labels" label="Labels">
               <SimpleFormIterator>
-                <TextInput source="labels" label="Label" />
+                <TextInput source="" label="Label" />
               </SimpleFormIterator>
             </ArrayInput>
           </div>
@@ -100,7 +106,7 @@ const TaskCreate = () => {
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <ArrayInput source="comments" label="Comments">
               <SimpleFormIterator>
-                <TextInput source="comments" label="Comment" />
+                <TextInput source="" label="Comment" />
               </SimpleFormIterator>
             </ArrayInput>
           </div>

@@ -79,7 +79,7 @@ export const Tickets: TicketsType[] = [
     title: "Update homepage banner",
     description:
       "Design and replace the banner on the homepage for the holiday season.",
-    status: "Open",
+    status: "Close",
     priority: "Low",
     assignee: null,
     reporter: {
@@ -115,7 +115,7 @@ export const Tickets: TicketsType[] = [
   },
   {
     id: 6,
-    title: "Fix CSS alignment issue on mobile",
+    title: "Fix CSS alignment issue on mobile The footer on the mobile version is misaligned. Fix the styling to ensure proper layout. The footer on the mobile version is misaligned. Fix the styling to ensure proper layout. The footer on the mobile version is misaligned. Fix the styling to ensure proper layout.",
     description:
       "The footer on the mobile version is misaligned. Fix the styling to ensure proper layout.",
     status: "To Do",
@@ -158,7 +158,7 @@ export const Tickets: TicketsType[] = [
     title: "Write documentation for API endpoints",
     description:
       "Document all the available REST API endpoints with examples and use cases.",
-    status: "Open",
+    status: "Pending",
     priority: "Low",
     assignee: {
       id: "USER-789",
