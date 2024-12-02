@@ -38,7 +38,7 @@ export const translate = {
         },
         form: {
             create: "Tạo mới nhiệm vụ công việc",
-            edit: "Cập nhật nhiệm vụ công việc"
+            edit: "Cập nhật nhiệm vụ"
         }
     }
 }

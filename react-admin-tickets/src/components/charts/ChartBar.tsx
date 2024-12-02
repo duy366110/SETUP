@@ -23,38 +23,11 @@ ChartJS.register(
 
 interface ChartBarProps {
   title?: string;
+  data?: any;
 }
 
 const ChartBar = (props: ChartBarProps) => {
   const theme = useTheme();
-
-  const data = useMemo(() => {
-    return {
-      labels: ["19:00", "19:35", "20:00", "20:35", "21:00", "21:35"],
-      datasets: [
-        {
-          label: "Dataset 1",
-          data: [0, 0, 70, 40, 90, 20],
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-        },
-        {
-          label: "Dataset 2",
-          data: [0, 20, 50, 60, 80, 15],
-          backgroundColor: "rgba(54, 162, 235, 0.5)",
-        },
-        {
-          label: "Dataset 3",
-          data: [40, 50, 20, 0, 60, 17],
-          backgroundColor: "rgba(75, 192, 192, 0.5)",
-        },
-        {
-          label: "Dataset 3",
-          data: [40, 50, 20, 0, 60, 10],
-          backgroundColor: "rgba(75, 192, 192, 0.5)",
-        },
-      ],
-    };
-  }, []);
 
   const options: any = useMemo(() => {
     return {
@@ -79,20 +52,20 @@ const ChartBar = (props: ChartBarProps) => {
         },
         label: {
           color: "red",
-        }
+        },
       },
       scales: {
         x: {
           stacked: true,
           ticks: {
             color: theme.palette.mode === "dark" ? "#fff" : "#333",
-          }
+          },
         },
         y: {
           stacked: true,
           ticks: {
             color: theme.palette.mode === "dark" ? "#fff" : "#333",
-          }
+          },
         },
       },
     };
@@ -105,7 +78,7 @@ const ChartBar = (props: ChartBarProps) => {
           {props.title}
         </H2Theme>
         <div className="h-[220px] px-[16px]">
-          <Bar data={data} options={options} />
+          <Bar data={props.data} options={options} />
         </div>
       </CardContent>
     </Card>
