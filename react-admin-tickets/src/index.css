@@ -12,6 +12,10 @@
 }
 
 /* TABLE LIST */
+.MuiTableBody-root tr:nth-child(even) {
+    background-color: #e7edf933;
+}
+
 .MuiTableCell-body {
     padding-bottom: 0px!important;
     padding-top: 0px!important;

@@ -54,15 +54,7 @@ const TicketPageList = (props: any) => {
             return false;
           }}
         >
-          <FieldFunction
-            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
-            label="ID"
-            field="id"
-            source="id"
-            types="typography"
-            render={RenderFieldFunction}
-          />
-          <TextField className="!line-clamp-2 max-w-[250px]" source="title" />
+          <TextField className="!line-clamp-2 !max-w-[130px]" source="title" />
 
           <FieldFunction
             customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
@@ -80,7 +72,7 @@ const TicketPageList = (props: any) => {
                   ${record.status === "Done"? "!text-[#fff] bg-[#37a137]" : ""}
                   ${record.status === "Close"? "!text-[#fff] bg-[#eb5a24]" : ""}
                   ${record.status === "Open"? "!text-[#fff] bg-[#42c6f1]" : ""}
-                  min-h-[50px] h-full flex items-center pl-2
+                  min-h-[50px] h-full flex items-center px-2
                 `}>
                   <span>{record.status}</span>
                 </PTheme>
@@ -141,7 +133,7 @@ const TicketPageList = (props: any) => {
           />
 
           <FieldFunction
-            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent !line-clamp-1"
+            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
             label="Labels"
             field="labels"
             source="labels"
@@ -162,7 +154,6 @@ const TicketPageList = (props: any) => {
           />
 
           <DateField source="createdAt" />
-          <DateField source="updatedAt" />
         </Datagrid>
 
         {idTicket && idTicket >= 0 && (
@@ -173,8 +164,8 @@ const TicketPageList = (props: any) => {
             anchor="right"
             sx={{ zIndex: 5 }}
           >
-            <div className="w-[400px] h-full mt-[60px]">
-              <TicketViewEdit id={idTicket} />
+            <div className="w-[350px] h-full mt-[60px]">
+              <TicketViewEdit id={idTicket} closeViewEdit={() => setIsRightViewEdit(false)}/>
             </div>
           </Drawer>
         )}

@@ -11,22 +11,7 @@ import {
 } from "react-admin";
 import { RichTextInput } from "ra-input-rich-text";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-
-const statuses = [
-  { id: "In Progress", name: "In Progress" },
-  { id: "Completed", name: "Completed" },
-  { id: "Pending", name: "Pending" },
-  { id: "To Do", name: "To Do" },
-  { id: "Done", name: "Done" },
-  { id: "Close", name: "Close" },
-  { id: "Open", name: "Open"},
-];
-
-const priorities = [
-  { id: "High", name: "High" },
-  { id: "Medium", name: "Medium" },
-  { id: "Low", name: "Low" },
-];
+import { statuses, priorities } from "../constants/model";
 
 const TaskCreate = () => {
   const redirect = useRedirect();
@@ -37,7 +22,8 @@ const TaskCreate = () => {
         <div className="col-span-12 mb-4">
           <h2 className="flex gap-2 items-center text-lg">
             <ArrowBackIosNewIcon
-              className="cursor-pointer !w-[15px]"
+              fontSize="small"
+              className="cursor-pointer"
               onClick={() => redirect("/tickets")}
             />
             <span>Create ticket</span>
