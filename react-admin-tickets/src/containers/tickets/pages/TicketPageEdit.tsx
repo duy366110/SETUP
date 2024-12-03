@@ -88,7 +88,7 @@ const TicketPageEdit = () => {
             <DateInput source="updatedAt" label={translate("ticket.common.updatedAt")} />
           </div>
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
+          <div className="col-span-12 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput source="labels" label={translate("ticket.common.label")}>
               <SimpleFormIterator>
                 <TextInput source="" label={translate("ticket.common.label")} />
@@ -96,7 +96,7 @@ const TicketPageEdit = () => {
             </ArrayInput>
           </div>
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
+          <div className="col-span-12 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput source="comments" label={translate("ticket.common.comment")}>
               <SimpleFormIterator>
                 <TextInput source="" label={translate("ticket.common.comment")} />
