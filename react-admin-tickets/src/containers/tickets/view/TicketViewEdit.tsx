@@ -10,6 +10,7 @@ import {
   ReferenceInput,
   SaveButton,
   DeleteButton,
+  required,
   useUpdate,
   useDelete,
   useTranslate,
@@ -88,17 +89,18 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
           </div>
 
           <div className="col-span-12">
-            <TextInput source="title" label={translate("ticket.common.title")} />
+            <TextInput source="title" label={translate("ticket.common.title")} validate={required()} />
           </div>
 
           <div className="col-span-12">
-            <SelectInput source="status" choices={statuses} label={translate("ticket.common.status")} />
+            <SelectInput source="status" choices={statuses} label={translate("ticket.common.status")} validate={required()} />
           </div>
           <div className="col-span-12">
             <SelectInput
               source="priority"
               choices={priorities}
               label={translate("ticket.common.priority")}
+              validate={required()}
             />
           </div>
 

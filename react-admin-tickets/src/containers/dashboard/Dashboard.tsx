@@ -36,7 +36,7 @@ const Dashboard = (props: any) => {
       },
       {
         title: translate("dashboard.stat.amountReceived"),
-        value: "121,529",
+        value: "121,529 VND",
         color: "#28a745",
         bg: "linear-gradient(to right, #c1c161 0%, #c1c161 0%, #d4d4b1 100%)",
       },
