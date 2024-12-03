@@ -2,9 +2,9 @@ export const translate = {
     en: {
         title: "Dashboard",
         stat: {
-            customUsing: "Number of customers using the system",
-            totalTransactionInMonth: "Total number of transactions in the month",
-            transactionSuccess: "Percentage of successful transactions",
+            customUsing: "Statistics of existing customers",
+            totalTransactionInMonth: "Statistics of transactions in the month",
+            transactionSuccess: "Statistics of successful transactions",
             amountReceived: "Total actual revenue",
             detail: "View more",
         },
@@ -18,9 +18,9 @@ export const translate = {
     vi: {
         title: "Quản trị",
         stat: {
-            customUsing: "Lượng khách hàng sử dụng hệ thống",
-            totalTransactionInMonth: "Tổng số giao dịch trong tháng",
-            transactionSuccess: " phần trăm số giao dịch thanh công",
+            customUsing: "Thống kê khách hàng hiện có",
+            totalTransactionInMonth: "Thống kê giao dịch trong tháng",
+            transactionSuccess: "Thống kê giao dịch thanh công",
             amountReceived: "Tổng số doanh thu thực tế",
             detail: "Chi tiết",
         },
