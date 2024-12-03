@@ -7,6 +7,7 @@ import {
   ArrayInput,
   SimpleFormIterator,
   ReferenceInput,
+  required,
   useRedirect,
   useTranslate,
 } from "react-admin";
@@ -37,17 +38,18 @@ const TicketPageEdit = () => {
 
         <div className="grid grid-cols-12 gap-4 w-full">
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <TextInput source="title" label={translate("ticket.common.title")} />
+            <TextInput source="title" label={translate("ticket.common.title")} validate={required()} />
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <SelectInput source="status" choices={statuses} label={translate("ticket.common.status")} />
+            <SelectInput source="status" choices={statuses} label={translate("ticket.common.status")} validate={required()} />
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <SelectInput
               source="priority"
               choices={priorities}
               label={translate("ticket.common.priority")}
+              validate={required()}
             />
           </div>
 
