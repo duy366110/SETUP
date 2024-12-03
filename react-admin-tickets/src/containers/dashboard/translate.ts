@@ -1,11 +1,12 @@
 export const translate = {
     en: {
+        title: "Dashboard",
         stat: {
             customUsing: "Number of customers using the system",
             totalTransactionInMonth: "Total number of transactions in the month",
             transactionSuccess: "Percentage of successful transactions",
             amountReceived: "Total actual amount received",
-            detail: "Detail",
+            detail: "View more",
         },
         chart: {
             access: "Statistics of app accesses in the last 24 hours",
@@ -15,6 +16,7 @@ export const translate = {
         }
     },
     vi: {
+        title: "Quản trị",
         stat: {
             customUsing: "Lượng khách hàng sử dụng hệ thống",
             totalTransactionInMonth: "Tổng số giao dịch trong tháng",
