@@ -55,7 +55,12 @@ const customEnglishMessages: TranslationMessages = {
             delete: "Delete",
             cancel: "Cancel",
             edit: "Edit"
-        }
+        },
+        message: {
+            error: {
+                email: "Invalid email format",
+            }
+        },
     },
     ticket: {...tickets.en},
     dashboard: {...dashboard.en}

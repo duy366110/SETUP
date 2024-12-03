@@ -60,7 +60,7 @@ const Dashboard = (props: any) => {
                   }}
                 >
                   <CardContent className="flex flex-col justify-between h-full !pb-[10px]">
-                    <div>
+                    <div className="mb-2">
                       <Typography variant="h5" component="div" gutterBottom>
                         {stat.title}
                       </Typography>
