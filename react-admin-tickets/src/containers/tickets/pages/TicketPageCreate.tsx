@@ -14,10 +14,37 @@ import {
 import { RichTextInput } from "ra-input-rich-text";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { statuses, priorities } from "../constants/model";
+import { EmailRegex } from "@/constants/Regexs";
 
 const TicketPageCreate = () => {
   const redirect = useRedirect();
   const translate = useTranslate();
+
+  const validateAssigneeEmail = (value: any, allValues: any) => {
+    if (allValues.assignee.name) {
+      if(!value) {
+        return required()(value, allValues);
+      }
+
+      if (!EmailRegex.test(value)) {
+        return translate("common.message.error.email");
+      }
+    }
+    return undefined;
+  };
+
+  const validateReporterEmail = (value: any, allValues: any) => {
+    if (allValues.reporter.name) {
+      if(!value) {
+        return required()(value, allValues);
+      }
+
+      if (!EmailRegex.test(value)) {
+        return translate("common.message.error.email");
+      }
+    }
+    return undefined;
+  };
 
   return (
     <Create className="mt-16 md:mt-0" redirect="list">
@@ -76,6 +103,7 @@ const TicketPageCreate = () => {
             <TextInput
               source="assignee.email"
               label={translate("ticket.common.assigneeEmail")}
+              validate={validateAssigneeEmail}
             />
           </div>
 
@@ -96,6 +124,7 @@ const TicketPageCreate = () => {
             <TextInput
               source="reporter.email"
               label={translate("ticket.common.reporterEmail")}
+              validate={validateReporterEmail}
             />
           </div>
 

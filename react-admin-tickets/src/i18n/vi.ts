@@ -55,7 +55,12 @@ const customVietnameseMessages: TranslationMessages = {
             delete: "Xoá",
             cancel: "Huỷ",
             edit: "Cập nhật"
-        }
+        },
+        message: {
+            error: {
+                email: "Email không hợp lệ",
+            }
+        },
     },
     ticket:{...tickets.vi},
     dashboard: {...dashboard.vi}
