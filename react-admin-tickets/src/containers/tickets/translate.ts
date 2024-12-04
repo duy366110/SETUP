@@ -21,7 +21,7 @@ export const translate = {
         }
     },
     vi: {
-        title: "Nhiệm vụ",
+        title: "Công việc",
         common: {
             title: "Tiêu đề",
             status: "Trạng thái",

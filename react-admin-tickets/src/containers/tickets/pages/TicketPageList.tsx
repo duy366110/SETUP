@@ -1,5 +1,15 @@
 import { useState, useEffect } from "react";
-import { List, Datagrid, TextField, DateField, useRedirect, useTranslate } from "react-admin";
+import {
+  RaRecord,
+  List,
+  Datagrid,
+  DatagridConfigurable,
+  TextField,
+  DateField,
+  useRedirect,
+  useTranslate,
+  useListContext,
+} from "react-admin";
 import { useSelector } from "react-redux";
 import { Drawer } from "@mui/material";
 import AttachEmailIcon from "@mui/icons-material/AttachEmail";
@@ -7,6 +17,7 @@ import PTheme from "@/components/themes/PTheme";
 
 import { RootState } from "@/store";
 import TicketViewEdit from "../view/TicketViewEdit";
+import TicketViewListCardMobile from "../view/TicketViewListCardMobile";
 import {
   FieldFunction,
   RenderFieldFunction,
@@ -17,6 +28,7 @@ const TicketPageList = (props: any) => {
   const mediaQuery: any = useSelector<RootState>(
     (state: any) => state.mediaQuery,
   );
+
   const redirect = useRedirect();
   const translate = useTranslate();
   const [isRightViewEdit, setIsRightViewEdit] = useState<boolean>(false);
@@ -32,17 +44,23 @@ const TicketPageList = (props: any) => {
     <div className="grid grid-cols-12">
       <List
         title={translate("ticket.title")}
-        className={`${isRightViewEdit? "col-span-9" : "col-span-12"} mt-10 lg:mt-0`}
+        className={`${isRightViewEdit ? "col-span-9" : "col-span-12"} mt-10 lg:mt-0`}
         sx={{
           flexGrow: 1,
           transition: (theme: any) =>
             theme.transitions.create(["all"], {
               duration: theme.transitions.duration.enteringScreen,
             }),
-          // marginRight: !!isRightViewEdit ? "400px" : 0,
+          "& .MuiTableCell-root": {
+            display: {
+              xs: "none",
+              md: "table-cell",
+            },
+          },
         }}
       >
-        <Datagrid
+        {mediaQuery.md && <TicketViewListCardMobile />}
+        <DatagridConfigurable
           rowClick={(id, resource) => {
             if (!mediaQuery.md) {
               setIdTicket(id);
@@ -54,8 +72,18 @@ const TicketPageList = (props: any) => {
             redirect(`/tickets/${id}`);
             return false;
           }}
+          sx={{
+            "& .column-groups": {
+              md: { display: "none" },
+              lg: { display: "table-cell" },
+            },
+          }}
         >
-          <TextField className="!line-clamp-2 !max-w-[130px]" source="title" label={translate("ticket.common.title")} />
+          <TextField
+            className="!line-clamp-2 !max-w-[130px]"
+            source="title"
+            label={translate("ticket.common.title")}
+          />
 
           <FieldFunction
             customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
@@ -65,16 +93,18 @@ const TicketPageList = (props: any) => {
             types="custom"
             customContent={(record: any) => {
               return (
-                <PTheme className={`
-                  ${record.status === "In Progress"? "!text-[#fff] bg-[#559ee5]" : ""}
-                  ${record.status === "Completed"? "!text-[#fff] bg-[#37a137]" : ""}
-                  ${record.status === "Pending"? "!text-[#fff] bg-[#e3c839]" : ""}
-                  ${record.status === "To Do"? "!text-[#fff] bg-[#4d6eb9]" : ""}
-                  ${record.status === "Done"? "!text-[#fff] bg-[#37a137]" : ""}
-                  ${record.status === "Close"? "!text-[#fff] bg-[#eb5a24]" : ""}
-                  ${record.status === "Open"? "!text-[#fff] bg-[#42c6f1]" : ""}
+                <PTheme
+                  className={`
+                  ${record.status === "In Progress" ? "!text-[#fff] bg-[#559ee5]" : ""}
+                  ${record.status === "Completed" ? "!text-[#fff] bg-[#37a137]" : ""}
+                  ${record.status === "Pending" ? "!text-[#fff] bg-[#e3c839]" : ""}
+                  ${record.status === "To Do" ? "!text-[#fff] bg-[#4d6eb9]" : ""}
+                  ${record.status === "Done" ? "!text-[#fff] bg-[#37a137]" : ""}
+                  ${record.status === "Close" ? "!text-[#fff] bg-[#eb5a24]" : ""}
+                  ${record.status === "Open" ? "!text-[#fff] bg-[#42c6f1]" : ""}
                   min-h-[50px] h-full flex items-center px-2 !text-[14px]
-                `}>
+                `}
+                >
                   <span>{record.status}</span>
                 </PTheme>
               );
@@ -82,7 +112,10 @@ const TicketPageList = (props: any) => {
             render={RenderFieldFunction}
           />
 
-          <TextField source="priority" label={translate("ticket.common.priority")} />
+          <TextField
+            source="priority"
+            label={translate("ticket.common.priority")}
+          />
           <FieldFunction
             customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
             label={translate("ticket.common.assignee")}
@@ -154,8 +187,11 @@ const TicketPageList = (props: any) => {
             render={RenderFieldFunction}
           />
 
-          <DateField source="createdAt" label={translate("ticket.common.createdAt")} />
-        </Datagrid>
+          <DateField
+            source="createdAt"
+            label={translate("ticket.common.createdAt")}
+          />
+        </DatagridConfigurable>
 
         {idTicket && idTicket >= 0 && (
           <Drawer
@@ -166,7 +202,10 @@ const TicketPageList = (props: any) => {
             sx={{ zIndex: 5 }}
           >
             <div className="w-[350px] h-full mt-[60px]">
-              <TicketViewEdit id={idTicket} closeViewEdit={() => setIsRightViewEdit(false)}/>
+              <TicketViewEdit
+                id={idTicket}
+                closeViewEdit={() => setIsRightViewEdit(false)}
+              />
             </div>
           </Drawer>
         )}
