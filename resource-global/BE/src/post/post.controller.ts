@@ -44,7 +44,7 @@ export class PostController {
     const totalPages = Math.ceil(totalItems / limit);
 
     const responseData = {
-      data: [],
+      data: paginatedData,
       pagination: {
         currentPage: page,
         perPage: limit,
@@ -57,6 +57,6 @@ export class PostController {
     res.setHeader('Content-Range', `posts 0-${totalResults - 1}/${totalResults}`);
 
     // Gửi phản hồi
-    res.status(200).json(responseData);
+    res.status(200).json([...paginatedData]);
   }
 }

@@ -1,10 +1,12 @@
-import { List } from "react-admin";
+import { List, Datagrid, TextField } from "react-admin";
 
 export const PageList = (props: any) => {
 
     return (
-        <List>
-            <div>Post</div>
+        <List resource="posts">
+            <Datagrid>
+                <TextField source="name" label="Name" />
+            </Datagrid>
         </List>
     )
 }
