@@ -61,7 +61,7 @@ const TicketPageList = (props: any) => {
       >
         {mediaQuery.md && <TicketViewListCardMobile />}
         <DatagridConfigurable
-          rowClick={(id, resource) => {
+          rowClick={(id, resource, record) => {
             if (!mediaQuery.md) {
               setIdTicket(id);
               setIsRightViewEdit(
@@ -79,10 +79,26 @@ const TicketPageList = (props: any) => {
             },
           }}
         >
-          <TextField
-            className="!line-clamp-2 !max-w-[130px]"
-            source="title"
+          <FieldFunction
+            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent !line-clamp-2 !max-w-[130px]"
             label={translate("ticket.common.title")}
+            field="title"
+            source="title"
+            types="custom"
+            customContent={(record: any) => {
+              return (
+                <p
+                  onClick={(event: any) => {
+                    event.stopPropagation();
+                    redirect(`/tickets/${record.id}/show`);
+                  }}
+                  className="flex items-start gap-2 py-1"
+                >
+                  {record.title}
+                </p>
+              );
+            }}
+            render={RenderFieldFunction}
           />
 
           <FieldFunction
