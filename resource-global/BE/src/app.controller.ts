@@ -13,12 +13,10 @@ export class AppController {
     @Query('sort') sort: string,
     @Response() res: ExpressResponse,
   ) {
-    // Chuyển đổi các tham số query thành đối tượng hoặc mảng cần thiết
     const parsedFilter = JSON.parse(filter);
     const parsedRange = JSON.parse(range);
     const parsedSort = JSON.parse(sort);
 
-    // Dữ liệu giả lập trả về
     const allPosts = [
       { id: 1, name: 'Item 1' },
       { id: 2, name: 'Item 2' },
@@ -32,26 +30,14 @@ export class AppController {
       { id: 10, name: 'Item 10' },
     ];
 
-    // Thực hiện phân trang
     const start = parsedRange[0] || 0;
     const end = parsedRange[1] || allPosts.length - 1;
     const limit = end - start + 1;
     const paginatedData = allPosts.slice(start, start + limit);
 
-    // Tính toán tổng số mục
     const totalItems = allPosts.length;
 
-    // Thêm header Content-Range vào phản hồi
     res.setHeader('Content-Range', `items ${start}-${start + limit - 1}/${totalItems}`);
-
-    // Trả về dữ liệu theo định dạng React-Admin
-    res.status(200).json(
-      [
-        { "id": 1, "name": "Item 1" },
-        { "id": 2, "name": "Item 2" },
-        { "id": 3, "name": "Item 3" },
-        // ... thêm các mục khác nếu có
-      ]
-    );
+    res.status(200).json([...paginatedData]);
   }
 }
