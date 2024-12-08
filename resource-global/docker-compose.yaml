@@ -1,7 +1,7 @@
 services:
   backend:
     build:
-      context: .
+      context: ./BE
       dockerfile: Dockerfile
     volumes:
       - ./src:/app/src

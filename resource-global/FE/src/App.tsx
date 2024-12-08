@@ -3,19 +3,19 @@ import {
   Resource
 } from "react-admin";
 import { Layout } from "./Layout";
-import { dataProvider } from "./dataProvider";
-import { authProvider } from "./authProvider";
+import { dataProvider } from "@/providers/dataProvider";
+import { authProvider } from "@/providers/authProvider";
 // COMPONENT
-import { Resource as DashboardResource } from "./containers/Dashboard/Resource";
+import { Dashboard } from "@/containers/Dashboard/Dashboard";
+import { resource as ResourcePost } from "@/containers/Products/Status/index";
 
 export const App = () => (
   <Admin
     layout={Layout}
     dataProvider={dataProvider}
     authProvider={authProvider}
+    dashboard={Dashboard}
   >
-
-  <Resource name="/" {...DashboardResource} />
-
+    <Resource name="posts" {...ResourcePost} />
   </Admin>
 );
