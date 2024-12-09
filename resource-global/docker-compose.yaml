@@ -1,10 +1,10 @@
 services:
   backend:
     build:
-      context: .
+      context: ./BE
       dockerfile: Dockerfile
     volumes:
-      - ./src:/app/src
+      - ./BE/src:/app/src
     image: backend
     restart: always
     ports:
