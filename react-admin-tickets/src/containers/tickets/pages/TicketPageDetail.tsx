@@ -3,14 +3,19 @@ import {
   SimpleShowLayout,
   useShowContext,
   useRedirect,
+  useGetResourceLabel,
 } from "react-admin";
 import { Card, CardContent, CardHeader } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { BreadCrumbs } from "@/components/breadcrumbs/Breadcrumbs";
+import { useEffect } from "react";
+
 
 const Detail = (props: any) => {
   const { record, isLoading }: any = useShowContext();
   const redirect = useRedirect();
+  const getResourceLabel = useGetResourceLabel();
 
   if (isLoading) {
     return <div className="text-center py-8">Loading...</div>;
@@ -20,17 +25,45 @@ const Detail = (props: any) => {
     return <div className="text-center py-8">No data available</div>;
   }
 
+  // const getUriFromUrl = () => {
+  //   const fullUrl = window.location.href;
+  //   const hashIndex = fullUrl.indexOf("#");
+  //   if (hashIndex === -1) {
+  //     return { mainUri: "", remainingUri: "" };
+  //   }
+
+  //   const uri = fullUrl.slice(hashIndex + 1);
+
+  //   const parts = uri.split("/").filter(Boolean);
+
+  //   if (parts.length === 0) {
+  //     return { mainUri: "", remainingUri: "" };
+  //   }
+  //   const mainUri = parts.slice(0, 3).join("/");
+  //   const remainingUri = parts.slice(3).join("/");
+
+  //   return { mainUri, remainingUri };
+  // };
+
+  useEffect(() => {
+    // const { mainUri, remainingUri } = getUriFromUrl();
+    // const mainLabel = getResourceLabel(mainUri);
+    // console.log(mainLabel);
+
+  }, []);
+
   return (
     <>
       <div className="p-6 bg-white rounded-lg shadow-lg">
-        <h1 className="flex items-center gap-2 text-lg font-extrabold text-gray-800 mb-6">
+        <BreadCrumbs />
+        {/* <h1 className="flex items-center gap-2 text-lg font-extrabold text-gray-800 mb-6">
           <ArrowBackIosNewIcon
             fontSize="small"
             className="cursor-pointer"
             onClick={() => redirect("/tickets")}
           />
           <span>Task Details</span>
-        </h1>
+        </h1> */}
 
         <div className="space-y-6">
           <Card>
