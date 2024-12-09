@@ -118,7 +118,7 @@ const TicketPageList = (props: any) => {
                   ${record.status === "Done" ? "!text-[#fff] bg-[#37a137]" : ""}
                   ${record.status === "Close" ? "!text-[#fff] bg-[#eb5a24]" : ""}
                   ${record.status === "Open" ? "!text-[#fff] bg-[#42c6f1]" : ""}
-                  min-h-[50px] h-full flex items-center px-2 !text-[14px]
+                  h-full flex items-center justify-center px-2 py-1 !text-[14px] rounded-md text-center
                 `}
                 >
                   <span>{record.status}</span>
