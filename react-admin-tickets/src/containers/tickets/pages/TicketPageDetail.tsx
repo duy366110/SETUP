@@ -3,7 +3,9 @@ import {
   SimpleShowLayout,
   useShowContext,
   useRedirect,
+  useGetResourceLabel,
 } from "react-admin";
+import { useLocation } from "react-router-dom";
 import { Card, CardContent, CardHeader } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -11,6 +13,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 const Detail = (props: any) => {
   const { record, isLoading }: any = useShowContext();
   const redirect = useRedirect();
+  const getResourceLabel = useGetResourceLabel();
 
   if (isLoading) {
     return <div className="text-center py-8">Loading...</div>;
@@ -23,14 +26,15 @@ const Detail = (props: any) => {
   return (
     <>
       <div className="p-6 bg-white rounded-lg shadow-lg">
-        <h1 className="flex items-center gap-2 text-lg font-extrabold text-gray-800 mb-6">
+        {/* <BreadCrumbs /> */}
+        {/* <h1 className="flex items-center gap-2 text-lg font-extrabold text-gray-800 mb-6">
           <ArrowBackIosNewIcon
             fontSize="small"
             className="cursor-pointer"
             onClick={() => redirect("/tickets")}
           />
           <span>Task Details</span>
-        </h1>
+        </h1> */}
 
         <div className="space-y-6">
           <Card>
@@ -59,9 +63,10 @@ const Detail = (props: any) => {
               <div className="flex gap-4 mb-4">
                 {record.labels &&
                   record.labels.length > 0 &&
-                  record.labels.map((label: any) => {
+                  record.labels.map((label: any, index: number) => {
                     return (
                       <div
+                        key={index}
                         className={`
                     ${label === "bug" ? "!bg-[#FF6B6B] text-white" : ""}
                     ${label === "login" ? "!bg-[#4CAF50] text-white" : ""}

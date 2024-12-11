@@ -195,7 +195,7 @@ const TicketPageList = (props: any) => {
               return (
                 <div className="flex items-start gap-2">
                   {record.labels.map((label: string) => {
-                    return <div>{label}</div>;
+                    return <div key={label}>{label}</div>;
                   })}
                 </div>
               );
