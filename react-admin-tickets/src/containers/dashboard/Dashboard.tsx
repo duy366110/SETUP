@@ -17,24 +17,28 @@ const Dashboard = (props: any) => {
   const stats = useMemo(() => {
     return [
       {
+        id: "stats-01",
         title: translate("dashboard.stat.customUsing"),
         value: "10,813",
         color: "#007bff",
         bg: "linear-gradient(-225deg, #A8BFFF 0%, #884D80 100%)",
       },
       {
+        id: "stats-02",
         title: translate("dashboard.stat.totalTransactionInMonth"),
         value: "3,435",
         color: "#dc3545",
         bg: "linear-gradient(120deg, #f6d365 0%, #fda085 100%)",
       },
       {
+        id: "stats-03",
         title: translate("dashboard.stat.transactionSuccess"),
         value: "31.8%",
         color: "#fd7e14",
         bg: "linear-gradient(to top, #48c6ef 0%, #6f86d6 100%)",
       },
       {
+        id: "stats-04",
         title: translate("dashboard.stat.amountReceived"),
         value: "121,529 VND",
         color: "#28a745",
@@ -49,7 +53,7 @@ const Dashboard = (props: any) => {
         <div className="grid grid-cols-12 items-stretch gap-4">
           {stats.map((stat, index) => {
             return (
-              <div className="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 h-full">
+              <div key={stat.id} className="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 h-full">
                 <Card
                   className={`${styles["tast-card"]} h-full`}
                   style={{

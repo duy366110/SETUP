@@ -57,10 +57,12 @@ const Header = (props: any) => {
               )}
             </Button>
 
-            <H2Theme className="!text-sm !text-zinc-500 uppercase tracking-wider">
-              <span className={`${title? "" : "hidden"} ease-linear`}>{title? title : ""}</span>
+            <div className="flex items-center !text-sm !text-zinc-500 uppercase tracking-wider">
+              <span className={`${title ? "" : "hidden"} ease-linear`}>
+                {title ? title : ""}
+              </span>
               <TitlePortal className="!text-sm text-zinc-500 uppercase tracking-wider" />
-            </H2Theme>
+            </div>
           </div>
 
           <div className="flex gap-4">
