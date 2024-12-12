@@ -62,6 +62,10 @@ const customEnglishMessages: TranslationMessages = {
             }
         },
     },
+    breadcrumb: {
+        tickets: "Tickets",
+        show: "Show",
+    },
     ticket: {...tickets.en},
     dashboard: {...dashboard.en}
     
