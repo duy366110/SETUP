@@ -4,6 +4,10 @@ import {
   TopToolbar,
   useShowContext,
   useTranslate,
+  SimpleForm,
+  Link,
+  SaveButton,
+  useRedirect,
 } from "react-admin";
 import {
   ListItem,
@@ -11,14 +15,15 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
-  Box,
-  IconButton,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import ClearIcon from '@mui/icons-material/Clear';
+import { Button } from "@mui/material";
+import { RichTextInput } from "ra-input-rich-text";
 
 const Detail = (props: any) => {
   const { record, isLoading }: any = useShowContext();
+  const redirect = useRedirect();
   const t = useTranslate();
 
   if (isLoading) {
@@ -31,12 +36,12 @@ const Detail = (props: any) => {
 
   return (
     <>
-      <div className="p-6 bg-white rounded-lg">
+      <div className="p-2 md:p-6 bg-white rounded-lg">
         <div className="space-y-6">
           <h2 className="text-xl font-medium">{record.title}</h2>
 
           {/* NORMAL INFOR */}
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
             <div className="flex gap-2 items-center">
               <AccessTimeIcon fontSize="small" />
               {record.createdAt && (
@@ -50,10 +55,12 @@ const Detail = (props: any) => {
             </div>
           </div>
 
-          <div className="p-2 bg-slate-50 flex gap-2 w-full">
+          <div className="p-2 bg-slate-50 flex flex-col md:flex-row gap-2 w-full">
             {/* REPORTER */}
             <div>
-              <p className="mb-2 font-semibold">Reporter:</p>
+              <p className="mb-2 text-base font-semibold">
+                {t("ticket.common.reporter")} :
+              </p>
               {record.reporter && (
                 <ListItem
                   className="!py-0 !items-start"
@@ -62,7 +69,11 @@ const Detail = (props: any) => {
                   <ListItemAvatar>
                     <Avatar
                       alt={record.reporter.name}
-                      src={record.reporter?.avatar? record.reporter?.avatar : "https://img.freepik.com/premium-vector/profile-icon-male-avatar_48369-2112.jpg?w=826"}
+                      src={
+                        record.reporter?.avatar
+                          ? record.reporter?.avatar
+                          : "https://img.freepik.com/premium-vector/profile-icon-male-avatar_48369-2112.jpg?w=826"
+                      }
                     />
                   </ListItemAvatar>
                   <div>
@@ -81,7 +92,9 @@ const Detail = (props: any) => {
 
             {/* ASSIGNED */}
             <div>
-              <p className="mb-2 font-semibold">Assigned:</p>
+              <p className="mb-2 text-base font-semibold">
+                {t("ticket.common.assignee")} :
+              </p>
               {record.assignee && (
                 <ListItem
                   className="!py-0 !items-start"
@@ -90,7 +103,11 @@ const Detail = (props: any) => {
                   <ListItemAvatar>
                     <Avatar
                       alt={record.assignee.name}
-                      src={record.assignee?.avatar? record.assignee?.avatar : "https://img.freepik.com/premium-vector/profile-icon-female-avatar_48369-2119.jpg?w=826"}
+                      src={
+                        record.assignee?.avatar
+                          ? record.assignee?.avatar
+                          : "https://img.freepik.com/premium-vector/profile-icon-female-avatar_48369-2119.jpg?w=826"
+                      }
                     />
                   </ListItemAvatar>
                   <div className="">
@@ -104,7 +121,7 @@ const Detail = (props: any) => {
                         position: "unset",
                       }}
                     >
-                      Assign to me
+                      <Link to="/tickets">{t("common.assignToMe")}</Link>
                     </ListItemSecondaryAction>
                   </div>
                 </ListItem>
@@ -175,16 +192,54 @@ const Detail = (props: any) => {
 
           {/* DESC */}
           <div>
-            <h3 className="text-lg font-medium mb-2">Description</h3>
+            <h3 className="text-base font-semibold mb-2">
+              {t("ticket.common.description")}
+            </h3>
             <div
               className="text-base"
               dangerouslySetInnerHTML={{ __html: record.description }}
             />
           </div>
 
-          {/* Comments */}
+          {/* FROM COMMENT */}
+          <SimpleForm
+            className="!p-0"
+            toolbar={
+              <div className="flex justify-between w-full">
+                <Button
+                  onClick={() => redirect("/tickets")}
+                  variant="contained"
+                  color="error"
+                  startIcon={<ClearIcon />}
+                >
+                  {t("ra.action.cancel")}
+                </Button>
+                <SaveButton label={t("common.button.comment")} />
+              </div>
+            }
+          >
+            <RichTextInput
+              source="comments"
+              className="ra-rich-text-editor !p-0"
+              label={
+                <p className="text-base font-semibold mb-2">
+                  {t("ticket.common.comment")}
+                </p>
+              }
+              sx={{
+                "& .ql-container": {
+                  minHeight: "350px",
+                },
+              }}
+              fullWidth
+            />
+          </SimpleForm>
+
+          {/* COMMENT */}
           <div>
-            <h2 className="text-xl font-semibold text-gray-700">Comments</h2>
+            <h2 className="text-base font-semibold mb-2">
+              {t("ticket.common.comment")}
+            </h2>
             {record.comments && record.comments.length > 0 ? (
               <ul className="mt-2 list-disc pl-5">
                 {record.comments.map((comment: string, index: number) => (
@@ -194,7 +249,9 @@ const Detail = (props: any) => {
                 ))}
               </ul>
             ) : (
-              <p className="text-gray-500">No comments available</p>
+              <p className="text-gray-500">
+                {t("common.message.commentPlaceholder")}
+              </p>
             )}
           </div>
         </div>
@@ -208,8 +265,10 @@ const ToolBarTop = (props: any) => {
 };
 
 const TicketPageDetail = (props: any) => {
+  const t = useTranslate();
+  
   return (
-    <Show {...props} actions={<ToolBarTop />}>
+    <Show {...props} actions={<ToolBarTop />} title={t("ticket.page.show")}>
       <SimpleShowLayout>
         <Detail />
       </SimpleShowLayout>

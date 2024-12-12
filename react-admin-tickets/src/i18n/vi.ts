@@ -50,21 +50,26 @@ const customVietnameseMessages: TranslationMessages = {
         },
     },
     common: {
+        assignToMe: "Giao việc đến tôi",
         button: {
             save: "Lưu",
             delete: "Xoá",
             cancel: "Huỷ",
-            edit: "Cập nhật"
+            edit: "Cập nhật",
+            comment: "Thêm bình luận",
         },
         message: {
             error: {
                 email: "Email không hợp lệ",
-            }
+            },
+            commentPlaceholder: "Không có bình luận nào.",
         },
     },
     breadcrumb: {
         tickets: "Công việc",
         show: "Hiển thị",
+        create: "Tạo mới",
+        edit: "Cập nhật",
     },
     ticket:{...tickets.vi},
     dashboard: {...dashboard.vi}
