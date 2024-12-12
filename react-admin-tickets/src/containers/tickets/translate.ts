@@ -18,6 +18,9 @@ export const translate = {
         form: {
             create: "Create new ticket",
             edit: "Update ticket information"
+        },
+        page: {
+            show: "Ticket detail"
         }
     },
     vi: {
@@ -39,6 +42,9 @@ export const translate = {
         form: {
             create: "Tạo mới nhiệm vụ công việc",
             edit: "Cập nhật nhiệm vụ"
+        },
+        page: {
+            show: "Chi tiết"
         }
     }
 }

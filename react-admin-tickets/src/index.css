@@ -28,3 +28,14 @@
     padding-bottom: 0px!important;
     padding-top: 0px!important;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+li::marker {
+    content: "";
+    display: none;
+}

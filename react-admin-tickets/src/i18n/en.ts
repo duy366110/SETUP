@@ -50,21 +50,26 @@ const customEnglishMessages: TranslationMessages = {
         },
     },
     common: {
+        assignToMe: "Assign to me",
         button: {
             save: "Save",
             delete: "Delete",
             cancel: "Cancel",
-            edit: "Edit"
+            edit: "Edit",
+            comment: "Add comment",
         },
         message: {
             error: {
                 email: "Invalid email format",
-            }
+            },
+            commentPlaceholder: "No comments available",
         },
     },
     breadcrumb: {
         tickets: "Tickets",
         show: "Show",
+        create: "Create",
+        edit: "Edit",
     },
     ticket: {...tickets.en},
     dashboard: {...dashboard.en}
