@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Show,
   SimpleShowLayout,
@@ -5,7 +6,7 @@ import {
   useShowContext,
   useTranslate,
   Link,
-  // useGetList,
+  useGetList,
 } from "react-admin";
 import {
   ListItem,
@@ -15,11 +16,30 @@ import {
   Avatar,
 } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import ShortTextIcon from '@mui/icons-material/ShortText';
 import { Comments } from "@/components/comments/Comments";
 
 const Detail = (props: any) => {
   const { record, isLoading }: any = useShowContext();
+  const { data: statuses, isLoading: isLoadingStatus }: any = useGetList<any>("statuses");
+  const { data: priorities, isLoading: isLoadingPriority }: any = useGetList<any>("priorities");
   const t = useTranslate();
+
+  const [status, setStatus] = useState<any>(null);
+  const [priority, setPriority] = useState<any>(null);
+
+  useEffect(() => {
+    if(statuses && statuses.length > 0) {
+      setStatus(statuses.find((status: any) => status.id === record.status));
+    }
+  }, [statuses])
+
+  useEffect(() => {
+    if(priorities && priorities.length > 0) {
+      setPriority(priorities.find((priority: any) => priority.id === record.priority));
+    }
+  }, [priorities])
 
   if (isLoading) {
     return <div className="text-center py-8">Loading...</div>;
@@ -44,9 +64,21 @@ const Detail = (props: any) => {
               )}
               {!record.createdAt && <span> // </span>}
             </div>
-            <div className="flex gap-2">
-              <p>{record.status}</p>
-              <p>{record.priority}</p>
+            <div className="flex items-center gap-4">
+              {status && (
+                <div style={{ backgroundColor: status.color }} className="flex items-center gap-2 p-2 rounded text-white">
+                  <p>{status.name}</p>
+                  <DoneAllIcon fontSize="small" />
+                </div>
+                
+              )}
+              
+              {priority && (
+                <div style={{ backgroundColor: priority.color }} className="flex items-center gap-2 p-2 rounded text-white">
+                  <p>{priority.name}</p>
+                  <ShortTextIcon fontSize="small" />
+                </div>
+              )}
             </div>
           </div>
 

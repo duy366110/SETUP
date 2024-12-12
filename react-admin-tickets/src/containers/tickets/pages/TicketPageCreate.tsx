@@ -50,7 +50,7 @@ const TicketPageCreate = () => {
   };
 
   return (
-    <Create className="mt-16 md:mt-0" redirect="list" title={t("ticket.form.create")}>
+    <Create redirect="list" title={t("ticket.form.create")}>
       <SimpleForm>
         <div className="col-span-12 mb-4">
           <h2 className="flex gap-2 items-center text-lg">
@@ -154,7 +154,7 @@ const TicketPageCreate = () => {
               source="labels"
               label={t("ticket.common.label")}
             >
-              <SimpleFormIterator>
+              <SimpleFormIterator className="mt-2">
                 <TextInput source="" label={t("ticket.common.label")} />
               </SimpleFormIterator>
             </ArrayInput>
