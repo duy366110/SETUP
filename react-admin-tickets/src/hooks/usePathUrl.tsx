@@ -1,7 +1,10 @@
+import { useTranslate } from "react-admin";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { NumberRegex } from "@/constants/Regexs";
 
 export const usePathUrl = (skips: Array<string>) => {
+  const t = useTranslate();
   const location = useLocation();
   const [paths, setPaths] = useState<Array<any>>([]);
 
@@ -21,11 +24,11 @@ export const usePathUrl = (skips: Array<string>) => {
       let result = path? path : pathname;
       let resultList = result.split("/").filter((path: any) => path.trim());
 
-      let resultPath = resultList.map((item, index) => {
+      let resultPath = resultList.map((key: string, index) => {
         const link = "/" + resultList.slice(0, index + 1).join("/");
         const obj: any = {
             link: link,
-            name: item,
+            name: NumberRegex.test(key) ? key : t(`breadcrumb.${key}`),
             icon: "",
         };
     
