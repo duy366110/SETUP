@@ -10,8 +10,8 @@ export const UtilsActions = () => {
   return (
     <TopToolbar>
       <FilterButton />
-      <CreateButton />
       <SelectColumnsButton />
+      <CreateButton />
       <ExportButton />
     </TopToolbar>
   );

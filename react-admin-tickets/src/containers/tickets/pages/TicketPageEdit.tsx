@@ -49,7 +49,7 @@ const TicketPageEdit = () => {
   };
 
   return (
-    <Edit className="mt-16 md:mt-0" redirect="list" title={t("ticket.form.edit")}>
+    <Edit redirect="list" title={t("ticket.form.edit")} actions={<></>}>
       <SimpleForm>
         <div className="col-span-12 mb-4">
           <h2 className="flex gap-2 items-center text-lg">

@@ -48,7 +48,7 @@ const Dashboard = (props: any) => {
   }, []);
 
   return (
-    <div className="grid grid-cols-12 gap-4 mt-20 md:mt-4">
+    <div className="grid grid-cols-12 gap-4">
       <div className="col-span-12">
         <div className="grid grid-cols-12 items-stretch gap-4">
           {stats.map((stat, index) => {
