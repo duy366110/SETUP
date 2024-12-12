@@ -3,14 +3,23 @@ import {
   SimpleShowLayout,
   TopToolbar,
   useShowContext,
+  useTranslate,
 } from "react-admin";
-import { Card, CardContent, CardHeader, Button } from "@mui/material";
+import {
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
+  Box,
+  IconButton,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import AttachFileIcon from '@mui/icons-material/AttachFile';
-import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
 const Detail = (props: any) => {
   const { record, isLoading }: any = useShowContext();
+  const t = useTranslate();
 
   if (isLoading) {
     return <div className="text-center py-8">Loading...</div>;
@@ -24,39 +33,92 @@ const Detail = (props: any) => {
     <>
       <div className="p-6 bg-white rounded-lg">
         <div className="space-y-6">
-          {/* <CardHeader
-            className="border-b"
-            title={<p className="line-clamp-2 mb-2">{record.title}</p>}
-            subheader={
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex gap-2 items-center">
-                  <AccessTimeIcon fontSize="small" />
-                  {record.createdAt && (
-                    <span>{new Date(record.createdAt).toLocaleString()}</span>
-                  )}
-                  {!record.createdAt && <span> // </span>}
-                </div>
+          <h2 className="text-xl font-medium">{record.title}</h2>
 
-                <div className="flex gap-2">
-                  <p>{record.status}</p>
-                  <p>{record.priority}</p>
-                </div>
-              </div>
-            }
-          /> */}
-
-          <h2 className="text-2xl font-medium">{record.title}</h2>
-          <div>
-            <Button>
-              <AttachFileIcon />
-              <span>Attach</span>
-            </Button>
-            <Button>
-            <LibraryAddCheckIcon />
-              <span>Create subtask</span>
-            </Button>
+          {/* NORMAL INFOR */}
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex gap-2 items-center">
+              <AccessTimeIcon fontSize="small" />
+              {record.createdAt && (
+                <span>{new Date(record.createdAt).toLocaleString()}</span>
+              )}
+              {!record.createdAt && <span> // </span>}
+            </div>
+            <div className="flex gap-2">
+              <p>{record.status}</p>
+              <p>{record.priority}</p>
+            </div>
           </div>
 
+          <div className="p-2 bg-slate-50 flex gap-2 w-full">
+            {/* REPORTER */}
+            <div>
+              <p className="mb-2 font-semibold">Reporter:</p>
+              {record.reporter && (
+                <ListItem
+                  className="!py-0 !items-start"
+                  sx={{ display: "flex" }}
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      alt={record.reporter.name}
+                      src={record.reporter?.avatar? record.reporter?.avatar : "https://img.freepik.com/premium-vector/profile-icon-male-avatar_48369-2112.jpg?w=826"}
+                    />
+                  </ListItemAvatar>
+                  <div>
+                    <ListItemText primary={record.reporter.name} />
+                    <ListItemText primary={record.reporter.email} />
+                  </div>
+                </ListItem>
+              )}
+
+              {!record.reporter && (
+                <p className="text-sm text-red-500 font-medium">
+                  Chưa cập nhật
+                </p>
+              )}
+            </div>
+
+            {/* ASSIGNED */}
+            <div>
+              <p className="mb-2 font-semibold">Assigned:</p>
+              {record.assignee && (
+                <ListItem
+                  className="!py-0 !items-start"
+                  sx={{ display: "flex" }}
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      alt={record.assignee.name}
+                      src={record.assignee?.avatar? record.assignee?.avatar : "https://img.freepik.com/premium-vector/profile-icon-female-avatar_48369-2119.jpg?w=826"}
+                    />
+                  </ListItemAvatar>
+                  <div className="">
+                    <ListItemText primary={record.assignee.name} />
+                    <ListItemText primary={record.assignee.email} />
+                    <ListItemSecondaryAction
+                      sx={{
+                        transform: "unset",
+                        top: "unset",
+                        left: "unset",
+                        position: "unset",
+                      }}
+                    >
+                      Assign to me
+                    </ListItemSecondaryAction>
+                  </div>
+                </ListItem>
+              )}
+
+              {!record.assignee && (
+                <p className="text-sm text-red-500 font-medium">
+                  Chưa cập nhật
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* LABEL */}
           <div className="flex gap-4 mb-4">
             {record.labels &&
               record.labels.length > 0 &&
@@ -111,62 +173,13 @@ const Detail = (props: any) => {
               })}
           </div>
 
-          <div className="bg-gray-50 p-4 rounded-md shadow-md">
-            <h3 className="text-lg font-semibold text-gray-800 mb-2 border-b pb-1">
-              Người báo cáo
-            </h3>
-
-            {record.reporter ? (
-              <div className="px-2 text-gray-700">
-                <p className="mb-1">
-                  <span className="font-medium text-gray-900">Email:</span>{" "}
-                  {record.reporter.email}
-                </p>
-                <p>
-                  <span className="font-medium text-gray-900">Họ tên:</span>{" "}
-                  {record.reporter.name}
-                </p>
-              </div>
-            ) : (
-              <p className="px-2 text-sm text-gray-500 italic">
-                Thông tin chưa được cung cấp
-              </p>
-            )}
-
-            {!record.assignee && (
-              <p className="px-2 mt-2 text-sm text-red-500 font-medium">
-                Chưa cập nhật
-              </p>
-            )}
-          </div>
-
-          <div className="bg-gray-50 p-4 rounded-md shadow-md mt-4">
-            <h3 className="text-lg font-semibold text-gray-800 mb-2 border-b pb-1">
-              Người phụ trách
-            </h3>
-
-            {record.assignee ? (
-              <div className="px-2 text-gray-700">
-                <p className="mb-1">
-                  <span className="font-medium text-gray-900">Email:</span>{" "}
-                  {record.assignee.email}
-                </p>
-                <p>
-                  <span className="font-medium text-gray-900">Họ tên:</span>{" "}
-                  {record.assignee.name}
-                </p>
-              </div>
-            ) : (
-              <p className="px-2 text-sm text-gray-500 italic">
-                Thông tin chưa được cung cấp
-              </p>
-            )}
-
-            {!record.assignee && (
-              <p className="px-2 mt-2 text-sm text-red-500 font-medium">
-                Chưa cập nhật
-              </p>
-            )}
+          {/* DESC */}
+          <div>
+            <h3 className="text-lg font-medium mb-2">Description</h3>
+            <div
+              className="text-base"
+              dangerouslySetInnerHTML={{ __html: record.description }}
+            />
           </div>
 
           {/* Comments */}
