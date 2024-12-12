@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import {
   List,
   DatagridConfigurable,
-  TextField,
   DateField,
   SearchInput,
   DateInput,
@@ -10,26 +9,30 @@ import {
   SelectInput,
   useRedirect,
   useTranslate,
+  useGetList,
 } from "react-admin";
 import { useSelector } from "react-redux";
 import { Drawer } from "@mui/material";
 import AttachEmailIcon from "@mui/icons-material/AttachEmail";
-import PTheme from "@/components/themes/PTheme";
 
 import { RootState } from "@/store";
 import { UtilsActions } from "@/containers/utils/UtilsActions";
-import TicketViewEdit from "../view/TicketViewEdit";
-import TicketViewListCardMobile from "../view/TicketViewListCardMobile";
 import {
   FieldFunction,
   RenderFieldFunction,
 } from "@/components/fileds/FieldFunction";
+import { RenderFieldText } from "@/containers/utils/renderFieldText";
+import TicketViewEdit from "../view/TicketViewEdit";
+import TicketViewListCardMobile from "../view/TicketViewListCardMobile";
 import styles from "./TicketPageList.module.css";
 
 const TicketPageList = (props: any) => {
   const mediaQuery: any = useSelector<RootState>(
     (state: any) => state.mediaQuery,
   );
+
+  const { data: statuses, isLoading: isLoadingStatus }: any = useGetList<any>("statuses");
+  const { data: priorities, isLoading: isLoadingPriority }: any = useGetList<any>("priorities");
 
   const redirect = useRedirect();
   const translate = useTranslate();
@@ -38,7 +41,10 @@ const TicketPageList = (props: any) => {
 
   const visitorFilters = [
     <SearchInput source="q" alwaysOn />,
-    <DateInput source="createdAt" label={translate("ticket.common.createdAt")} />,
+    <DateInput
+      source="createdAt"
+      label={translate("ticket.common.createdAt")}
+    />,
     <NullableBooleanInput source="has_ordered" />,
     <NullableBooleanInput source="has_newsletter" defaultValue />,
     <SelectInput
@@ -59,7 +65,7 @@ const TicketPageList = (props: any) => {
     <div className="grid grid-cols-12">
       <List
         title={translate("ticket.title")}
-        filters={visitorFilters }
+        filters={visitorFilters}
         sort={{ field: "title", order: "DESC" }}
         perPage={25}
         actions={<UtilsActions />}
@@ -127,30 +133,29 @@ const TicketPageList = (props: any) => {
             source="status"
             types="custom"
             customContent={(record: any) => {
-              return (
-                <PTheme
-                  className={`
-                  ${record.status === "In Progress" ? "!text-[#fff] bg-[#559ee5]" : ""}
-                  ${record.status === "Completed" ? "!text-[#fff] bg-[#37a137]" : ""}
-                  ${record.status === "Pending" ? "!text-[#fff] bg-[#e3c839]" : ""}
-                  ${record.status === "To Do" ? "!text-[#fff] bg-[#4d6eb9]" : ""}
-                  ${record.status === "Done" ? "!text-[#fff] bg-[#37a137]" : ""}
-                  ${record.status === "Close" ? "!text-[#fff] bg-[#eb5a24]" : ""}
-                  ${record.status === "Open" ? "!text-[#fff] bg-[#42c6f1]" : ""}
-                  h-full flex items-center justify-center px-2 py-1 !text-[14px] rounded-md text-center
-                `}
-                >
-                  <span>{record.status}</span>
-                </PTheme>
+              return RenderFieldText(
+                statuses.find((status: any) => status.id === record.status),
+                "name",
               );
             }}
             render={RenderFieldFunction}
           />
 
-          <TextField
-            source="priority"
+          <FieldFunction
+            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
             label={translate("ticket.common.priority")}
+            field="priority"
+            source="priority"
+            types="custom"
+            customContent={(record: any) => {
+              return RenderFieldText(
+                priorities.find((priority: any) => priority.id === record.priority),
+                "name",
+              );
+            }}
+            render={RenderFieldFunction}
           />
+
           <FieldFunction
             customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
             label={translate("ticket.common.assignee")}

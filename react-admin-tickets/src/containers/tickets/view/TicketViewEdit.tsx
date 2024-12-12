@@ -14,8 +14,9 @@ import {
   useUpdate,
   useDelete,
   useTranslate,
+  useGetList,
 } from "react-admin";
-import { statuses, priorities } from "../constants/model";
+// import { statuses, priorities } from "../constants/model";
 import { RichTextInput } from "ra-input-rich-text";
 import { EmailRegex } from "@/constants/Regexs";
 import CloseIcon from "@mui/icons-material/Close";
@@ -27,6 +28,8 @@ interface TicketViewEditProps {
 
 const TicketViewEdit = (props: TicketViewEditProps | any) => {
   const model: string = useMemo(() => "tickets", []);
+  const {data: statuses, isLoading: isLoadingStatus }: any = useGetList<any>("statuses");
+    const {data: priorities, isLoading: isLoadingPriority }: any = useGetList<any>("priorities");
   const translate = useTranslate();
   const [update] = useUpdate(model);
   const [deleteOne] = useDelete();

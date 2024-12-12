@@ -10,15 +10,17 @@ import {
   required,
   useRedirect,
   useTranslate,
+  useGetList,
 } from "react-admin";
 import { RichTextInput } from "ra-input-rich-text";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { statuses, priorities } from "../constants/model";
 import { EmailRegex } from "@/constants/Regexs";
 
 const TicketPageEdit = () => {
   const redirect = useRedirect();
   const t = useTranslate();
+  const {data: statuses, isLoading: isLoadingStatus }: any = useGetList<any>("statuses");
+  const {data: priorities, isLoading: isLoadingPriority }: any = useGetList<any>("priorities");
 
   const validateAssigneeEmail = (value: any, allValues: any) => {
     if (allValues.assignee.name) {
@@ -75,6 +77,7 @@ const TicketPageEdit = () => {
               choices={statuses}
               label={t("ticket.common.status")}
               validate={required()}
+              optionValue="id"
             />
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
@@ -83,6 +86,7 @@ const TicketPageEdit = () => {
               choices={priorities}
               label={t("ticket.common.priority")}
               validate={required()}
+              optionValue="id"
             />
           </div>
 
