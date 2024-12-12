@@ -63,6 +63,7 @@ const TicketPageCreate = () => {
         <div className="grid grid-cols-12 gap-4 w-full">
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <TextInput
+              autoFocus={true}
               source="title"
               label={t("ticket.common.title")}
               validate={required()}
@@ -148,20 +149,6 @@ const TicketPageCreate = () => {
             >
               <SimpleFormIterator>
                 <TextInput source="" label={t("ticket.common.label")} />
-              </SimpleFormIterator>
-            </ArrayInput>
-          </div>
-
-          <div className="col-span-12 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
-            <ArrayInput
-              source="comments"
-              label={t("ticket.common.comment")}
-            >
-              <SimpleFormIterator>
-                <TextInput
-                  source=""
-                  label={t("ticket.common.comment")}
-                />
               </SimpleFormIterator>
             </ArrayInput>
           </div>
