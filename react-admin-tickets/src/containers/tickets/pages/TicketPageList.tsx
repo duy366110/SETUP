@@ -69,7 +69,7 @@ const TicketPageList = (props: any) => {
         sort={{ field: "title", order: "DESC" }}
         perPage={25}
         actions={<UtilsActions />}
-        className={`${isRightViewEdit ? "col-span-9" : "col-span-12"} mt-10 lg:mt-0`}
+        className={`${isRightViewEdit ? "col-span-9" : "col-span-12"}`}
         sx={{
           flexGrow: 1,
           transition: (theme: any) =>
@@ -134,7 +134,7 @@ const TicketPageList = (props: any) => {
             types="custom"
             customContent={(record: any) => {
               return RenderFieldText(
-                statuses.find((status: any) => status.id === record.status),
+                statuses && statuses.length ? statuses.find((status: any) => status.id === record.status) : null,
                 "name",
               );
             }}
@@ -149,7 +149,7 @@ const TicketPageList = (props: any) => {
             types="custom"
             customContent={(record: any) => {
               return RenderFieldText(
-                priorities.find((priority: any) => priority.id === record.priority),
+                priorities && priorities.length? priorities.find((priority: any) => priority.id === record.priority) : null,
                 "name",
               );
             }}
