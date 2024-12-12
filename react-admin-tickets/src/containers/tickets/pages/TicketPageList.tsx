@@ -111,7 +111,7 @@ const TicketPageList = (props: any) => {
                     event.stopPropagation();
                     redirect(`/tickets/${record.id}/show`);
                   }}
-                  className="flex items-start gap-2 py-1"
+                  className="flex items-start gap-2 py-1 !line-clamp-2 max-w-[250px]"
                 >
                   {record.title}
                 </p>

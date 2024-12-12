@@ -18,7 +18,7 @@ import { EmailRegex } from "@/constants/Regexs";
 
 const TicketPageEdit = () => {
   const redirect = useRedirect();
-  const translate = useTranslate();
+  const t = useTranslate();
 
   const validateAssigneeEmail = (value: any, allValues: any) => {
     if (allValues.assignee.name) {
@@ -27,7 +27,7 @@ const TicketPageEdit = () => {
       }
 
       if (!EmailRegex.test(value)) {
-        return translate("common.message.error.email");
+        return t("common.message.error.email");
       }
     }
     return undefined;
@@ -40,14 +40,14 @@ const TicketPageEdit = () => {
       }
 
       if (!EmailRegex.test(value)) {
-        return translate("common.message.error.email");
+        return t("common.message.error.email");
       }
     }
     return undefined;
   };
 
   return (
-    <Edit className="mt-16 md:mt-0" redirect="list">
+    <Edit className="mt-16 md:mt-0" redirect="list" title={t("ticket.form.edit")}>
       <SimpleForm>
         <div className="col-span-12 mb-4">
           <h2 className="flex gap-2 items-center text-lg">
@@ -56,7 +56,7 @@ const TicketPageEdit = () => {
               className="cursor-pointer"
               onClick={() => redirect("/tickets")}
             />
-            <span>{translate("ticket.form.edit")}</span>
+            <span>{t("ticket.form.edit")}</span>
           </h2>
         </div>
 
@@ -64,7 +64,7 @@ const TicketPageEdit = () => {
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <TextInput
               source="title"
-              label={translate("ticket.common.title")}
+              label={t("ticket.common.title")}
               validate={required()}
             />
           </div>
@@ -73,7 +73,7 @@ const TicketPageEdit = () => {
             <SelectInput
               source="status"
               choices={statuses}
-              label={translate("ticket.common.status")}
+              label={t("ticket.common.status")}
               validate={required()}
             />
           </div>
@@ -81,7 +81,7 @@ const TicketPageEdit = () => {
             <SelectInput
               source="priority"
               choices={priorities}
-              label={translate("ticket.common.priority")}
+              label={t("ticket.common.priority")}
               validate={required()}
             />
           </div>
@@ -90,11 +90,11 @@ const TicketPageEdit = () => {
             <ReferenceInput
               source="assignee.id"
               reference="users"
-              label={translate("ticket.common.assignee")}
+              label={t("ticket.common.assignee")}
             >
               <TextInput
                 source="assignee.name"
-                label={translate("ticket.common.assignee")}
+                label={t("ticket.common.assignee")}
               />
             </ReferenceInput>
           </div>
@@ -102,7 +102,7 @@ const TicketPageEdit = () => {
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <TextInput
               source="assignee.email"
-              label={translate("ticket.common.assigneeEmail")}
+              label={t("ticket.common.assigneeEmail")}
               validate={validateAssigneeEmail}
             />
           </div>
@@ -115,7 +115,7 @@ const TicketPageEdit = () => {
             >
               <TextInput
                 source="reporter.name"
-                label={translate("ticket.common.reporter")}
+                label={t("ticket.common.reporter")}
               />
             </ReferenceInput>
           </div>
@@ -123,7 +123,7 @@ const TicketPageEdit = () => {
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <TextInput
               source="reporter.email"
-              label={translate("ticket.common.reporterEmail")}
+              label={t("ticket.common.reporterEmail")}
               validate={validateReporterEmail}
             />
           </div>
@@ -131,23 +131,23 @@ const TicketPageEdit = () => {
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <DateInput
               source="createdAt"
-              label={translate("ticket.common.createdAt")}
+              label={t("ticket.common.createdAt")}
             />
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <DateInput
               source="updatedAt"
-              label={translate("ticket.common.updatedAt")}
+              label={t("ticket.common.updatedAt")}
             />
           </div>
 
           <div className="col-span-12 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput
               source="labels"
-              label={translate("ticket.common.label")}
+              label={t("ticket.common.label")}
             >
               <SimpleFormIterator>
-                <TextInput source="" label={translate("ticket.common.label")} />
+                <TextInput source="" label={t("ticket.common.label")} />
               </SimpleFormIterator>
             </ArrayInput>
           </div>
@@ -155,12 +155,12 @@ const TicketPageEdit = () => {
           <div className="col-span-12 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput
               source="comments"
-              label={translate("ticket.common.comment")}
+              label={t("ticket.common.comment")}
             >
               <SimpleFormIterator>
                 <TextInput
                   source=""
-                  label={translate("ticket.common.comment")}
+                  label={t("ticket.common.comment")}
                 />
               </SimpleFormIterator>
             </ArrayInput>
@@ -170,7 +170,7 @@ const TicketPageEdit = () => {
             <RichTextInput
               className="ra-rich-text-editor"
               source="description"
-              label={translate("ticket.common.description")}
+              label={t("ticket.common.description")}
               sx={{
                 "& .ql-container": {
                   minHeight: "350px",
