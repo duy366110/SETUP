@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import {
-  RaRecord,
   List,
-  Datagrid,
   DatagridConfigurable,
   TextField,
   DateField,
+  SearchInput,
+  DateInput,
+  NullableBooleanInput,
+  SelectInput,
   useRedirect,
   useTranslate,
-  useListContext,
 } from "react-admin";
 import { useSelector } from "react-redux";
 import { Drawer } from "@mui/material";
@@ -16,6 +17,7 @@ import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import PTheme from "@/components/themes/PTheme";
 
 import { RootState } from "@/store";
+import { UtilsActions } from "@/containers/utils/UtilsActions";
 import TicketViewEdit from "../view/TicketViewEdit";
 import TicketViewListCardMobile from "../view/TicketViewListCardMobile";
 import {
@@ -34,6 +36,19 @@ const TicketPageList = (props: any) => {
   const [isRightViewEdit, setIsRightViewEdit] = useState<boolean>(false);
   const [idTicket, setIdTicket] = useState<any>(-1);
 
+  const visitorFilters = [
+    <SearchInput source="q" alwaysOn />,
+    <DateInput source="createdAt" label={translate("ticket.common.createdAt")} />,
+    <NullableBooleanInput source="has_ordered" />,
+    <NullableBooleanInput source="has_newsletter" defaultValue />,
+    <SelectInput
+      {...props}
+      source="groups"
+      translateChoice
+      choices={[{ id: 1, name: "admin" }]}
+    />,
+  ];
+
   useEffect(() => {
     if (mediaQuery.md) {
       setIsRightViewEdit(false);
@@ -44,6 +59,10 @@ const TicketPageList = (props: any) => {
     <div className="grid grid-cols-12">
       <List
         title={translate("ticket.title")}
+        filters={visitorFilters }
+        sort={{ field: "title", order: "DESC" }}
+        perPage={25}
+        actions={<UtilsActions />}
         className={`${isRightViewEdit ? "col-span-9" : "col-span-12"} mt-10 lg:mt-0`}
         sx={{
           flexGrow: 1,
