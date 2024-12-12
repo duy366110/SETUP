@@ -2,8 +2,8 @@ export interface TicketsType {
   id?: number;
   title?: string;
   description?: string;
-  status?: string;
-  priority?: string;
+  status?: number;
+  priority?: number;
   assignee?: any;
   reporter?: any;
   createdAt?: Date;
@@ -17,8 +17,8 @@ export const Tickets: TicketsType[] = [
     title: "Fix login page error",
     description:
       "Users cannot log in due to a server timeout error. Investigate and fix the issue.",
-    status: "In Progress",
-    priority: "High",
+    status: 1,
+    priority: 1,
     assignee: {
       id: "USER-123",
       name: "John Doe",
@@ -37,8 +37,8 @@ export const Tickets: TicketsType[] = [
     id: 2,
     title: "Add dark mode to settings",
     description: "Implement a dark mode toggle in the user settings page.",
-    status: "Open",
-    priority: "Medium",
+    status: 2,
+    priority: 2,
     assignee: null,
     reporter: {
       id: "USER-456",
@@ -54,8 +54,8 @@ export const Tickets: TicketsType[] = [
     title: "Optimize database queries",
     description:
       "Certain database queries are slow and causing performance issues. Optimize the query logic and indexes.",
-    status: "Done",
-    priority: "Critical",
+    status: 3,
+    priority: 3,
     assignee: {
       id: "USER-789",
       name: "Alice Brown",
@@ -75,8 +75,8 @@ export const Tickets: TicketsType[] = [
     title: "Update homepage banner",
     description:
       "Design and replace the banner on the homepage for the holiday season.",
-    status: "Close",
-    priority: "Low",
+    status: 4,
+    priority: 4,
     assignee: null,
     reporter: {
       id: "USER-101",
@@ -91,8 +91,8 @@ export const Tickets: TicketsType[] = [
     id: 5,
     title: "Migrate user data to new database",
     description: "Migrate all user records to the new PostgreSQL database.",
-    status: "In Progress",
-    priority: "Critical",
+    status: 5,
+    priority: 1,
     assignee: {
       id: "USER-456",
       name: "Jane Smith",
@@ -113,8 +113,8 @@ export const Tickets: TicketsType[] = [
       "Fix CSS alignment issue on mobile The footer on the mobile version is misaligned. Fix the styling to ensure proper layout. The footer on the mobile version is misaligned. Fix the styling to ensure proper layout. The footer on the mobile version is misaligned. Fix the styling to ensure proper layout.",
     description:
       "The footer on the mobile version is misaligned. Fix the styling to ensure proper layout.",
-    status: "To Do",
-    priority: "Medium",
+    status: 6,
+    priority: 2,
     assignee: null,
     reporter: {
       id: "USER-234",
@@ -130,8 +130,8 @@ export const Tickets: TicketsType[] = [
     title: "Add forgot password functionality",
     description:
       "Implement a 'Forgot Password' feature to allow users to reset their passwords.",
-    status: "In Progress",
-    priority: "High",
+    status: 7,
+    priority: 3,
     assignee: {
       id: "USER-123",
       name: "John Doe",
@@ -151,8 +151,8 @@ export const Tickets: TicketsType[] = [
     title: "Write documentation for API endpoints",
     description:
       "Document all the available REST API endpoints with examples and use cases.",
-    status: "Pending",
-    priority: "Low",
+    status: 3,
+    priority: 4,
     assignee: {
       id: "USER-789",
       name: "Alice Brown",
@@ -172,8 +172,8 @@ export const Tickets: TicketsType[] = [
     title: "Conduct penetration testing",
     description:
       "Test the application for security vulnerabilities and provide a detailed report.",
-    status: "To Do",
-    priority: "Critical",
+    status: 5,
+    priority: 3,
     assignee: null,
     reporter: {
       id: "USER-567",
@@ -189,8 +189,8 @@ export const Tickets: TicketsType[] = [
     title: "Optimize image loading on website",
     description:
       "Reduce image sizes and implement lazy loading for better performance.",
-    status: "In Progress",
-    priority: "Medium",
+    status: 7,
+    priority: 2,
     assignee: {
       id: "USER-234",
       name: "David Miller",
