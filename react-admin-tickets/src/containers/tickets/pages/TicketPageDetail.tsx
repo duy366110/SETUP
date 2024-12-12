@@ -4,10 +4,8 @@ import {
   TopToolbar,
   useShowContext,
   useTranslate,
-  SimpleForm,
   Link,
-  SaveButton,
-  useRedirect,
+  // useGetList,
 } from "react-admin";
 import {
   ListItem,
@@ -16,14 +14,17 @@ import {
   ListItemText,
   Avatar,
 } from "@mui/material";
+import { useEffect } from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import ClearIcon from '@mui/icons-material/Clear';
-import { Button } from "@mui/material";
-import { RichTextInput } from "ra-input-rich-text";
+import { Comments } from "@/components/comments/Comments";
 
 const Detail = (props: any) => {
   const { record, isLoading }: any = useShowContext();
-  const redirect = useRedirect();
+//   const { data: comments } = useGetList<any>('comments', {
+//     filter: { idTciket: record.id },
+//     sort: { field: 'id', order: 'DESC' },
+//     pagination: { page: 1, perPage: 50 },
+// });
   const t = useTranslate();
 
   if (isLoading) {
@@ -33,6 +34,10 @@ const Detail = (props: any) => {
   if (!record) {
     return <div className="text-center py-8">No data available</div>;
   }
+
+  // useEffect(() => {
+  //   console.log(comments);
+  // }, [comments])
 
   return (
     <>
@@ -202,49 +207,41 @@ const Detail = (props: any) => {
           </div>
 
           {/* FROM COMMENT */}
-          <SimpleForm
-            className="!p-0"
-            toolbar={
-              <div className="flex justify-between w-full">
-                <Button
-                  onClick={() => redirect("/tickets")}
-                  variant="contained"
-                  color="error"
-                  startIcon={<ClearIcon />}
-                >
-                  {t("ra.action.cancel")}
-                </Button>
-                <SaveButton label={t("common.button.comment")} />
-              </div>
-            }
-          >
-            <RichTextInput
-              source="comments"
-              className="ra-rich-text-editor !p-0"
-              label={
-                <p className="text-base font-semibold mb-2">
-                  {t("ticket.common.comment")}
-                </p>
-              }
-              sx={{
-                "& .ql-container": {
-                  minHeight: "350px",
-                },
-              }}
-              fullWidth
-            />
-          </SimpleForm>
+          <Comments record={record} />
 
           {/* COMMENT */}
-          <div>
+          {/* <div>
             <h2 className="text-base font-semibold mb-2">
               {t("ticket.common.comment")}
             </h2>
             {record.comments && record.comments.length > 0 ? (
               <ul className="mt-2 list-disc pl-5">
                 {record.comments.map((comment: string, index: number) => (
-                  <li key={index} className="text-gray-900">
-                    {comment}
+                  <li key={index} className="border rounded p-2 text-gray-900 mb-4">
+                    <div>
+                      <ListItem
+                        className="!py-0 !items-start"
+                        sx={{ display: "flex" }}
+                      >
+                        <ListItemAvatar>
+                          <Avatar
+                            alt={""}
+                            src={
+                              "https://img.freepik.com/premium-vector/profile-icon-female-avatar_48369-2119.jpg?w=826"
+                            }
+                          />
+                        </ListItemAvatar>
+                        <div className="">
+                          <ListItemText primary={"user"} />
+                          <div
+                            className="text-base"
+                            dangerouslySetInnerHTML={{
+                              __html: comment,
+                            }}
+                          />
+                        </div>
+                      </ListItem>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -253,7 +250,7 @@ const Detail = (props: any) => {
                 {t("common.message.commentPlaceholder")}
               </p>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </>
@@ -266,7 +263,7 @@ const ToolBarTop = (props: any) => {
 
 const TicketPageDetail = (props: any) => {
   const t = useTranslate();
-  
+
   return (
     <Show {...props} actions={<ToolBarTop />} title={t("ticket.page.show")}>
       <SimpleShowLayout>

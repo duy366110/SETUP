@@ -9,7 +9,6 @@ export interface TicketsType {
   createdAt?: Date;
   updatedAt?: Date;
   labels?: Array<string>;
-  comments?: Array<any>;
 }
 
 export const Tickets: TicketsType[] = [
@@ -33,7 +32,6 @@ export const Tickets: TicketsType[] = [
     createdAt: new Date("2024-11-30T09:00:00Z"),
     updatedAt: new Date("2024-12-01T15:00:00Z"),
     labels: ["bug", "login", "backend"],
-    comments: [],
   },
   {
     id: 2,
@@ -50,7 +48,6 @@ export const Tickets: TicketsType[] = [
     createdAt: new Date("2024-11-29T14:30:00Z"),
     updatedAt: new Date("2024-11-29T14:30:00Z"),
     labels: ["feature", "frontend", "UI/UX"],
-    comments: [],
   },
   {
     id: 3,
@@ -72,7 +69,6 @@ export const Tickets: TicketsType[] = [
     createdAt: new Date("2024-11-15T08:15:00Z"),
     updatedAt: new Date("2024-11-20T17:45:00Z"),
     labels: ["performance", "database"],
-    comments: [],
   },
   {
     id: 4,
@@ -90,7 +86,6 @@ export const Tickets: TicketsType[] = [
     createdAt: new Date("2024-11-22T12:00:00Z"),
     updatedAt: new Date("2024-11-29T14:30:00Z"),
     labels: ["design", "frontend"],
-    comments: [],
   },
   {
     id: 5,
@@ -111,11 +106,11 @@ export const Tickets: TicketsType[] = [
     createdAt: new Date("2024-11-28T08:00:00Z"),
     updatedAt: new Date("2024-12-01T09:30:00Z"),
     labels: ["database", "migration"],
-    comments: [],
   },
   {
     id: 6,
-    title: "Fix CSS alignment issue on mobile The footer on the mobile version is misaligned. Fix the styling to ensure proper layout. The footer on the mobile version is misaligned. Fix the styling to ensure proper layout. The footer on the mobile version is misaligned. Fix the styling to ensure proper layout.",
+    title:
+      "Fix CSS alignment issue on mobile The footer on the mobile version is misaligned. Fix the styling to ensure proper layout. The footer on the mobile version is misaligned. Fix the styling to ensure proper layout. The footer on the mobile version is misaligned. Fix the styling to ensure proper layout.",
     description:
       "The footer on the mobile version is misaligned. Fix the styling to ensure proper layout.",
     status: "To Do",
@@ -129,7 +124,6 @@ export const Tickets: TicketsType[] = [
     createdAt: new Date("2024-11-29T10:15:00Z"),
     updatedAt: new Date("2024-11-29T14:30:00Z"),
     labels: ["bug", "frontend", "CSS"],
-    comments: [],
   },
   {
     id: 7,
@@ -151,7 +145,6 @@ export const Tickets: TicketsType[] = [
     createdAt: new Date("2024-11-25T11:45:00Z"),
     updatedAt: new Date("2024-11-30T17:15:00Z"),
     labels: ["feature", "authentication"],
-    comments: [],
   },
   {
     id: 8,
@@ -173,7 +166,6 @@ export const Tickets: TicketsType[] = [
     createdAt: new Date("2024-11-10T08:30:00Z"),
     updatedAt: new Date("2024-11-29T14:30:00Z"),
     labels: ["documentation", "API"],
-    comments: [],
   },
   {
     id: 9,
@@ -191,7 +183,6 @@ export const Tickets: TicketsType[] = [
     createdAt: new Date("2024-11-18T14:00:00Z"),
     updatedAt: new Date("2024-11-29T14:30:00Z"),
     labels: ["security", "testing"],
-    comments: [],
   },
   {
     id: 10,
@@ -213,6 +204,5 @@ export const Tickets: TicketsType[] = [
     createdAt: new Date("2024-11-20T09:30:00Z"),
     updatedAt: new Date("2024-11-25T15:45:00Z"),
     labels: ["performance", "frontend"],
-    comments: [],
   },
 ];
