@@ -5,7 +5,7 @@ import {
   DateField,
   SearchInput,
   DateInput,
-  NullableBooleanInput,
+  TextInput,
   SelectInput,
   useRedirect,
   useTranslate,
@@ -41,18 +41,26 @@ const TicketPageList = (props: any) => {
 
   const visitorFilters = [
     <SearchInput source="q" alwaysOn />,
-    <DateInput
-      source="createdAt"
-      label={translate("ticket.common.createdAt")}
-    />,
-    <NullableBooleanInput source="has_ordered" />,
-    <NullableBooleanInput source="has_newsletter" defaultValue />,
+    <TextInput source="title" label={translate("ticket.common.title")} />,
     <SelectInput
       {...props}
-      source="groups"
+      defaultValue={1}
+      label={translate("ticket.common.status")}
+      source="status"
       translateChoice
-      choices={[{ id: 1, name: "admin" }]}
+      choices={statuses}
+      optionValue="id"
     />,
+    <SelectInput
+      {...props}
+      defaultValue={1}
+      label={translate("ticket.common.priority")}
+      source="priority"
+      translateChoice
+      choices={priorities}
+      optionValue="id"
+    />,
+    <DateInput source="createdAt" label={translate("ticket.common.createdAt")} />,
   ];
 
   useEffect(() => {
