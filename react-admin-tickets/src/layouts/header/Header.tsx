@@ -6,11 +6,11 @@ import {
   ToggleThemeButton,
   LocalesMenuButton,
   useTranslate,
+  UserMenu,
 } from "react-admin";
 import { Button } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import { H2Theme } from "@/components/themes/HTheme";
 import DivTheme from "../../components/themes/DivTheme";
 
 const Header = (props: any) => {
@@ -69,6 +69,7 @@ const Header = (props: any) => {
             <ToggleThemeButton />
             <div className="flex items-center gap-4">
               <LocalesMenuButton />
+              <UserMenu />
             </div>
           </div>
         </div>
