@@ -62,6 +62,10 @@ const customVietnameseMessages: TranslationMessages = {
             }
         },
     },
+    breadcrumb: {
+        tickets: "Công việc",
+        show: "Hiển thị",
+    },
     ticket:{...tickets.vi},
     dashboard: {...dashboard.vi}
 };
