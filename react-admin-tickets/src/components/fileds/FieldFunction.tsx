@@ -28,13 +28,13 @@ export const RenderFieldFunction = (props: any) => {
           {props.customContent(props.record)}
         </>
       )}
-      {/* {props.types === "date" && <DateField source={props.field} />}
+      {props.types === "date" && <DateField source={props.field} />}
       {props.types === "text" && <TextField source={props.field} />}
       {props.types === "typography" && (
         <Typography className={props.customStyles}>
           {props.record[props.field]}
         </Typography>
-      )} */}
+      )}
     </>
   );
 };

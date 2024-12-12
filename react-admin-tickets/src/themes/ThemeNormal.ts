@@ -28,6 +28,12 @@ export const NormalDarkTheme = {
         MuiFilledInput: {
             styleOverrides: undefined,
         },
+        MuiTextField: {
+            defaultProps: {
+                variant: 'outlined', // Đặt mặc định tất cả TextField dạng "outlined"
+                fullWidth: true,
+            },
+        },
         MuiAppBar: {
             styleOverrides: {
                 colorSecondary: {
@@ -74,6 +80,12 @@ export const NormalLightTheme = {
                         borderLeft: '3px solid #4f3cc9',
                     },
                 },
+            },
+        },
+        MuiTextField: {
+            defaultProps: {
+                variant: 'outlined', // Đặt mặc định tất cả TextField dạng "outlined"
+                fullWidth: true,
             },
         },
         MuiPaper: {
