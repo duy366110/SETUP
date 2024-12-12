@@ -1,19 +1,16 @@
 import {
   Show,
   SimpleShowLayout,
+  TopToolbar,
   useShowContext,
-  useRedirect,
-  useGetResourceLabel,
 } from "react-admin";
-import { useLocation } from "react-router-dom";
-import { Card, CardContent, CardHeader } from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { Card, CardContent, CardHeader, Button } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
 const Detail = (props: any) => {
   const { record, isLoading }: any = useShowContext();
-  const redirect = useRedirect();
-  const getResourceLabel = useGetResourceLabel();
 
   if (isLoading) {
     return <div className="text-center py-8">Loading...</div>;
@@ -25,49 +22,49 @@ const Detail = (props: any) => {
 
   return (
     <>
-      <div className="p-6 bg-white rounded-lg shadow-lg">
-        {/* <BreadCrumbs /> */}
-        {/* <h1 className="flex items-center gap-2 text-lg font-extrabold text-gray-800 mb-6">
-          <ArrowBackIosNewIcon
-            fontSize="small"
-            className="cursor-pointer"
-            onClick={() => redirect("/tickets")}
-          />
-          <span>Task Details</span>
-        </h1> */}
-
+      <div className="p-6 bg-white rounded-lg">
         <div className="space-y-6">
-          <Card>
-            <CardHeader
-              className="border-b"
-              title={<p className="line-clamp-2 mb-2">{record.title}</p>}
-              subheader={
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex gap-2 items-center">
-                    <AccessTimeIcon fontSize="small" />
-                    {record.createdAt && (
-                      <span>{new Date(record.createdAt).toLocaleString()}</span>
-                    )}
-                    {!record.createdAt && <span> // </span>}
-                  </div>
-
-                  <div className="flex gap-2">
-                    <p>{record.status}</p>
-                    <p>{record.priority}</p>
-                  </div>
+          {/* <CardHeader
+            className="border-b"
+            title={<p className="line-clamp-2 mb-2">{record.title}</p>}
+            subheader={
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex gap-2 items-center">
+                  <AccessTimeIcon fontSize="small" />
+                  {record.createdAt && (
+                    <span>{new Date(record.createdAt).toLocaleString()}</span>
+                  )}
+                  {!record.createdAt && <span> // </span>}
                 </div>
-              }
-            />
 
-            <CardContent>
-              <div className="flex gap-4 mb-4">
-                {record.labels &&
-                  record.labels.length > 0 &&
-                  record.labels.map((label: any, index: number) => {
-                    return (
-                      <div
-                        key={index}
-                        className={`
+                <div className="flex gap-2">
+                  <p>{record.status}</p>
+                  <p>{record.priority}</p>
+                </div>
+              </div>
+            }
+          /> */}
+
+          <h2 className="text-2xl font-medium">{record.title}</h2>
+          <div>
+            <Button>
+              <AttachFileIcon />
+              <span>Attach</span>
+            </Button>
+            <Button>
+            <LibraryAddCheckIcon />
+              <span>Create subtask</span>
+            </Button>
+          </div>
+
+          <div className="flex gap-4 mb-4">
+            {record.labels &&
+              record.labels.length > 0 &&
+              record.labels.map((label: any, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    className={`
                     ${label === "bug" ? "!bg-[#FF6B6B] text-white" : ""}
                     ${label === "login" ? "!bg-[#4CAF50] text-white" : ""}
                     ${label === "backend" ? "!bg-[#607D8B] text-white" : ""}
@@ -86,10 +83,10 @@ const Detail = (props: any) => {
                     ${label === "testing" ? "!bg-[#CDDC39] text-white" : ""}
                     relative w-fit bg-gray-200 rounded px-2 py-1
                 `}
-                      >
-                        {label}
-                        <div
-                          className={`
+                  >
+                    {label}
+                    <div
+                      className={`
                     ${label === "bug" ? "!bg-[#FF6B6B]" : ""}
                     ${label === "login" ? "!bg-[#4CAF50] text-white" : ""}
                     ${label === "backend" ? "!bg-[#607D8B] text-white" : ""}
@@ -108,71 +105,69 @@ const Detail = (props: any) => {
                     ${label === "testing" ? "!bg-[#CDDC39] text-white" : ""}
                     absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-gray-200 rotate-45
                 `}
-                        ></div>
-                      </div>
-                    );
-                  })}
-              </div>
-
-              <div className="bg-gray-50 p-4 rounded-md shadow-md">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2 border-b pb-1">
-                  Người báo cáo
-                </h3>
-
-                {record.reporter ? (
-                  <div className="px-2 text-gray-700">
-                    <p className="mb-1">
-                      <span className="font-medium text-gray-900">Email:</span>{" "}
-                      {record.reporter.email}
-                    </p>
-                    <p>
-                      <span className="font-medium text-gray-900">Họ tên:</span>{" "}
-                      {record.reporter.name}
-                    </p>
+                    ></div>
                   </div>
-                ) : (
-                  <p className="px-2 text-sm text-gray-500 italic">
-                    Thông tin chưa được cung cấp
-                  </p>
-                )}
+                );
+              })}
+          </div>
 
-                {!record.assignee && (
-                  <p className="px-2 mt-2 text-sm text-red-500 font-medium">
-                    Chưa cập nhật
-                  </p>
-                )}
+          <div className="bg-gray-50 p-4 rounded-md shadow-md">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2 border-b pb-1">
+              Người báo cáo
+            </h3>
+
+            {record.reporter ? (
+              <div className="px-2 text-gray-700">
+                <p className="mb-1">
+                  <span className="font-medium text-gray-900">Email:</span>{" "}
+                  {record.reporter.email}
+                </p>
+                <p>
+                  <span className="font-medium text-gray-900">Họ tên:</span>{" "}
+                  {record.reporter.name}
+                </p>
               </div>
+            ) : (
+              <p className="px-2 text-sm text-gray-500 italic">
+                Thông tin chưa được cung cấp
+              </p>
+            )}
 
-              <div className="bg-gray-50 p-4 rounded-md shadow-md mt-4">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2 border-b pb-1">
-                  Người phụ trách
-                </h3>
+            {!record.assignee && (
+              <p className="px-2 mt-2 text-sm text-red-500 font-medium">
+                Chưa cập nhật
+              </p>
+            )}
+          </div>
 
-                {record.assignee ? (
-                  <div className="px-2 text-gray-700">
-                    <p className="mb-1">
-                      <span className="font-medium text-gray-900">Email:</span>{" "}
-                      {record.assignee.email}
-                    </p>
-                    <p>
-                      <span className="font-medium text-gray-900">Họ tên:</span>{" "}
-                      {record.assignee.name}
-                    </p>
-                  </div>
-                ) : (
-                  <p className="px-2 text-sm text-gray-500 italic">
-                    Thông tin chưa được cung cấp
-                  </p>
-                )}
+          <div className="bg-gray-50 p-4 rounded-md shadow-md mt-4">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2 border-b pb-1">
+              Người phụ trách
+            </h3>
 
-                {!record.assignee && (
-                  <p className="px-2 mt-2 text-sm text-red-500 font-medium">
-                    Chưa cập nhật
-                  </p>
-                )}
+            {record.assignee ? (
+              <div className="px-2 text-gray-700">
+                <p className="mb-1">
+                  <span className="font-medium text-gray-900">Email:</span>{" "}
+                  {record.assignee.email}
+                </p>
+                <p>
+                  <span className="font-medium text-gray-900">Họ tên:</span>{" "}
+                  {record.assignee.name}
+                </p>
               </div>
-            </CardContent>
-          </Card>
+            ) : (
+              <p className="px-2 text-sm text-gray-500 italic">
+                Thông tin chưa được cung cấp
+              </p>
+            )}
+
+            {!record.assignee && (
+              <p className="px-2 mt-2 text-sm text-red-500 font-medium">
+                Chưa cập nhật
+              </p>
+            )}
+          </div>
 
           {/* Comments */}
           <div>
@@ -195,9 +190,13 @@ const Detail = (props: any) => {
   );
 };
 
+const ToolBarTop = (props: any) => {
+  return <TopToolbar className="!min-h-0"></TopToolbar>;
+};
+
 const TicketPageDetail = (props: any) => {
   return (
-    <Show {...props}>
+    <Show {...props} actions={<ToolBarTop />}>
       <SimpleShowLayout>
         <Detail />
       </SimpleShowLayout>
