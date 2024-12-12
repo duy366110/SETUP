@@ -3,6 +3,7 @@ import fetchMock from "fetch-mock";
 import generateData from "data-generator-retail";
 
 import { Tickets } from "@/datas/tickets";
+import { Comments } from "@/datas/comments";
 
 
 export default () => {
@@ -13,6 +14,7 @@ export default () => {
     }
     restServer.init({
       ...data,
+      "comments": Comments,
       "tickets": Tickets,
     });
     restServer.toggleLogging(); // logging is off by default, enable it

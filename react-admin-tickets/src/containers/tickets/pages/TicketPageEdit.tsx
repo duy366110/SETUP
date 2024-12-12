@@ -152,20 +152,6 @@ const TicketPageEdit = () => {
             </ArrayInput>
           </div>
 
-          <div className="col-span-12 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
-            <ArrayInput
-              source="comments"
-              label={t("ticket.common.comment")}
-            >
-              <SimpleFormIterator>
-                <TextInput
-                  source=""
-                  label={t("ticket.common.comment")}
-                />
-              </SimpleFormIterator>
-            </ArrayInput>
-          </div>
-
           <div className="col-span-12">
             <RichTextInput
               className="ra-rich-text-editor"

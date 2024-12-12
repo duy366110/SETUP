@@ -208,20 +208,6 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
             </ArrayInput>
           </div>
 
-          <div className="col-span-12 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
-            <ArrayInput
-              source="comments"
-              label={translate("ticket.common.comment")}
-            >
-              <SimpleFormIterator>
-                <TextInput
-                  source=""
-                  label={translate("ticket.common.comment")}
-                />
-              </SimpleFormIterator>
-            </ArrayInput>
-          </div>
-
           <div className="col-span-12">
             <RichTextInput
               className="ra-rich-text-editor"
