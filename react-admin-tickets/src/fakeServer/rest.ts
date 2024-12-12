@@ -4,6 +4,8 @@ import generateData from "data-generator-retail";
 
 import { Tickets } from "@/datas/tickets";
 import { Comments } from "@/datas/comments";
+import { Statuses } from "@/datas/statuses";
+import { Priorities } from "@/datas/priorities";
 
 
 export default () => {
@@ -15,6 +17,8 @@ export default () => {
     restServer.init({
       ...data,
       "comments": Comments,
+      "statuses": Statuses,
+      "priorities": Priorities,
       "tickets": Tickets,
     });
     restServer.toggleLogging(); // logging is off by default, enable it

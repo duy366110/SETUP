@@ -14,17 +14,11 @@ import {
   ListItemText,
   Avatar,
 } from "@mui/material";
-import { useEffect } from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Comments } from "@/components/comments/Comments";
 
 const Detail = (props: any) => {
   const { record, isLoading }: any = useShowContext();
-//   const { data: comments } = useGetList<any>('comments', {
-//     filter: { idTciket: record.id },
-//     sort: { field: 'id', order: 'DESC' },
-//     pagination: { page: 1, perPage: 50 },
-// });
   const t = useTranslate();
 
   if (isLoading) {
@@ -34,10 +28,6 @@ const Detail = (props: any) => {
   if (!record) {
     return <div className="text-center py-8">No data available</div>;
   }
-
-  // useEffect(() => {
-  //   console.log(comments);
-  // }, [comments])
 
   return (
     <>
@@ -208,49 +198,6 @@ const Detail = (props: any) => {
 
           {/* FROM COMMENT */}
           <Comments record={record} />
-
-          {/* COMMENT */}
-          {/* <div>
-            <h2 className="text-base font-semibold mb-2">
-              {t("ticket.common.comment")}
-            </h2>
-            {record.comments && record.comments.length > 0 ? (
-              <ul className="mt-2 list-disc pl-5">
-                {record.comments.map((comment: string, index: number) => (
-                  <li key={index} className="border rounded p-2 text-gray-900 mb-4">
-                    <div>
-                      <ListItem
-                        className="!py-0 !items-start"
-                        sx={{ display: "flex" }}
-                      >
-                        <ListItemAvatar>
-                          <Avatar
-                            alt={""}
-                            src={
-                              "https://img.freepik.com/premium-vector/profile-icon-female-avatar_48369-2119.jpg?w=826"
-                            }
-                          />
-                        </ListItemAvatar>
-                        <div className="">
-                          <ListItemText primary={"user"} />
-                          <div
-                            className="text-base"
-                            dangerouslySetInnerHTML={{
-                              __html: comment,
-                            }}
-                          />
-                        </div>
-                      </ListItem>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500">
-                {t("common.message.commentPlaceholder")}
-              </p>
-            )}
-          </div> */}
         </div>
       </div>
     </>
