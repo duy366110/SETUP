@@ -8,6 +8,7 @@ import I18nProvider from "@/providers/I18nProvider";
 import { ThemeName, Themes } from "@/themes/Themes";
 import store from "@/store/index";
 import Dashboard from "@/containers/dashboard/Dashboard";
+import Login from "@/containers/auth/Login";
 import { resource as ResourceTicket } from "@/containers/tickets/Index";
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
       authProvider={authProvider}
       i18nProvider={I18nProvider}
       disableTelemetry
+      loginPage={Login}
       lightTheme={lightTheme}
       darkTheme={darkTheme}
       defaultTheme={currentTheme}
