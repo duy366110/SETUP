@@ -21,8 +21,12 @@ import {
   FieldFunction,
   RenderFieldFunction,
 } from "@/components/fileds/FieldFunction";
-import { RenderFieldText } from "@/containers/utils/renderFieldText";
+import {
+  RenderFieldText,
+  RenderFieldTextAssignee,
+} from "@/containers/utils/renderFieldText";
 import TicketViewEdit from "../view/TicketViewEdit";
+import TicketViewAssigneed from "../view/TicketViewAssigneed";
 import TicketViewListCardMobile from "../view/TicketViewListCardMobile";
 import styles from "./TicketPageList.module.css";
 
@@ -31,13 +35,19 @@ const TicketPageList = (props: any) => {
     (state: any) => state.mediaQuery,
   );
 
-  const { data: statuses, isLoading: isLoadingStatus }: any = useGetList<any>("statuses");
-  const { data: priorities, isLoading: isLoadingPriority }: any = useGetList<any>("priorities");
+  const { data: statuses, isLoading: isLoadingStatus }: any =
+    useGetList<any>("statuses");
+  const { data: priorities, isLoading: isLoadingPriority }: any =
+    useGetList<any>("priorities");
+  const { data: assignes, isLoading: isLoadingAssignes }: any =
+    useGetList<any>("assignes");
 
   const redirect = useRedirect();
   const translate = useTranslate();
   const [isRightViewEdit, setIsRightViewEdit] = useState<boolean>(false);
+  const [isAssigneDetail, setIsAssigneDetail] = useState<boolean>(false);
   const [idTicket, setIdTicket] = useState<any>(-1);
+  const [idAssigne, setIdAssigne] = useState<any>(-1)
 
   const visitorFilters = [
     <SearchInput source="q" alwaysOn />,
@@ -60,7 +70,10 @@ const TicketPageList = (props: any) => {
       choices={priorities}
       optionValue="id"
     />,
-    <DateInput source="createdAt" label={translate("ticket.common.createdAt")} />,
+    <DateInput
+      source="createdAt"
+      label={translate("ticket.common.createdAt")}
+    />,
   ];
 
   useEffect(() => {
@@ -68,6 +81,16 @@ const TicketPageList = (props: any) => {
       setIsRightViewEdit(false);
     }
   }, [mediaQuery]);
+
+  const onViewAssignedDetail = (event: any, record: any) => {
+    event.stopPropagation();
+    setIdTicket(record.id);
+    setIdAssigne(record.assignee);
+    setIsAssigneDetail(true);
+    setIsRightViewEdit(
+      idTicket < 0 || record.id === idTicket ? !isRightViewEdit : true,
+    );
+  };
 
   return (
     <div className="grid grid-cols-12">
@@ -97,6 +120,7 @@ const TicketPageList = (props: any) => {
           rowClick={(id, resource, record) => {
             if (!mediaQuery.md) {
               setIdTicket(id);
+              setIsAssigneDetail(false);
               setIsRightViewEdit(
                 idTicket < 0 || id === idTicket ? !isRightViewEdit : true,
               );
@@ -142,7 +166,9 @@ const TicketPageList = (props: any) => {
             types="custom"
             customContent={(record: any) => {
               return RenderFieldText(
-                statuses && statuses.length ? statuses.find((status: any) => status.id === record.status) : null,
+                statuses && statuses.length
+                  ? statuses.find((status: any) => status.id === record.status)
+                  : null,
                 "name",
               );
             }}
@@ -157,7 +183,11 @@ const TicketPageList = (props: any) => {
             types="custom"
             customContent={(record: any) => {
               return RenderFieldText(
-                priorities && priorities.length? priorities.find((priority: any) => priority.id === record.priority) : null,
+                priorities && priorities.length
+                  ? priorities.find(
+                      (priority: any) => priority.id === record.priority,
+                    )
+                  : null,
                 "name",
               );
             }}
@@ -174,16 +204,15 @@ const TicketPageList = (props: any) => {
               if (!record.assignee) {
                 return <p className="py-1">Not assignee</p>;
               }
-              return (
-                <div className="flex items-start gap-2 py-1">
-                  <div>
-                    <AttachEmailIcon fontSize="small" />
-                  </div>
-                  <p className="flex flex-col gap-1">
-                    <span>{record.assignee.email}</span>
-                    <span>{record.assignee.name}</span>
-                  </p>
-                </div>
+              return RenderFieldTextAssignee(
+                record,
+                assignes && assignes.length
+                  ? assignes.find(
+                      (assigne: any) => assigne.id === record.assignee,
+                    )
+                  : null,
+                "email",
+                onViewAssignedDetail,
               );
             }}
             render={RenderFieldFunction}
@@ -250,10 +279,16 @@ const TicketPageList = (props: any) => {
             sx={{ zIndex: 5 }}
           >
             <div className="w-[350px] h-full mt-[60px]">
-              <TicketViewEdit
-                id={idTicket}
-                closeViewEdit={() => setIsRightViewEdit(false)}
-              />
+              {!isAssigneDetail && (
+                <TicketViewEdit
+                  id={idTicket}
+                  closeViewEdit={() => setIsRightViewEdit(false)}
+                />
+              )}
+
+              {isAssigneDetail && (
+                <TicketViewAssigneed assignedId={idAssigne} closeViewEdit={() => setIsRightViewEdit(false)} />
+              )}
             </div>
           </Drawer>
         )}

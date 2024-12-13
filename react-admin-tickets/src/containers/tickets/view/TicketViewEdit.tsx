@@ -16,7 +16,6 @@ import {
   useTranslate,
   useGetList,
 } from "react-admin";
-// import { statuses, priorities } from "../constants/model";
 import { RichTextInput } from "ra-input-rich-text";
 import { EmailRegex } from "@/constants/Regexs";
 import CloseIcon from "@mui/icons-material/Close";
@@ -28,24 +27,12 @@ interface TicketViewEditProps {
 
 const TicketViewEdit = (props: TicketViewEditProps | any) => {
   const model: string = useMemo(() => "tickets", []);
-  const {data: statuses, isLoading: isLoadingStatus }: any = useGetList<any>("statuses");
-    const {data: priorities, isLoading: isLoadingPriority }: any = useGetList<any>("priorities");
-  const translate = useTranslate();
+  const { data: statuses, isLoading: isLoadingStatus }: any = useGetList<any>("statuses");
+  const { data: priorities, isLoading: isLoadingPriority }: any = useGetList<any>("priorities");
+  const { data: assignes, isLoading: isLoadingAssignes }: any = useGetList<any>("assignes");
+  const t = useTranslate();
   const [update] = useUpdate(model);
   const [deleteOne] = useDelete();
-
-  const validateAssigneeEmail = (value: any, allValues: any) => {
-    if (allValues.assignee.name) {
-      if (!value) {
-        return required()(value, allValues);
-      }
-
-      if (!EmailRegex.test(value)) {
-        return translate("common.message.error.email");
-      }
-    }
-    return undefined;
-  };
 
   const validateReporterEmail = (value: any, allValues: any) => {
     if (allValues.reporter.name) {
@@ -54,7 +41,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
       }
 
       if (!EmailRegex.test(value)) {
-        return translate("common.message.error.email");
+        return t("common.message.error.email");
       }
     }
     return undefined;
@@ -69,9 +56,6 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
           onSuccess: () => {
             props.closeViewEdit();
           },
-          // onFailure: (error: any) => {
-          //   console.log(error.message);
-          // },
         },
       );
     } catch (e) {
@@ -100,10 +84,10 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
         onSubmit={onSubmitHandler}
         toolbar={
           <div className="bg-[#f5f5f5] flex justify-between p-4">
-            <SaveButton label={translate("common.button.save")} />
+            <SaveButton label={t("common.button.save")} />
             <DeleteButton
               onClick={handleDelete}
-              label={translate("common.button.delete")}
+              label={t("common.button.delete")}
             />
           </div>
         }
@@ -111,7 +95,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
         <div className="grid grid-cols-12 gap-4 w-full">
           <div className="col-span-12 mb-4">
             <h2 className="flex gap-2 items-center justify-between text-lg w-full">
-              <span>{translate("ticket.form.edit")}</span>
+              <span>{t("ticket.form.edit")}</span>
               <CloseIcon
                 fontSize="small"
                 className="cursor-pointer"
@@ -123,7 +107,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
           <div className="col-span-12">
             <TextInput
               source="title"
-              label={translate("ticket.common.title")}
+              label={t("ticket.common.title")}
               validate={required()}
             />
           </div>
@@ -132,7 +116,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
             <SelectInput
               source="status"
               choices={statuses}
-              label={translate("ticket.common.status")}
+              label={t("ticket.common.status")}
               validate={required()}
             />
           </div>
@@ -140,29 +124,19 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
             <SelectInput
               source="priority"
               choices={priorities}
-              label={translate("ticket.common.priority")}
+              label={t("ticket.common.priority")}
               validate={required()}
             />
           </div>
 
           <div className="col-span-12">
-            <ReferenceInput
-              source="assignee.id"
-              reference="users"
-              label={translate("ticket.common.assignee")}
-            >
-              <TextInput
-                source="assignee.name"
-                label={translate("ticket.common.assignee")}
-              />
-            </ReferenceInput>
-          </div>
-
-          <div className="col-span-12">
-            <TextInput
-              source="assignee.email"
-              label={translate("ticket.common.assigneeEmail")}
-              validate={validateAssigneeEmail}
+            <SelectInput
+              defaultValue={1}
+              source="assignee"
+              choices={assignes}
+              validate={required()}
+              label={t("ticket.common.assignee")}
+              optionValue="id"
             />
           </div>
 
@@ -174,7 +148,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
             >
               <TextInput
                 source="reporter.name"
-                label={translate("ticket.common.reporter")}
+                label={t("ticket.common.reporter")}
               />
             </ReferenceInput>
           </div>
@@ -182,7 +156,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
           <div className="col-span-12">
             <TextInput
               source="reporter.email"
-              label={translate("ticket.common.reporterEmail")}
+              label={t("ticket.common.reporterEmail")}
               validate={validateReporterEmail}
             />
           </div>
@@ -190,23 +164,23 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
           <div className="col-span-12">
             <DateInput
               source="createdAt"
-              label={translate("ticket.common.createdAt")}
+              label={t("ticket.common.createdAt")}
             />
           </div>
           <div className="col-span-12">
             <DateInput
               source="updatedAt"
-              label={translate("ticket.common.updatedAt")}
+              label={t("ticket.common.updatedAt")}
             />
           </div>
 
           <div className="col-span-12 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput
               source="labels"
-              label={translate("ticket.common.label")}
+              label={t("ticket.common.label")}
             >
               <SimpleFormIterator>
-                <TextInput source="" label={translate("ticket.common.label")} />
+                <TextInput source="" label={t("ticket.common.label")} />
               </SimpleFormIterator>
             </ArrayInput>
           </div>
@@ -215,7 +189,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
             <RichTextInput
               className="ra-rich-text-editor"
               source="description"
-              label={translate("ticket.common.description")}
+              label={t("ticket.common.description")}
               sx={{
                 "& .ql-container": {
                   minHeight: "350px",

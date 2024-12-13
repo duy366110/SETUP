@@ -19,11 +19,7 @@ export const Tickets: TicketsType[] = [
       "Users cannot log in due to a server timeout error. Investigate and fix the issue.",
     status: 1,
     priority: 1,
-    assignee: {
-      id: "USER-123",
-      name: "John Doe",
-      email: "john.doe@example.com",
-    },
+    assignee: 1,
     reporter: {
       id: "USER-456",
       name: "Jane Smith",
@@ -39,7 +35,7 @@ export const Tickets: TicketsType[] = [
     description: "Implement a dark mode toggle in the user settings page.",
     status: 2,
     priority: 2,
-    assignee: null,
+    assignee: 1,
     reporter: {
       id: "USER-456",
       name: "Jane Smith",
@@ -56,11 +52,7 @@ export const Tickets: TicketsType[] = [
       "Certain database queries are slow and causing performance issues. Optimize the query logic and indexes.",
     status: 3,
     priority: 3,
-    assignee: {
-      id: "USER-789",
-      name: "Alice Brown",
-      email: "alice.brown@example.com",
-    },
+    assignee: 1,
     reporter: {
       id: "USER-123",
       name: "John Doe",
@@ -77,7 +69,7 @@ export const Tickets: TicketsType[] = [
       "Design and replace the banner on the homepage for the holiday season.",
     status: 4,
     priority: 4,
-    assignee: null,
+    assignee: 2,
     reporter: {
       id: "USER-101",
       name: "Sarah Connor",
@@ -93,11 +85,7 @@ export const Tickets: TicketsType[] = [
     description: "Migrate all user records to the new PostgreSQL database.",
     status: 5,
     priority: 1,
-    assignee: {
-      id: "USER-456",
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-    },
+    assignee: 2,
     reporter: {
       id: "USER-789",
       name: "Alice Brown",
@@ -115,7 +103,7 @@ export const Tickets: TicketsType[] = [
       "The footer on the mobile version is misaligned. Fix the styling to ensure proper layout.",
     status: 6,
     priority: 2,
-    assignee: null,
+    assignee: 1,
     reporter: {
       id: "USER-234",
       name: "David Miller",
@@ -132,11 +120,7 @@ export const Tickets: TicketsType[] = [
       "Implement a 'Forgot Password' feature to allow users to reset their passwords.",
     status: 7,
     priority: 3,
-    assignee: {
-      id: "USER-123",
-      name: "John Doe",
-      email: "john.doe@example.com",
-    },
+    assignee: 1,
     reporter: {
       id: "USER-234",
       name: "David Miller",
@@ -153,11 +137,7 @@ export const Tickets: TicketsType[] = [
       "Document all the available REST API endpoints with examples and use cases.",
     status: 3,
     priority: 4,
-    assignee: {
-      id: "USER-789",
-      name: "Alice Brown",
-      email: "alice.brown@example.com",
-    },
+    assignee: 1,
     reporter: {
       id: "USER-101",
       name: "Sarah Connor",
@@ -174,11 +154,11 @@ export const Tickets: TicketsType[] = [
       "Test the application for security vulnerabilities and provide a detailed report.",
     status: 5,
     priority: 3,
-    assignee: null,
+    assignee: 2,
     reporter: {
-      id: "USER-567",
-      name: "Michael Scott",
-      email: "michael.scott@example.com",
+      id: "USER-101",
+      name: "Sarah Connor",
+      email: "sarah.connor@example.com",
     },
     createdAt: new Date("2024-11-18T14:00:00Z"),
     updatedAt: new Date("2024-11-29T14:30:00Z"),
@@ -191,11 +171,7 @@ export const Tickets: TicketsType[] = [
       "Reduce image sizes and implement lazy loading for better performance.",
     status: 7,
     priority: 2,
-    assignee: {
-      id: "USER-234",
-      name: "David Miller",
-      email: "david.miller@example.com",
-    },
+    assignee: 1,
     reporter: {
       id: "USER-123",
       name: "John Doe",
