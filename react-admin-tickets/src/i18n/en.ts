@@ -1,6 +1,7 @@
 import { TranslationMessages } from 'react-admin';
 import englishMessages from 'ra-language-english';
 import { translate as tickets } from '@/containers/tickets/translate';
+import { translate as issues } from "@/containers/issues/translate";
 import { translate as dashboard} from "@/containers/dashboard/translate";
 
 const customEnglishMessages: TranslationMessages = {
@@ -72,11 +73,13 @@ const customEnglishMessages: TranslationMessages = {
     },
     breadcrumb: {
         tickets: "Tickets",
+        issues: "Issues",
         show: "Show",
         create: "Create",
         edit: "Edit",
     },
     ticket: {...tickets.en},
+    issue: {...issues.en},
     dashboard: {...dashboard.en}
     
 };
