@@ -64,6 +64,11 @@ const customVietnameseMessages: TranslationMessages = {
             },
             commentPlaceholder: "Không có bình luận nào.",
         },
+        fullName: "Họ và tên",
+        email: "Email",
+        phone: "Số điện thoại",
+        department: "Phòng bang",
+        address: "Địa chỉ",
     },
     breadcrumb: {
         tickets: "Công việc",
