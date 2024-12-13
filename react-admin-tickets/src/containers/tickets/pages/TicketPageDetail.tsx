@@ -7,6 +7,7 @@ import {
   useTranslate,
   Link,
   useGetList,
+  useReference,
 } from "react-admin";
 import {
   ListItem,
@@ -24,10 +25,15 @@ const Detail = (props: any) => {
   const { record, isLoading }: any = useShowContext();
   const { data: statuses, isLoading: isLoadingStatus }: any = useGetList<any>("statuses");
   const { data: priorities, isLoading: isLoadingPriority }: any = useGetList<any>("priorities");
+  const { referenceRecord: assigne, isLoading: isLoadingAssignes } = useReference<any>({
+      reference: "assignes",
+      id: record.assignee,
+    });
   const t = useTranslate();
 
   const [status, setStatus] = useState<any>(null);
   const [priority, setPriority] = useState<any>(null);
+  const [assignee, setAssignee] = useState<any>(null);
 
   useEffect(() => {
     if(statuses && statuses.length > 0) {
@@ -40,6 +46,12 @@ const Detail = (props: any) => {
       setPriority(priorities.find((priority: any) => priority.id === record.priority));
     }
   }, [priorities])
+
+  useEffect(() => {
+    if(assigne) {
+      setAssignee(assigne);
+    }
+  }, [assigne])
 
   if (isLoading) {
     return <div className="text-center py-8">Loading...</div>;
@@ -122,24 +134,24 @@ const Detail = (props: any) => {
               <p className="mb-2 text-base font-semibold">
                 {t("ticket.common.assignee")} :
               </p>
-              {record.assignee && (
+              {assignee && (
                 <ListItem
                   className="!py-0 !items-start"
                   sx={{ display: "flex" }}
                 >
                   <ListItemAvatar>
                     <Avatar
-                      alt={record.assignee.name}
+                      alt={assignee.name}
                       src={
-                        record.assignee?.avatar
-                          ? record.assignee?.avatar
+                        assignee?.avatar
+                          ? assignee?.avatar
                           : "https://img.freepik.com/premium-vector/profile-icon-female-avatar_48369-2119.jpg?w=826"
                       }
                     />
                   </ListItemAvatar>
                   <div className="">
-                    <ListItemText primary={record.assignee.name} />
-                    <ListItemText primary={record.assignee.email} />
+                    <ListItemText primary={assignee.name} />
+                    <ListItemText primary={assignee.email} />
                     <ListItemSecondaryAction
                       sx={{
                         transform: "unset",
