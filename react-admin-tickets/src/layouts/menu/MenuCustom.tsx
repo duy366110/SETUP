@@ -10,7 +10,8 @@ import { useLocation } from "react-router-dom";
 // import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // import HistoryIcon from "@mui/icons-material/History";
 // import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 // import styles from "./MenuCustom.module.css";
 
 const MenuCustom = (props: any) => {
@@ -36,9 +37,11 @@ const MenuCustom = (props: any) => {
         <MenuItemLink
           to="/"
           selected={location.pathname === "/"}
-          className={`!border-l-0 !bg-[#3575b7] text-[#ffffff] ${open? "!px-5" : "!px-1" } h-14 w-[-webkit-fill-available] ease-in-out`}
+          className={`!border-l-0 !bg-[#3575b7] text-[#ffffff] ${open ? "!px-5" : "!px-1"} h-14 w-[-webkit-fill-available] ease-in-out`}
         >
-          <span className={`${open? 'text-[20px]' : 'text-[11px]'} text-white w-full text-center ease-in-out`}>
+          <span
+            className={`${open ? "text-[20px]" : "text-[11px]"} text-white w-full text-center ease-in-out`}
+          >
             <span className="font-semibold">Sconnect</span>
           </span>
         </MenuItemLink>
@@ -54,6 +57,14 @@ const MenuCustom = (props: any) => {
             primaryText={translate("ticket.title")}
             selected={location.pathname === "/tickets"}
             leftIcon={<BookmarkAddedIcon />}
+          />
+
+          <MenuItemLink
+            className="!py-2"
+            to="/issues"
+            primaryText={translate("issue.title")}
+            selected={location.pathname === "/issues"}
+            leftIcon={<InsertDriveFileIcon />}
           />
 
           {/* <MenuItemLink

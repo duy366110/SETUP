@@ -1,6 +1,7 @@
 import { TranslationMessages } from 'react-admin';
 import vietnameseMessages from 'ra-language-vietnamese';
 import { translate as tickets } from '@/containers/tickets/translate';
+import { translate as issues } from "@/containers/issues/translate";
 import { translate as dashboard} from "@/containers/dashboard/translate";
 
 const customVietnameseMessages: TranslationMessages = {
@@ -72,11 +73,13 @@ const customVietnameseMessages: TranslationMessages = {
     },
     breadcrumb: {
         tickets: "Công việc",
+        issues: "Sự cố",
         show: "Hiển thị",
         create: "Tạo mới",
         edit: "Cập nhật",
     },
     ticket:{...tickets.vi},
+    issue: {...issues.vi},
     dashboard: {...dashboard.vi}
 };
 

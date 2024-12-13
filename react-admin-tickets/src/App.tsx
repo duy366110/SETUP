@@ -9,7 +9,9 @@ import { ThemeName, Themes } from "@/themes/Themes";
 import store from "@/store/index";
 import Dashboard from "@/containers/dashboard/Dashboard";
 import Login from "@/containers/auth/Login";
+
 import { resource as ResourceTicket } from "@/containers/tickets/Index";
+import { resource as ResourceIssue } from "@/containers/issues/Index";
 
 const App = () => {
   const theme: any = useTheme();
@@ -38,6 +40,7 @@ const App = () => {
       </CustomRoutes>
 
       <Resource name="tickets" {...ResourceTicket} />
+      <Resource name="issues" {...ResourceIssue} />
     </Admin>
   );
 };

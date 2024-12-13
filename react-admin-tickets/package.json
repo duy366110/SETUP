@@ -11,6 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^17.0.0",
     "@reduxjs/toolkit": "^2.4.0",
     "@tinymce/tinymce-react": "^5.1.1",
     "@types/react-color": "^3.0.12",
