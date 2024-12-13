@@ -16,7 +16,6 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import DivTheme from "../../components/themes/DivTheme";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
@@ -84,7 +83,7 @@ const Header = (props: any) => {
               <UserMenu icon={<AccountCircleIcon />}>
                 <div className="w-[250px]">
                   <div className="border-b px-6 py-2">
-                    <p className="text-sm font-semibold ">
+                    <p className="text-sm font-semibold mb-1">
                       {identity?.username}
                     </p>
                     <p className="text-sm text-slate-400">
@@ -92,17 +91,19 @@ const Header = (props: any) => {
                     </p>
                   </div>
 
-                  <div className="flex flex-col gap-2 py-4">
+                  <div className="flex flex-col gap-2 py-2">
                     <MenuItemLink
                       className="!text-sm"
                       to="/profile"
-                      primaryText={translate("user.editProfile", {
-                        _: "Edit profile",
-                      })}
+                      primaryText={
+                          translate("user.editProfile", {
+                            _: "Edit profile",
+                          })
+                      }
                       leftIcon={<PersonIcon fontSize="small" />}
                     />
                     <MenuItemLink
-                      className="@ext-sm"
+                      className="!text-sm"
                       to="/preferences"
                       primaryText={translate("user.preferences", {
                         _: "Preferences",
