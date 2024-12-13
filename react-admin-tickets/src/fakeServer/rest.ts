@@ -22,6 +22,7 @@ export default () => {
       "priorities": Priorities,
       "tickets": Tickets,
       "assignes": Assignes,
+      "issues": Assignes,
     });
     restServer.toggleLogging(); // logging is off by default, enable it
     fetchMock?.mock("begin:http://localhost:4000", restServer.getHandler());
