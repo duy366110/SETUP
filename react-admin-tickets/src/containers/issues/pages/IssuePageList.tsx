@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useGetList, useUpdate } from "react-admin";
+import { useGetList, useUpdate, useTranslate } from "react-admin";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import AddIcon from '@mui/icons-material/Add';
 
 const IssuePageList = () => {
-  const { data: board, isLoading: isLoadingStatus }: any =
-    useGetList<any>("board");
+  const { data: board, isLoading: isLoadingStatus }: any = useGetList<any>("board");
+  const t = useTranslate();
   const [onBoard, setOnBoard] = useState<any>(null);
   const [update] = useUpdate("board");
 
@@ -39,9 +40,9 @@ const IssuePageList = () => {
 
       Object.assign(data, onBoard);
 
-      let elm: any = data[`${source.droppableId.toLowerCase()}`].find((item: any) => item.id === draggableId);
-      data[`${destination.droppableId.toLowerCase()}`].push(elm);
-      data[`${source.droppableId.toLowerCase()}`] = data[`${source.droppableId.toLowerCase()}`].filter((item: any) => item.id !== draggableId);
+      let elm: any = data[`${source.droppableId}`].find((item: any) => item.id === draggableId);
+      data[`${source.droppableId}`] = data[`${source.droppableId}`].filter((item: any) => item.id !== draggableId);
+      data[`${destination.droppableId}`].push(elm);
       upload(data);
     }
   };
@@ -63,10 +64,13 @@ const IssuePageList = () => {
                     borderRadius: "8px",
                   }}
                 >
-                  <h3>{columnId}</h3>
+                  <h3 className="flex items-center justity-between text-slate-400 text-sm capitalize font-medium mb-4 w-full">
+                    <span className="mr-auto">{t(`issue.common.${columnId}`)}</span>
+                    <AddIcon className="cursor-pointer" fontSize="small" />
+                  </h3>
 
                   {onBoard &&
-                    onBoard[`${columnId?.toLowerCase()}`]?.map(
+                    onBoard[`${columnId}`]?.map(
                       (item: any, index: number) => {
                         return (
                           <Draggable
@@ -88,9 +92,10 @@ const IssuePageList = () => {
                                   ...provided.draggableProps.style,
                                 }}
                               >
-                                <h4>{item.title}</h4>
-                                <p>{item.value}</p>
-                                <p>{item.type}</p>
+                                <p className="text-xs font-medium uppercase mb-2">{item.type}:</p>
+                                <h4 className="text-sm font-semibold line-clamp-1 mb-3">{item.title}</h4>
+                                <p className="text-sm line-clamp-4">{item.description}</p>
+                                
                               </div>
                             )}
                           </Draggable>
