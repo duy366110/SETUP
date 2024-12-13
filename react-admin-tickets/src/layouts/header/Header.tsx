@@ -5,19 +5,27 @@ import {
   useSidebarState,
   ToggleThemeButton,
   LocalesMenuButton,
+  Logout,
+  MenuItemLink,
   useTranslate,
   UserMenu,
 } from "react-admin";
+import { useAuthProvider, useGetIdentity } from "ra-core";
 import { Button } from "@mui/material";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import PersonIcon from "@mui/icons-material/Person";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import DivTheme from "../../components/themes/DivTheme";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Header = (props: any) => {
   const location = useLocation();
   const [title, setTitle] = useState("");
   const translate = useTranslate();
   const [open, setOpen] = useSidebarState();
+  const { isPending, identity }: any = useGetIdentity();
 
   const customTitle = useMemo(() => {
     return ["/"];
@@ -40,6 +48,10 @@ const Header = (props: any) => {
       setTitle("");
     }
   }, [location]);
+
+  useEffect(() => {
+    console.log(identity);
+  }, [identity]);
 
   return (
     <header className="test bg-white h-14 fixed md:relative top-0 left-0  w-[-webkit-fill-available] shadow-sm z-[1000]">
@@ -69,7 +81,41 @@ const Header = (props: any) => {
             <ToggleThemeButton />
             <div className="flex items-center gap-4">
               <LocalesMenuButton />
-              <UserMenu />
+              <UserMenu icon={<AccountCircleIcon />}>
+                <div className="w-[250px]">
+                  <div className="border-b px-6 py-2">
+                    <p className="text-sm font-semibold ">
+                      {identity?.username}
+                    </p>
+                    <p className="text-sm text-slate-400">
+                      @{identity?.username}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col gap-2 py-4">
+                    <MenuItemLink
+                      className="!text-sm"
+                      to="/profile"
+                      primaryText={translate("user.editProfile", {
+                        _: "Edit profile",
+                      })}
+                      leftIcon={<PersonIcon fontSize="small" />}
+                    />
+                    <MenuItemLink
+                      className="@ext-sm"
+                      to="/preferences"
+                      primaryText={translate("user.preferences", {
+                        _: "Preferences",
+                      })}
+                      leftIcon={<SettingsIcon fontSize="small" />}
+                    />
+                  </div>
+
+                  <div className="border-t">
+                    <Logout className="!text-sm" />
+                  </div>
+                </div>
+              </UserMenu>
             </div>
           </div>
         </div>
