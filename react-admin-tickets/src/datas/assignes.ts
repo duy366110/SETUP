@@ -11,7 +11,7 @@ export interface AssignesType {
 export const Assignes: AssignesType[] = [
   {
     id: 1,
-    avatar: "",
+    avatar: "https://img.freepik.com/premium-vector/profile-icon-male-avatar_48369-2124.jpg?w=826",
     name: "Nguyễn Hoàng Khải",
     email: "hoangkhai@gmail.com",
     phone: "0352639729",
@@ -21,7 +21,7 @@ export const Assignes: AssignesType[] = [
   },
   {
     id: 2,
-    avatar: "",
+    avatar: "https://img.freepik.com/premium-vector/profile-icon-male-avatar_48369-2116.jpg?w=826",
     name: "Võ Thiên Chiều",
     email: "thienchieu@gmail.com",
     phone: "0968468627",

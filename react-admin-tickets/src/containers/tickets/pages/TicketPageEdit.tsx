@@ -44,7 +44,7 @@ const TicketPageEdit = () => {
     <Edit redirect="list" title={t("ticket.form.edit")} actions={<></>}>
       <SimpleForm
         toolbar={
-          <Toolbar className="!pl-[16px]">
+          <Toolbar className="!px-[16px]">
             <div className="flex justify-between w-full">
               <Button
                 onClick={() => redirect("/tickets")}
@@ -145,7 +145,7 @@ const TicketPageEdit = () => {
             />
           </div>
 
-          <div className="col-span-12 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
+          <div className="col-span-12 lg:col-span-8 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput
               source="labels"
               label={t("ticket.common.label")}

@@ -47,7 +47,7 @@ const TicketPageCreate = () => {
     <Create redirect="list" title={t("ticket.form.create")}>
       <SimpleForm
         toolbar={
-          <Toolbar className="!pl-[16px]">
+          <Toolbar className="!px-[16px]">
             <div className="flex justify-between w-full">
               <Button
                 onClick={() => redirect("/tickets")}
