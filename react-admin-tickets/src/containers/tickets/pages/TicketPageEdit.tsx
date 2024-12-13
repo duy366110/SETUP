@@ -1,6 +1,8 @@
 import {
   Edit,
   SimpleForm,
+  DeleteButton,
+  SaveButton,
   TextInput,
   SelectInput,
   DateInput,
@@ -8,11 +10,13 @@ import {
   SimpleFormIterator,
   ReferenceInput,
   required,
+  Toolbar,
   useRedirect,
   useTranslate,
   useGetList,
 } from "react-admin";
 import { RichTextInput } from "ra-input-rich-text";
+import { Button } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { EmailRegex } from "@/constants/Regexs";
 
@@ -38,7 +42,25 @@ const TicketPageEdit = () => {
 
   return (
     <Edit redirect="list" title={t("ticket.form.edit")} actions={<></>}>
-      <SimpleForm>
+      <SimpleForm
+        toolbar={
+          <Toolbar className="!px-[16px]">
+            <div className="flex justify-between w-full">
+              <Button
+                onClick={() => redirect("/tickets")}
+                variant="contained"
+                color="error"
+              >
+                {t("ra.action.cancel")}
+              </Button>
+              <div className="flex gap-4 items-center">
+                <DeleteButton className="!py-2" />
+                <SaveButton />
+              </div>
+            </div>
+          </Toolbar>
+        }
+      >
         <div className="col-span-12 mb-4">
           <h2 className="flex gap-2 items-center text-lg">
             <ArrowBackIosNewIcon
@@ -123,7 +145,7 @@ const TicketPageEdit = () => {
             />
           </div>
 
-          <div className="col-span-12 lg:col-span-4 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
+          <div className="col-span-12 lg:col-span-8 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
             <ArrayInput
               source="labels"
               label={t("ticket.common.label")}
