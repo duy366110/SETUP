@@ -21,6 +21,9 @@ export const translate = {
         },
         page: {
             show: "Ticket detail"
+        },
+        view: {
+            assigne: "Assigneed informaton",
         }
     },
     vi: {
@@ -45,6 +48,9 @@ export const translate = {
         },
         page: {
             show: "Chi tiết"
-        }
+        },
+        view: {
+            assigne: "Người phụ trách",
+        },
     }
 }

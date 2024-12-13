@@ -64,6 +64,11 @@ const customEnglishMessages: TranslationMessages = {
             },
             commentPlaceholder: "No comments available",
         },
+        fullName: "Full name",
+        email: "Email",
+        phone: "Phone",
+        department: "Department",
+        address: "Address",
     },
     breadcrumb: {
         tickets: "Tickets",

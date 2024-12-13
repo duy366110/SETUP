@@ -22,19 +22,7 @@ const TicketPageCreate = () => {
 
   const {data: statuses, isLoading: isLoadingStatus }: any = useGetList<any>("statuses");
   const {data: priorities, isLoading: isLoadingPriority }: any = useGetList<any>("priorities");
-
-  const validateAssigneeEmail = (value: any, allValues: any) => {
-    if (allValues.assignee.name) {
-      if(!value) {
-        return required()(value, allValues);
-      }
-
-      if (!EmailRegex.test(value)) {
-        return t("common.message.error.email");
-      }
-    }
-    return undefined;
-  };
+  const { data: assignes, isLoading: isLoadingAssignes }: any = useGetList<any>("assignes");
 
   const validateReporterEmail = (value: any, allValues: any) => {
     if (allValues.reporter.name) {
@@ -95,23 +83,13 @@ const TicketPageCreate = () => {
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <ReferenceInput
-              source="assignee.id"
-              reference="users"
+            <SelectInput
+              defaultValue={1}
+              source="assignee"
+              choices={assignes}
+              validate={required()}
               label={t("ticket.common.assignee")}
-            >
-              <TextInput
-                source="assignee.name"
-                label={t("ticket.common.assignee")}
-              />
-            </ReferenceInput>
-          </div>
-
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <TextInput
-              source="assignee.email"
-              label={t("ticket.common.assigneeEmail")}
-              validate={validateAssigneeEmail}
+              optionValue="id"
             />
           </div>
 
