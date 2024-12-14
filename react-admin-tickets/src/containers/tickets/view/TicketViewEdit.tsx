@@ -92,7 +92,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
           </div>
         }
       >
-        <div className="grid grid-cols-12 gap-4 w-full">
+        <div className="grid grid-cols-12 w-full">
           <div className="col-span-12 mb-4">
             <h2 className="flex gap-2 items-center justify-between text-lg w-full">
               <span>{t("ticket.form.edit")}</span>
@@ -174,7 +174,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
             />
           </div>
 
-          <div className="col-span-12 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
+          <div className="col-span-12 bg-[#f5f5f5] mb-2 p-4 rounded-[0.8rem]">
             <ArrayInput
               source="labels"
               label={t("ticket.common.label")}

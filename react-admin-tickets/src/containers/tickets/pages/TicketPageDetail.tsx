@@ -3,11 +3,12 @@ import {
   Show,
   SimpleShowLayout,
   TopToolbar,
+  Link,
   useShowContext,
   useTranslate,
-  Link,
   useGetList,
   useReference,
+  useRedirect,
 } from "react-admin";
 import {
   ListItem,
@@ -19,6 +20,7 @@ import {
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import ShortTextIcon from '@mui/icons-material/ShortText';
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Comments } from "@/components/comments/Comments";
 
 const Detail = (props: any) => {
@@ -30,6 +32,7 @@ const Detail = (props: any) => {
       id: record.assignee,
     });
   const t = useTranslate();
+  const redirect = useRedirect();
 
   const [status, setStatus] = useState<any>(null);
   const [priority, setPriority] = useState<any>(null);
@@ -65,7 +68,14 @@ const Detail = (props: any) => {
     <>
       <div className="p-2 md:p-6 bg-white rounded-lg">
         <div className="space-y-6">
-          <h2 className="text-xl font-medium">{record.title}</h2>
+          <h2 className="flex gap-2 items-center text-lg">
+          <ArrowBackIosNewIcon
+              fontSize="small"
+              className="cursor-pointer"
+              onClick={() => redirect("/tickets")}
+            />
+            <span>{record.title}</span>
+          </h2>
 
           {/* NORMAL INFOR */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
