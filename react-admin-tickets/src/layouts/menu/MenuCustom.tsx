@@ -13,6 +13,7 @@ import { useLocation } from "react-router-dom";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 // import styles from "./MenuCustom.module.css";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const MenuCustom = (props: any) => {
   const [open, setOpen] = useSidebarState();
@@ -69,10 +70,10 @@ const MenuCustom = (props: any) => {
 
           <MenuItemLink
             className="!py-2"
-            to="/meeting"
-            primaryText={translate("issue.title")}
-            selected={location.pathname === "/meeting"}
-            leftIcon={<InsertDriveFileIcon />}
+            to="/calendars"
+            primaryText={translate("calendar.title")}
+            selected={location.pathname === "/calendars"}
+            leftIcon={<CalendarMonthIcon />}
           />
 
           {/* <MenuItemLink
