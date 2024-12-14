@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 // import HistoryIcon from "@mui/icons-material/History";
 // import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 // import styles from "./MenuCustom.module.css";
 
 const MenuCustom = (props: any) => {
@@ -64,6 +64,14 @@ const MenuCustom = (props: any) => {
             to="/issues"
             primaryText={translate("issue.title")}
             selected={location.pathname === "/issues"}
+            leftIcon={<InsertDriveFileIcon />}
+          />
+
+          <MenuItemLink
+            className="!py-2"
+            to="/meeting"
+            primaryText={translate("issue.title")}
+            selected={location.pathname === "/meeting"}
             leftIcon={<InsertDriveFileIcon />}
           />
 
