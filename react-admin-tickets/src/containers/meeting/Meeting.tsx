@@ -5,25 +5,20 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 const Meeting = () => {
-    const [events, setEvents] = useState([]);
-
-  const eventsData = [
-    {
-      id: 1,
-      title: "Meeting",
-      start: "2024-12-14T10:00:00",
-      end: "2024-12-14T12:00:00",
-    },
-    {
-      id: 2,
-      title: "Workshop",
-      start: "2024-12-15T09:00:00",
-      end: "2024-12-15T11:00:00",
-    },
-  ].map((event) => ({
-    ...event,
-    id: String(event.id), // Chuyển đổi id sang chuỗi
-  }));
+    const [events, setEvents] = useState<any>([
+      {
+        id: "1",
+        title: "Meeting",
+        start: "2024-12-14T10:00:00",
+        end: "2024-12-14T12:00:00",
+      },
+      {
+        id: "2",
+        title: "Workshop",
+        start: "2024-12-15T09:00:00",
+        end: "2024-12-15T11:00:00",
+      },
+    ]);
 
   const handleDateClick = (info: any) => {
     const title = prompt("Enter a title for your event:");
@@ -49,11 +44,12 @@ const Meeting = () => {
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        events={eventsData}
+        events={events}
         dateClick={handleDateClick}
         eventClick={handleEventClick}
         editable={true}
         selectable={true}
+        eventDurationEditable={true}
       />
     </div>
   );
