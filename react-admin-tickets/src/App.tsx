@@ -10,7 +10,7 @@ import store from "@/store/index";
 import Dashboard from "@/containers/dashboard/Dashboard";
 import Login from "@/containers/auth/Login";
 
-import Meeting from "@/containers/meeting/Meeting";
+import Calendars from "@/containers/calendars/Calendar";
 
 import { resource as ResourceTicket } from "@/containers/tickets/Index";
 import { resource as ResourceIssue } from "@/containers/issues/Index";
@@ -39,7 +39,7 @@ const App = () => {
     >
       <CustomRoutes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/meeting" element={<Meeting />} />
+        <Route path="/calendars" element={<Calendars />} />
       </CustomRoutes>
 
       <Resource name="tickets" {...ResourceTicket} />
