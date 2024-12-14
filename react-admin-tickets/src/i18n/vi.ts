@@ -3,6 +3,7 @@ import vietnameseMessages from 'ra-language-vietnamese';
 import { translate as tickets } from '@/containers/tickets/translate';
 import { translate as issues } from "@/containers/issues/translate";
 import { translate as dashboard} from "@/containers/dashboard/translate";
+import { translate as calendar } from "@/containers/calendars/translate";
 
 const customVietnameseMessages: TranslationMessages = {
     ...vietnameseMessages,
@@ -72,12 +73,14 @@ const customVietnameseMessages: TranslationMessages = {
         address: "Địa chỉ",
     },
     breadcrumb: {
+        calendars: "Lịch trình",
         tickets: "Công việc",
         issues: "Sự cố",
         show: "Hiển thị",
         create: "Tạo mới",
         edit: "Cập nhật",
     },
+    calendar: {...calendar.vi},
     ticket:{...tickets.vi},
     issue: {...issues.vi},
     dashboard: {...dashboard.vi}

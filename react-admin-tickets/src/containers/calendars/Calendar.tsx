@@ -4,7 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-const Meeting = () => {
+const Calendars = () => {
     const [events, setEvents] = useState<any>([
       {
         id: "1",
@@ -55,4 +55,4 @@ const Meeting = () => {
   );
 };
 
-export default Meeting;
+export default Calendars;
