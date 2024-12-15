@@ -3,6 +3,71 @@ import { useUpdate, useTranslate, useReference } from "react-admin";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import AddIcon from "@mui/icons-material/Add";
 
+const DraggableView = ({workspace, index}: any) => {
+  return (
+    <Draggable key={workspace.id} draggableId={workspace.id} index={index}>
+      {(provided) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          style={{
+            padding: "10px",
+            marginBottom: "10px",
+            backgroundColor: "white",
+            borderRadius: "4px",
+            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
+            ...provided.draggableProps.style,
+          }}
+        >
+          <p className="text-xs font-medium uppercase mb-2">{workspace.type}:</p>
+          <h4 className="text-sm font-semibold line-clamp-1 mb-3">
+            {workspace.title}
+          </h4>
+          <p className="text-sm line-clamp-4">{workspace.description}</p>
+        </div>
+      )}
+    </Draggable>
+  );
+};
+
+const DroppableView = ({ column, workspaces }: any) => {
+  const t = useTranslate();
+
+  return (
+    <div>
+      <Droppable key={column} droppableId={column}>
+        {(provided) => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            style={{
+              backgroundColor: "#f4f5f7",
+              padding: "1rem",
+              width: "300px",
+              borderRadius: "8px",
+            }}
+          >
+            <h3 className="flex items-center justity-between text-slate-400 text-sm capitalize font-medium mb-4 w-full">
+              <span className="mr-auto">{t(`issue.common.${column}`)}</span>
+              <AddIcon className="cursor-pointer" fontSize="small" />
+            </h3>
+
+            {workspaces &&
+              workspaces[`${column}`]?.map((workspace: any, index: number) => {
+                return (
+                  <DraggableView workspace={workspace} index={index} />
+                );
+              })}
+
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </div>
+  );
+};
+
 const IssuePageList = () => {
   const { referenceRecord: board, isLoading } = useReference<any>({
     reference: "board",
@@ -14,7 +79,6 @@ const IssuePageList = () => {
     id: 1,
   });
 
-  const t = useTranslate();
   const [onBoard, setOnBoard] = useState<any>(null);
   const [update] = useUpdate("board");
   const [workspaces, setWorkspaces] = useState<any>(null);
@@ -87,70 +151,7 @@ const IssuePageList = () => {
     <DragDropContext onDragEnd={onDragEnd}>
       <div style={{ display: "flex", gap: "1rem" }}>
         {onBoard?.keys?.map((columnId: any) => {
-          return (
-            <Droppable key={columnId} droppableId={columnId}>
-              {(provided) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  style={{
-                    backgroundColor: "#f4f5f7",
-                    padding: "1rem",
-                    width: "300px",
-                    borderRadius: "8px",
-                  }}
-                >
-                  <h3 className="flex items-center justity-between text-slate-400 text-sm capitalize font-medium mb-4 w-full">
-                    <span className="mr-auto">
-                      {t(`issue.common.${columnId}`)}
-                    </span>
-                    <AddIcon className="cursor-pointer" fontSize="small" />
-                  </h3>
-
-                  {workspaces &&
-                    workspaces[`${columnId}`]?.map(
-                      (item: any, index: number) => {
-                        return (
-                          <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={index}
-                          >
-                            {(provided) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                style={{
-                                  padding: "10px",
-                                  marginBottom: "10px",
-                                  backgroundColor: "white",
-                                  borderRadius: "4px",
-                                  boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
-                                  ...provided.draggableProps.style,
-                                }}
-                              >
-                                <p className="text-xs font-medium uppercase mb-2">
-                                  {item.type}:
-                                </p>
-                                <h4 className="text-sm font-semibold line-clamp-1 mb-3">
-                                  {item.title}
-                                </h4>
-                                <p className="text-sm line-clamp-4">
-                                  {item.description}
-                                </p>
-                              </div>
-                            )}
-                          </Draggable>
-                        );
-                      },
-                    )}
-
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          );
+          return <DroppableView column={columnId} workspaces={workspaces} />;
         })}
       </div>
     </DragDropContext>
