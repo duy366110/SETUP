@@ -52,12 +52,12 @@ const IssueViewDroppable: React.FC<IssueViewDroppableProps> = ({
               );
             })}
 
-          <div>
+          {/* <div>
             <Buttons click={openDrawerIssue}>
               <AddIcon className="text-slate-400" fontSize="small" />
               <span className="leading-[100%]">Thêm mới sự cố</span>
             </Buttons>
-          </div>
+          </div> */}
           {provided.placeholder}
         </div>
       )}
