@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { useUpdate, useTranslate, useReference } from "react-admin";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import AddIcon from "@mui/icons-material/Add";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
-const DraggableView = ({workspace, index}: any) => {
+import Menus from "@/components/Menus/index";
+
+const DraggableView = ({ workspace, index }: any) => {
   return (
-    <Draggable key={workspace.id} draggableId={workspace.id} index={index}>
+    <Draggable  draggableId={workspace.id} index={index}>
       {(provided) => (
         <div
           ref={provided.innerRef}
@@ -20,7 +23,9 @@ const DraggableView = ({workspace, index}: any) => {
             ...provided.draggableProps.style,
           }}
         >
-          <p className="text-xs font-medium uppercase mb-2">{workspace.type}:</p>
+          <p className="text-xs font-medium uppercase mb-2">
+            {workspace.type}:
+          </p>
           <h4 className="text-sm font-semibold line-clamp-1 mb-3">
             {workspace.title}
           </h4>
@@ -35,8 +40,8 @@ const DroppableView = ({ column, workspaces }: any) => {
   const t = useTranslate();
 
   return (
-    <div>
-      <Droppable key={column} droppableId={column}>
+    
+      <Droppable  droppableId={column}>
         {(provided) => (
           <div
             {...provided.droppableProps}
@@ -50,21 +55,24 @@ const DroppableView = ({ column, workspaces }: any) => {
           >
             <h3 className="flex items-center justity-between text-slate-400 text-sm capitalize font-medium mb-4 w-full">
               <span className="mr-auto">{t(`issue.common.${column}`)}</span>
-              <AddIcon className="cursor-pointer" fontSize="small" />
+              <Menus
+                iconButton={<MoreHorizIcon className="text-slate-400" fontSize="small" />}
+              />
             </h3>
 
             {workspaces &&
               workspaces[`${column}`]?.map((workspace: any, index: number) => {
-                return (
-                  <DraggableView workspace={workspace} index={index} />
-                );
+                return <DraggableView key={workspace.id} workspace={workspace} index={index} />;
               })}
 
+
+            <div>
+              <AddIcon className="text-slate-400" fontSize="small" />
+            </div>
             {provided.placeholder}
           </div>
         )}
       </Droppable>
-    </div>
   );
 };
 
@@ -150,8 +158,8 @@ const IssuePageList = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div style={{ display: "flex", gap: "1rem" }}>
-        {onBoard?.keys?.map((columnId: any) => {
-          return <DroppableView column={columnId} workspaces={workspaces} />;
+        {onBoard?.keys?.map((columnId: any, index: number) => {
+          return <DroppableView key={columnId} column={columnId} workspaces={workspaces} />;
         })}
       </div>
     </DragDropContext>
