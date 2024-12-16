@@ -7,18 +7,19 @@ import IssueViewDroppable from "../view/IssueViewDroppable";
 import IssueViewCreate from "../view/IssueViewCreate";
 
 const IssuePageList = () => {
-  const { referenceRecord: board, isLoading } = useReference<any>({
-    reference: "board",
-    id: 1,
-  });
-
   const { referenceRecord: issues } = useReference<any>({
     reference: "issues",
     id: 1,
   });
 
   const { data: isseusStaus } = useGetList<any>("issues-status", {
-    filter: { boardId: board?.id },
+    filter: { issueId: issues?.id },
+    // sort: { field: 'date', order: 'DESC' },
+    // pagination: { page: 1, perPage: 50 },
+  });
+
+  const { data: isseusDatas } = useGetList<any>("issues-datas", {
+    filter: { issueId: issues?.id },
     // sort: { field: 'date', order: 'DESC' },
     // pagination: { page: 1, perPage: 50 },
   });
@@ -29,13 +30,13 @@ const IssuePageList = () => {
 
   const setUpWorkspaces = () => {
     let result: any = {};
-
+    
     isseusStaus?.forEach((statusIssue: any) => {
       result[`${statusIssue.id}`] = [];
     });
 
-    issues.items.forEach((item: any) => {
-      const key = isseusStaus?.find((key: any) => key.id === item.branch);
+    isseusDatas?.forEach((item: any) => {
+      const key = isseusStaus?.find((key: any) => key.id === item.statusId);
       if (key) {
         result[`${key.id}`].push(item);
       }
@@ -45,10 +46,10 @@ const IssuePageList = () => {
   };
 
   useEffect(() => {
-    if (issues && issues.items.length) {
+    if (issues && isseusDatas?.length) {
       setUpWorkspaces();
     }
-  }, [issues, isseusStaus]);
+  }, [issues, isseusStaus, isseusDatas]);
 
   const upload = async (data: any) => {
     try {
@@ -74,9 +75,9 @@ const IssuePageList = () => {
       let payload: any = {};
       Object.assign(payload, issues);
 
-      payload.items = issues.items.map((item: any) => {
+      payload.items = isseusDatas?.map((item: any) => {
         if (item.id === Number(draggableId)) {
-          item.branch = Number(destination.droppableId);
+          item.statusId = Number(destination.droppableId);
         }
         return item;
       });
@@ -107,13 +108,13 @@ const IssuePageList = () => {
           );
         })}
 
-        {openDrawer && (
+        {openDrawer && issues && issues?.id && (
           <DrawerRight
             closeDrawer={onCloseDrawerIssue}
             open={openDrawer}
             title="Create issue"
           >
-            <IssueViewCreate />
+            <IssueViewCreate closeDrawer={onCloseDrawerIssue} issueId={issues?.id} />
           </DrawerRight>
         )}
       </div>

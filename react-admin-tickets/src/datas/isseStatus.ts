@@ -1,34 +1,39 @@
 export interface IssueStatusType {
   bg?: string;
-  boardId?: number;
   id?: number;
+  issueId?: number;
+  name?: string;
   order?: number;
   title?: string;
-  
+  // value?: string;
 }
 
 export const IssueStatus: IssueStatusType[] = [
   {
     bg: "#f4f5f7",
-    boardId: 1,
     id: 1,
+    issueId: 1,
+    name: "New",
     order: 1,
     title: "New",
-    
+    // value: "New",
   },
   {
-    boardId: 1,
     bg: "#f4f5f7",
     id: 2,
+    issueId: 1,
+    name: "In progress",
     order: 2,
     title: "In progress",
-    
+    // value: "In progress",
   },
   {
     bg: "#f4f5f7",
-    boardId: 1,
     id: 3,
+    issueId: 1,
+    name: "Done",
     order: 3,
     title: "Done",
+    // value: "Done",
   },
 ];
