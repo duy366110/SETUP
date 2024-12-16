@@ -8,6 +8,9 @@ import { Statuses } from "@/datas/statuses";
 import { Priorities } from "@/datas/priorities";
 import { Assignes } from "@/datas/assignes";
 
+/** COMMON */
+import { Labels } from "@/datas/labels";
+
 /** ISSUE */
 import { Issues } from "@/datas/issues";
 import { IssueStatus } from "@/datas/isseStatus";
@@ -27,6 +30,7 @@ export default () => {
       "priorities": Priorities,
       "tickets": Tickets,
       "assignes": Assignes,
+      "labels": Labels,
       "issues": Issues,
       "issues-status": IssueStatus,
       "issues-datas": IssuesDatas,
