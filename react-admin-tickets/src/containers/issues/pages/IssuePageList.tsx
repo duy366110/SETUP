@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import {
-  ListBase,
+  List,
   SearchInput,
   TextInput,
-  DateField,
   ListToolbar,
   TopToolbar,
+  ExportButton,
   FilterButton,
   useUpdate,
   useReference,
   useGetList,
   useListContext,
+  useTranslate,
 } from "react-admin";
 import { DragDropContext } from "@hello-pangea/dnd";
 import AddIcon from "@mui/icons-material/Add";
@@ -24,6 +25,7 @@ const DealActions = () => {
   return (
     <TopToolbar>
       <FilterButton />
+      <ExportButton />
     </TopToolbar>
   );
 };
@@ -62,6 +64,7 @@ const IssuePageList = () => {
   });
   const [issuesDatasLocal, setIssuesDatasLocal] = useState<Array<any>>([]);
 
+  const t = useTranslate();
   const [update] = useUpdate("issues");
   const [issueList, setIssueList] = useState<any>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
@@ -69,7 +72,6 @@ const IssuePageList = () => {
   const dealFilters = [
     <SearchInput source="id" alwaysOn />,
     <TextInput source="title" />,
-    <DateField source="created_at" />,
   ];
 
   const setUpWorkspaces = () => {
@@ -166,9 +168,12 @@ const IssuePageList = () => {
   };
 
   return (
-    <ListBase resource="issues-datas">
+    <List
+      resource="issues-datas" title={t("issue.title")}
+      actions={<></>}
+    >
       <div className="grid grid-cols-12 gap-4">
-        <div className={`${openDrawer ? "col-span-9" : "col-span-12"}`}>
+        <div className={`${openDrawer ? "col-span-9" : "col-span-12"} p-4 transition-all`}>
           <ListToolbar
             className="mb-4"
             filters={dealFilters}
@@ -178,7 +183,7 @@ const IssuePageList = () => {
           <div className="bg-[#e1e1e1] p-4 rounded-md">
             <div className="mb-4">
               <Buttons click={onOpenDrawerIssue}>
-                <AddIcon className="text-slate-400" fontSize="small" />
+                <AddIcon className="text-gray-700" fontSize="small" />
                 <span className="leading-[100%]">Thêm mới sự cố</span>
               </Buttons>
             </div>
@@ -217,7 +222,7 @@ const IssuePageList = () => {
           </DrawerRight>
         )}
       </div>
-    </ListBase>
+    </List>
   );
 };
 
