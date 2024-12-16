@@ -7,9 +7,11 @@ import { Comments } from "@/datas/comments";
 import { Statuses } from "@/datas/statuses";
 import { Priorities } from "@/datas/priorities";
 import { Assignes } from "@/datas/assignes";
-import { Board } from "@/datas/board";
+
+/** ISSUE */
 import { Issues } from "@/datas/issues";
 import { IssueStatus } from "@/datas/isseStatus";
+import { IssuesDatas } from "@/datas/issueDatas";
 
 
 export default () => {
@@ -25,9 +27,9 @@ export default () => {
       "priorities": Priorities,
       "tickets": Tickets,
       "assignes": Assignes,
-      "board": Board,
       "issues": Issues,
       "issues-status": IssueStatus,
+      "issues-datas": IssuesDatas,
     });
     restServer.toggleLogging(); // logging is off by default, enable it
     fetchMock?.mock("begin:http://localhost:4000", restServer.getHandler());
