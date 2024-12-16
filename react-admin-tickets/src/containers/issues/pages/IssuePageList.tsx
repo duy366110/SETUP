@@ -62,6 +62,10 @@ const IssuePageList = () => {
     // sort: { field: 'date', order: 'DESC' },
     // pagination: { page: 1, perPage: 50 },
   });
+
+  // const { data: priorities } = useGetList<any>("priorities");
+  // const { data: labels } = useGetList<any>("labels");
+
   const [issuesDatasLocal, setIssuesDatasLocal] = useState<Array<any>>([]);
 
   const t = useTranslate();
@@ -84,6 +88,11 @@ const IssuePageList = () => {
     issuesDatasLocal?.forEach((item: any) => {
       const key = isseusStaus?.find((key: any) => key.id === item.statusId);
       if (key) {
+        // let label = labels?.find((label: any) => label.id === item.label);
+        // let priority = priorities?.find((priority: any) => priority.id === item.priority);
+
+        // item.label = label;
+        // item.priority = priority;
         result[`${key.id}`].push(item);
       }
     });

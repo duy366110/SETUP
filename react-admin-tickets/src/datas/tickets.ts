@@ -68,7 +68,7 @@ export const Tickets: TicketsType[] = [
     description:
       "Design and replace the banner on the homepage for the holiday season.",
     status: 4,
-    priority: 4,
+    priority: 3,
     assignee: 2,
     reporter: {
       id: "USER-101",
@@ -93,7 +93,7 @@ export const Tickets: TicketsType[] = [
     },
     createdAt: new Date("2024-11-28T08:00:00Z"),
     updatedAt: new Date("2024-12-01T09:30:00Z"),
-    labels: ["database", "migration"],
+    labels: ["database"],
   },
   {
     id: 6,
@@ -111,7 +111,7 @@ export const Tickets: TicketsType[] = [
     },
     createdAt: new Date("2024-11-29T10:15:00Z"),
     updatedAt: new Date("2024-11-29T14:30:00Z"),
-    labels: ["bug", "frontend", "CSS"],
+    labels: ["bug", "frontend"],
   },
   {
     id: 7,
@@ -128,7 +128,7 @@ export const Tickets: TicketsType[] = [
     },
     createdAt: new Date("2024-11-25T11:45:00Z"),
     updatedAt: new Date("2024-11-30T17:15:00Z"),
-    labels: ["feature", "authentication"],
+    labels: ["feature"],
   },
   {
     id: 8,
@@ -136,7 +136,7 @@ export const Tickets: TicketsType[] = [
     description:
       "Document all the available REST API endpoints with examples and use cases.",
     status: 3,
-    priority: 4,
+    priority: 2,
     assignee: 1,
     reporter: {
       id: "USER-101",
@@ -145,7 +145,7 @@ export const Tickets: TicketsType[] = [
     },
     createdAt: new Date("2024-11-10T08:30:00Z"),
     updatedAt: new Date("2024-11-29T14:30:00Z"),
-    labels: ["documentation", "API"],
+    labels: ["API"],
   },
   {
     id: 9,

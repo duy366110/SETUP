@@ -5,7 +5,7 @@ export interface IssueViewDroppableProps {
 
 export interface IssueViewDraggableProps {
     index: number;
-    workspace: any,
+    issue: any,
 }
 
 export interface IssueViewCreateProps {
