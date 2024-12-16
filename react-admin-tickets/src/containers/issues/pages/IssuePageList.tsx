@@ -1,80 +1,10 @@
 import { useState, useEffect } from "react";
-import { useUpdate, useTranslate, useReference } from "react-admin";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import AddIcon from "@mui/icons-material/Add";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useUpdate, useReference, useGetList } from "react-admin";
+import { DragDropContext } from "@hello-pangea/dnd";
 
-import Menus from "@/components/Menus/index";
-
-const DraggableView = ({ workspace, index }: any) => {
-  return (
-    <Draggable  draggableId={workspace.id} index={index}>
-      {(provided) => (
-        <div
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          style={{
-            padding: "10px",
-            marginBottom: "10px",
-            backgroundColor: "white",
-            borderRadius: "4px",
-            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
-            ...provided.draggableProps.style,
-          }}
-        >
-          <p className="text-xs font-medium uppercase mb-2">
-            {workspace.type}:
-          </p>
-          <h4 className="text-sm font-semibold line-clamp-1 mb-3">
-            {workspace.title}
-          </h4>
-          <p className="text-sm line-clamp-4">{workspace.description}</p>
-        </div>
-      )}
-    </Draggable>
-  );
-};
-
-const DroppableView = ({ column, workspaces }: any) => {
-  const t = useTranslate();
-
-  return (
-    
-      <Droppable  droppableId={column}>
-        {(provided) => (
-          <div
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            style={{
-              backgroundColor: "#f4f5f7",
-              padding: "1rem",
-              width: "300px",
-              borderRadius: "8px",
-            }}
-          >
-            <h3 className="flex items-center justity-between text-slate-400 text-sm capitalize font-medium mb-4 w-full">
-              <span className="mr-auto">{t(`issue.common.${column}`)}</span>
-              <Menus
-                iconButton={<MoreHorizIcon className="text-slate-400" fontSize="small" />}
-              />
-            </h3>
-
-            {workspaces &&
-              workspaces[`${column}`]?.map((workspace: any, index: number) => {
-                return <DraggableView key={workspace.id} workspace={workspace} index={index} />;
-              })}
-
-
-            <div>
-              <AddIcon className="text-slate-400" fontSize="small" />
-            </div>
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-  );
-};
+import DrawerRight from "@/components/Drawers/DrawerRight";
+import IssueViewDroppable from "../view/IssueViewDroppable";
+import IssueViewCreate from "../view/IssueViewCreate";
 
 const IssuePageList = () => {
   const { referenceRecord: board, isLoading } = useReference<any>({
@@ -82,48 +12,49 @@ const IssuePageList = () => {
     id: 1,
   });
 
-  const { referenceRecord: workspace } = useReference<any>({
-    reference: "workspace",
+  const { referenceRecord: issues } = useReference<any>({
+    reference: "issues",
     id: 1,
   });
 
-  const [onBoard, setOnBoard] = useState<any>(null);
+  const { data: isseusStaus } = useGetList<any>("issues-status", {
+    filter: { boardId: board?.id },
+    // sort: { field: 'date', order: 'DESC' },
+    // pagination: { page: 1, perPage: 50 },
+  });
+
   const [update] = useUpdate("board");
-  const [workspaces, setWorkspaces] = useState<any>(null);
+  const [issueList, setIssueList] = useState<any>(null);
+  const [openDrawer, setOpenDrawer] = useState<boolean>(false);
 
   const setUpWorkspaces = () => {
     let result: any = {};
 
-    board.keys.forEach((key: string) => {
-      result[`${key}`] = [];
+    isseusStaus?.forEach((statusIssue: any) => {
+      result[`${statusIssue.id}`] = [];
     });
 
-    workspace.items.forEach((item: any) => {
-      const key = board.keys.find((key: string) => key === item.branch);
+    issues.items.forEach((item: any) => {
+      const key = isseusStaus?.find((key: any) => key.id === item.branch);
       if (key) {
-        result[key].push(item);
+        result[`${key.id}`].push(item);
       }
     });
-    setWorkspaces(result);
+
+    setIssueList(result);
   };
 
   useEffect(() => {
-    if (board) {
-      setOnBoard(board);
-    }
-  }, [board]);
-
-  useEffect(() => {
-    if (workspace && workspace.items.length) {
+    if (issues && issues.items.length) {
       setUpWorkspaces();
     }
-  }, [workspace]);
+  }, [issues, isseusStaus]);
 
   const upload = async (data: any) => {
     try {
       await update(
-        "workspace",
-        { id: workspace.id, data },
+        "issues",
+        { id: issues.id, data },
         {
           onSuccess: () => {
             setUpWorkspaces();
@@ -139,14 +70,13 @@ const IssuePageList = () => {
     const { source, draggableId, destination } = result;
 
     if (!destination) return;
-
     if (source.droppableId !== destination.droppableId) {
       let payload: any = {};
-      Object.assign(payload, workspace);
+      Object.assign(payload, issues);
 
-      payload.items = workspace.items.map((item: any) => {
-        if (item.id === draggableId) {
-          item.branch = destination.droppableId;
+      payload.items = issues.items.map((item: any) => {
+        if (item.id === Number(draggableId)) {
+          item.branch = Number(destination.droppableId);
         }
         return item;
       });
@@ -155,12 +85,37 @@ const IssuePageList = () => {
     }
   };
 
+  const onOpenDrawerIssue = () => {
+    setOpenDrawer(true);
+  };
+
+  const onCloseDrawerIssue = () => {
+    setOpenDrawer(false);
+  };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div style={{ display: "flex", gap: "1rem" }}>
-        {onBoard?.keys?.map((columnId: any, index: number) => {
-          return <DroppableView key={columnId} column={columnId} workspaces={workspaces} />;
+        {isseusStaus?.map((statusIssue: any, index: number) => {
+          return (
+            <IssueViewDroppable
+              key={statusIssue?.id}
+              openDrawerIssue={onOpenDrawerIssue}
+              statusIssue={statusIssue}
+              issueList={issueList}
+            />
+          );
         })}
+
+        {openDrawer && (
+          <DrawerRight
+            closeDrawer={onCloseDrawerIssue}
+            open={openDrawer}
+            title="Create issue"
+          >
+            <IssueViewCreate />
+          </DrawerRight>
+        )}
       </div>
     </DragDropContext>
   );
