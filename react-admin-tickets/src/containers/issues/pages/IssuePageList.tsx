@@ -194,7 +194,6 @@ const IssuePageList = () => {
                     return (
                       <IssueViewDroppable
                         key={statusIssue?.id}
-                        openDrawerIssue={onOpenDrawerIssue}
                         statusIssue={statusIssue}
                         issueList={issueList}
                       />
