@@ -1,6 +1,9 @@
-export const Board: any = [
+export interface BoardType {
+  id?: number;
+}
+
+export const Board: BoardType[] = [
   {
     id: 1,
-    keys: ["new", "inprogress", "done"]
   },
 ];

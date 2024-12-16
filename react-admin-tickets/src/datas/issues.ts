@@ -1,23 +1,23 @@
-export interface WorkspaceType {
+export interface IssuesType {
     id?: number;
     boardId?: number;
     items?: Array<any>;
   }
   
-  export const Workspace: WorkspaceType[] = [
+  export const Issues: IssuesType[] = [
     {
       id: 1,
       boardId: 1,
       items: [
         {
-            id: "ISSUE-001",
-            branch: "new",
+            id: 1,
+            branch: 1,
             title: "Server downtime affecting production environment",
             description:
               "The production server is experiencing frequent downtimes during peak hours, causing service interruptions for users.",
             type: "Open",
             priority: "High",
-            status: "Open",
+            // status: "Open",
             created_at: "2024-12-10T14:30:00Z",
             updated_at: "2024-12-13T09:00:00Z",
             assigned_to: {
@@ -28,14 +28,14 @@ export interface WorkspaceType {
             tags: ["server", "downtime", "critical"],
           },
           {
-            id: "ISSUE-003",
-            branch: "new",
+            id: 2,
+            branch: 1,
             title: "Outdated security patches on staging server",
             description:
               "The staging environment has multiple outdated security patches, posing potential vulnerabilities for testing purposes.",
             type: "Security",
             priority: "Medium",
-            status: "Open",
+            // status: "Open",
             created_at: "2024-12-11T10:15:00Z",
             updated_at: "2024-12-13T09:15:00Z",
             assigned_to: {
@@ -46,14 +46,14 @@ export interface WorkspaceType {
             tags: ["security", "patch", "vulnerability"],
           },
           {
-            id: "ISSUE-005",
-            branch: "new",
+            id: 3,
+            branch: 2,
             title: "Missing translations on the mobile app",
             description:
               "Several UI components on the mobile app are displayed in English instead of the user’s selected language.",
             type: "UI/UX",
             priority: "Open",
-            status: "Backlog",
+            // status: "Backlog",
             created_at: "2024-12-09T16:45:00Z",
             updated_at: "2024-12-12T17:00:00Z",
             assigned_to: {
@@ -64,14 +64,14 @@ export interface WorkspaceType {
             tags: ["ui", "translation", "language"],
           },
           {
-            id: "ISSUE-004",
-            branch: "inprogress",
+            id: 4,
+            branch: 2,
             title: "Slow database queries on analytics dashboard",
             description:
               "The analytics dashboard takes over 10 seconds to load data due to inefficient database queries.",
             type: "Performance",
             priority: "High",
-            status: "In Progress",
+            // status: "In Progress",
             created_at: "2024-12-10T09:00:00Z",
             updated_at: "2024-12-13T10:00:00Z",
             assigned_to: {
@@ -82,14 +82,14 @@ export interface WorkspaceType {
             tags: ["performance", "database", "optimization"],
           },
           {
-            id: "ISSUE-002",
-            branch: "inprogress",
+            id: 5,
+            branch: 3,
             title: "Bug in payment gateway integration",
             description:
               "Users are unable to complete transactions using the credit card option. Error code 502 is returned intermittently.",
             type: "Software",
             priority: "Critical",
-            status: "In Progress",
+            // status: "In Progress",
             created_at: "2024-12-12T08:00:00Z",
             updated_at: "2024-12-13T11:30:00Z",
             assigned_to: {
