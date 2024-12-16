@@ -5,7 +5,6 @@ export interface IssueStatusType {
   name?: string;
   order?: number;
   title?: string;
-  // value?: string;
 }
 
 export const IssueStatus: IssueStatusType[] = [
@@ -16,7 +15,6 @@ export const IssueStatus: IssueStatusType[] = [
     name: "New",
     order: 1,
     title: "New",
-    // value: "New",
   },
   {
     bg: "#f4f5f7",
@@ -25,7 +23,6 @@ export const IssueStatus: IssueStatusType[] = [
     name: "In progress",
     order: 2,
     title: "In progress",
-    // value: "In progress",
   },
   {
     bg: "#f4f5f7",
@@ -34,6 +31,5 @@ export const IssueStatus: IssueStatusType[] = [
     name: "Done",
     order: 3,
     title: "Done",
-    // value: "Done",
   },
 ];

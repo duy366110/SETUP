@@ -1,5 +1,4 @@
 export interface IssueViewDroppableProps {
-    openDrawerIssue?: () => void;
     statusIssue: any;
     issueList: any;
 }
