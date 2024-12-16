@@ -25,10 +25,14 @@ const IssueViewDraggable: React.FC<IssueViewDraggableProps> = ({
           <p className="text-xs font-medium uppercase mb-2">
             {workspace.type}:
           </p>
+          
           <h4 className="text-sm font-semibold line-clamp-1 mb-3">
             {workspace.title}
           </h4>
-          <p className="text-sm line-clamp-4">{workspace.description}</p>
+
+          <div
+            className="text-sm line-clamp-4"
+            dangerouslySetInnerHTML={{ __html: workspace.description }} />
         </div>
       )}
     </Draggable>
