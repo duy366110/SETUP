@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
+import { useGetList } from "react-admin";
 import { Draggable } from "@hello-pangea/dnd";
+import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import { IssueViewDraggableProps } from "./IssueView.type";
 import DivTheme from "@/components/themes/DivTheme";
 
 const IssueViewDraggable: React.FC<IssueViewDraggableProps> = ({
-  workspace,
+  issue,
   index,
 }: any) => {
+
+  const { data: labels } = useGetList<any>("labels");
+  const [label, setLabel] = useState<any>(null);
+
+  useEffect(() => {
+    if(issue) {
+      let label = labels?.find((label: any) => label.id === issue.label);
+      setLabel(label);
+    }
+  }, [issue, labels])
+
   return (
-    <Draggable draggableId={`${workspace.id}`} index={index}>
+    <Draggable draggableId={`${issue.id}`} index={index}>
       {(provided) => (
         <DivTheme
           ref={provided.innerRef}
@@ -22,17 +35,24 @@ const IssueViewDraggable: React.FC<IssueViewDraggableProps> = ({
             ...provided.draggableProps.style,
           }}
         >
-          <p className="text-xs font-medium uppercase mb-2">
-            {workspace.type}:
-          </p>
-          
+          <div className="flex items-center justify-between text-gray-700 text-sm capitalize mb-2">
+            {label && (
+              <div style={{ backgroundColor: label?.color }} className={`flex items-center gap-2 relative w-fit rounded px-2 py-1 text-white`}>
+                <TurnedInIcon fontSize="small" />
+                <span>{label?.name}</span>
+                <div style={{ backgroundColor: label?.color }} className={`absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 rotate-45`}></div>
+              </div>
+            )}
+          </div>
+
           <h4 className="text-sm font-semibold line-clamp-1 mb-3">
-            {workspace.title}
+            {issue.title}
           </h4>
 
           <div
             className="text-sm line-clamp-4"
-            dangerouslySetInnerHTML={{ __html: workspace.description }} />
+            dangerouslySetInnerHTML={{ __html: issue.description }}
+          />
         </DivTheme>
       )}
     </Draggable>

@@ -36,12 +36,12 @@ const IssueViewDroppable: React.FC<IssueViewDroppableProps> = ({
           </h3>
 
           {issueList &&
-            issueList[`${statusIssue.id}`]?.map((workspace: any) => {
+            issueList[`${statusIssue.id}`]?.map((issue: any) => {
               return (
                 <IssueViewDraggable
-                  key={workspace.id}
-                  workspace={workspace}
-                  index={workspace.id}
+                  key={issue.id}
+                  issue={issue}
+                  index={issue.id}
                 />
               );
             })}

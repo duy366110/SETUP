@@ -26,6 +26,9 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
     // pagination: { page: 1, perPage: 50 },
   });
 
+  const { data: priorities } = useGetList<any>("priorities");
+  const { data: labels } = useGetList<any>("labels");
+
   const onCreateHandler = async (data: any) => {
     console.log(isseusStatus);
 
@@ -33,8 +36,6 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
       let payload = {
         issueId: 1,
         statusId: 1,
-        type: "Open",
-        priority: "High",
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
         ...data,
@@ -73,7 +74,29 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
           source="statusId"
           choices={isseusStatus}
           validate={required()}
-          label={t("ticket.common.assignee")}
+          label={t("issue.form.status")}
+          optionValue="id"
+        />
+      </div>
+
+      <div className="col-span-12 w-full">
+        <SelectInput
+          defaultValue={1}
+          source="priority"
+          choices={priorities}
+          validate={required()}
+          label={t("issue.form.priority")}
+          optionValue="id"
+        />
+      </div>
+
+      <div className="col-span-12 w-full">
+        <SelectInput
+          defaultValue={1}
+          source="label"
+          choices={labels}
+          validate={required()}
+          label={t("issue.form.label")}
           optionValue="id"
         />
       </div>
