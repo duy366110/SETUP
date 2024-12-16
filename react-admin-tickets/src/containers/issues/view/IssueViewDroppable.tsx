@@ -24,11 +24,11 @@ const IssueViewDroppable: React.FC<IssueViewDroppableProps> = ({
             borderRadius: "8px",
           }}
         >
-          <h3 className="flex items-center justity-between text-slate-400 text-sm capitalize font-medium mb-4 w-full">
+          <h3 className="flex items-center justity-between text-gray-700 text-sm capitalize font-medium mb-4 w-full">
             <span className="mr-auto">{statusIssue.title}</span>
             <Menus
               iconButton={
-                <MoreHorizIcon className="text-slate-400" fontSize="small" />
+                <MoreHorizIcon className="text-gray-700" fontSize="small" />
               }
             >
               <IssueUtilDroppableMenu statusIssue={statusIssue} />
