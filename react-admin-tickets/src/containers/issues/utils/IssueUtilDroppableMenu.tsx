@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useUpdate } from "react-admin";
+import { useUpdate, useTranslate } from "react-admin";
 
 interface IssueUtilDroppableMenuProps {
     statusIssue?: any
@@ -9,6 +9,7 @@ const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
     statusIssue = null,
 }) => {
     const [update] = useUpdate();
+    const t = useTranslate();
   const colors = useMemo(() => {
     return [
       "#4bce97",
@@ -22,34 +23,37 @@ const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
     ];
   }, []);
 
-  const onChangeColor = async(color: string) => {
-    console.log(color);
-    console.log(statusIssue);
+  const upload = async(payload: any) => {
+    try {
+      await update(
+        "issues-status",
+        { id: statusIssue.id, data: payload },
+        {
+          onSuccess: () => {
+              console.log("Update success");
+          },
+        },
+      );
+    } catch (e) {
+      console.log("Error while saving data.");
+    }
+  }
 
+  const onChangeColor = async(color: string) => {
     let payload = {
         ...statusIssue,
         bg: color
     }
 
-    try {
-        await update(
-          "issues-status",
-          { id: statusIssue.id, data: payload },
-          {
-            onSuccess: () => {
-                console.log("Update success");
-            },
-          },
-        );
-      } catch (e) {
-        console.log("Error while saving data.");
-      }
+    upload(payload);
   }
 
   return (
     <div className="p-4">
+
+
       <div className="grid grid-cols-12">
-        <h2 className="col-span-12">Change color list</h2>
+        <h2 className="col-span-12 text-sm text-gray-500 mb-2">{t("issue.util.colorStatus")}</h2>
         {colors && colors.length &&
           colors.map((color: string) => {
             return (
@@ -57,7 +61,7 @@ const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
                 key={color}
                 className="h-10 col-span-3 w-16"
                 style={{ backgroundColor: color }}
-                onClick={(event) => onChangeColor(color)}
+                onClick={(event: any) => onChangeColor(color)}
               ></div>
             );
           })}
