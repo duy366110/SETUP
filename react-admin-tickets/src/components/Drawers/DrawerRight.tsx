@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Drawer } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { DrawersRightProps } from "./Drawers.type";
+import { RootState } from "@/store";
 
 const DrawerRight: React.FC<DrawersRightProps> = ({
   closeDrawer,
@@ -9,9 +11,14 @@ const DrawerRight: React.FC<DrawersRightProps> = ({
   open = false,
   title = "",
 }) => {
+
+  const mediaQuery: any = useSelector<RootState>(
+    (state: any) => state.mediaQuery,
+  );
+
   return (
     <Drawer className="relative" open={open} variant="persistent" anchor="right" sx={{ zIndex: 1 }}>
-      <div className="w-[350px] h-full mt-[60px] p-4">
+      <div className={`${mediaQuery.md ? "w-[100%] mt-[60px]" : "w-[350px] mt-[60px]"} h-full  p-4`}>
         <h2 className="flex justify-between w-full">
           <span>{title}</span>
           <CloseIcon
