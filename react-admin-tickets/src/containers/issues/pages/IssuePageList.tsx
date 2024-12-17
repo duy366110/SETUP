@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
 import {
   List,
-  SearchInput,
-  TextInput,
   ListToolbar,
   TopToolbar,
   ExportButton,
-  FilterButton,
   useUpdate,
   useReference,
   useGetList,
   useListContext,
   useTranslate,
+  useRedirect,
 } from "react-admin";
+import { useSelector } from "react-redux";
 import { DragDropContext } from "@hello-pangea/dnd";
 import AddIcon from "@mui/icons-material/Add";
 
+import { RootState } from "@/store";
 import Buttons from "@/components/Buttons/Buttons";
 import DrawerRight from "@/components/Drawers/DrawerRight";
 import IssueViewDroppable from "../view/IssueViewDroppable";
@@ -24,7 +24,6 @@ import IssueViewCreate from "../view/IssueViewCreate";
 const DealActions = () => {
   return (
     <TopToolbar>
-      <FilterButton />
       <ExportButton />
     </TopToolbar>
   );
@@ -62,21 +61,19 @@ const IssuePageList = () => {
     // sort: { field: 'date', order: 'DESC' },
     // pagination: { page: 1, perPage: 50 },
   });
-
-  // const { data: priorities } = useGetList<any>("priorities");
-  // const { data: labels } = useGetList<any>("labels");
-
-  const [issuesDatasLocal, setIssuesDatasLocal] = useState<Array<any>>([]);
-
   const t = useTranslate();
   const [update] = useUpdate("issues");
+  const redirect = useRedirect();
+
+  const mediaQuery: any = useSelector<RootState>(
+    (state: any) => state.mediaQuery,
+  );
+
+  const [issuesDatasLocal, setIssuesDatasLocal] = useState<Array<any>>([]);
   const [issueList, setIssueList] = useState<any>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
 
-  const dealFilters = [
-    <SearchInput source="id" alwaysOn />,
-    <TextInput source="title" />,
-  ];
+  const dealFilters = [<></>];
 
   const setUpWorkspaces = () => {
     let result: any = {};
@@ -88,11 +85,6 @@ const IssuePageList = () => {
     issuesDatasLocal?.forEach((item: any) => {
       const key = isseusStaus?.find((key: any) => key.id === item.statusId);
       if (key) {
-        // let label = labels?.find((label: any) => label.id === item.label);
-        // let priority = priorities?.find((priority: any) => priority.id === item.priority);
-
-        // item.label = label;
-        // item.priority = priority;
         result[`${key.id}`].push(item);
       }
     });
@@ -166,6 +158,10 @@ const IssuePageList = () => {
    * Mở Drawer thêm mới issues
    */
   const onOpenDrawerIssue = () => {
+    if(mediaQuery.md) {
+      redirect("/issues/create");
+      return
+    }
     setOpenDrawer(true);
   };
 
@@ -181,8 +177,8 @@ const IssuePageList = () => {
       resource="issues-datas" title={t("issue.title")}
       actions={<></>}
     >
-      <div className="grid grid-cols-12 gap-4">
-        <div className={`${openDrawer ? "col-span-9" : "col-span-12"} p-4 transition-all`}>
+      <div className="md:grid md:grid-cols-12 gap-4">
+        <div className={`${openDrawer ? "md:col-span-9" : "md:col-span-12"} p-4 transition-all`}>
           <ListToolbar
             className="mb-4"
             filters={dealFilters}
