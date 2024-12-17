@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import {
+  
+  SaveButton,
   SimpleForm,
   TextInput,
   SelectInput,
   required,
+  Toolbar,
   useTranslate,
   useCreate,
   useGetList,
 } from "react-admin";
 import { RichTextInput } from "ra-input-rich-text";
-
+import { Button } from "@mui/material";
 import { IssueViewCreateProps } from "./IssueView.type";
 
 const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
@@ -63,6 +66,23 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
       key={key}
       onSubmit={onCreateHandler}
       className="grid-col-12 w-full !px-0"
+      toolbar={
+        <Toolbar className="!px-[16px]">
+          <div className="flex justify-between w-full">
+            <Button
+              onClick={() => closeDrawer()}
+              variant="contained"
+              color="error"
+            >
+              {t("ra.action.cancel")}
+            </Button>
+            <div className="flex gap-4 items-center">
+              {/* <DeleteButton className="!py-2" /> */}
+              <SaveButton />
+            </div>
+          </div>
+        </Toolbar>
+      }
     >
       <div className="col-span-12 w-full">
         <TextInput source="title" label="Title" />

@@ -1,5 +1,7 @@
 import IssuePageList from "./pages/IssuePageList";
+import IssuePageCreate from "./pages/IssuePageCreate";
 
 export const resource = {
-    list: IssuePageList
+    list: IssuePageList,
+    create: IssuePageCreate,
 }
