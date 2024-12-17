@@ -18,9 +18,9 @@ const FormComment = (props: any) => {
       source="comments"
       className="ra-rich-text-editor !p-0 !w-full"
       label={
-        <p className="text-base font-semibold mb-2">
+        <span className="text-base font-semibold mb-2">
           {t("ticket.common.comment")}
-        </p>
+        </span>
       }
       sx={{
         "& .ql-container": {
@@ -57,7 +57,6 @@ export const Comments = (props: any) => {
         {
           onSuccess: () => {
             setKey(key+1);
-            console.log("Create message successfully");
           },
         },
       );

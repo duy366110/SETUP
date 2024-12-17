@@ -1,31 +1,30 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useGetList, useRedirect } from "react-admin";
 import { Draggable } from "@hello-pangea/dnd";
-import TurnedInIcon from '@mui/icons-material/TurnedIn';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
+import TurnedInIcon from "@mui/icons-material/TurnedIn";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 
-import DivTheme from "@/components/themes/DivTheme";
+import DivTheme from "@/components/Themes/DivTheme";
 import { IssueViewDraggableProps } from "./IssueView.type";
 
 const IssueViewDraggable: React.FC<IssueViewDraggableProps> = ({
   issue,
   index,
 }: any) => {
-
   const { data: labels } = useGetList<any>("labels");
   const redirect = useRedirect();
   const [label, setLabel] = useState<any>(null);
 
   useEffect(() => {
-    if(issue) {
+    if (issue) {
       let label = labels?.find((label: any) => label.id === issue.label);
       setLabel(label);
     }
-  }, [issue, labels])
+  }, [issue, labels]);
 
   const onRedirectEditPage = () => {
     redirect(`/issues/${issue.id}`);
-  }
+  };
 
   return (
     <Draggable draggableId={`${issue.id}`} index={index}>
@@ -44,14 +43,26 @@ const IssueViewDraggable: React.FC<IssueViewDraggableProps> = ({
         >
           <div className="flex items-center justify-between text-gray-700 text-sm capitalize mb-2">
             {label && (
-              <div style={{ backgroundColor: label?.color }} className={`flex items-center gap-2 relative w-fit rounded px-2 py-1 text-white`}>
+              <div
+                style={{ backgroundColor: label?.color }}
+                className={`flex items-center gap-2 relative w-fit rounded px-2 py-1 text-white`}
+              >
                 <TurnedInIcon fontSize="small" />
                 <span>{label?.name}</span>
-                <div style={{ backgroundColor: label?.color }} className={`absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 rotate-45`}></div>
+                <div
+                  style={{ backgroundColor: label?.color }}
+                  className={`absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 rotate-45`}
+                ></div>
               </div>
             )}
 
-            <BorderColorIcon onClick={onRedirectEditPage} fontSize="small" />
+            <DivTheme className="!p-0">
+              <BorderColorIcon
+                className="cursor-pointer"
+                onClick={onRedirectEditPage}
+                fontSize="small"
+              />
+            </DivTheme>
           </div>
 
           <h4 className="text-sm font-semibold line-clamp-1 mb-3">

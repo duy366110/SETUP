@@ -16,6 +16,9 @@ import { Issues } from "@/datas/issues";
 import { IssueStatus } from "@/datas/isseStatus";
 import { IssuesDatas } from "@/datas/issueDatas";
 
+/** SCHEDULE */
+import { Schedule } from "@/datas/schedule";
+
 
 export default () => {
     const data = generateData({ serializeDate: true });
@@ -34,6 +37,7 @@ export default () => {
       "issues": Issues,
       "issues-status": IssueStatus,
       "issues-datas": IssuesDatas,
+      "schedules": Schedule,
     });
     restServer.toggleLogging(); // logging is off by default, enable it
     fetchMock?.mock("begin:http://localhost:4000", restServer.getHandler());

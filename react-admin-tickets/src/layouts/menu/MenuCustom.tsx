@@ -70,8 +70,8 @@ const MenuCustom = (props: any) => {
 
           <MenuItemLink
             className="!py-2"
-            to="/calendars"
-            primaryText={translate("calendar.title")}
+            to="/schedules"
+            primaryText={translate("schedule.title")}
             selected={location.pathname === "/calendars"}
             leftIcon={<CalendarMonthIcon />}
           />
