@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import sliceMediaQuery from "./slice/sliceMediaQuery";
+import sliceDialog from "./slice/sliceDialog";
 
 const store = configureStore({
     reducer: {
+        dialog: sliceDialog,
         mediaQuery: sliceMediaQuery,
     },
 })

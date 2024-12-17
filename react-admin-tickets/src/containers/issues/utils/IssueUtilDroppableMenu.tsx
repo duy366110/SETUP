@@ -61,7 +61,7 @@ const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
       <div className="grid grid-cols-12">
         <div className="col-span-12">
           <h2 className="text-sm text-gray-500 mb-2">
-            {t("issue.util.colorStatus")}
+            {t("issue.util.titleStatus")}
           </h2>
           <SimpleForm className="!p-0" toolbar={<></>}>
             <TextInput onBlur={onChangeTitle} source="title" />

@@ -3,7 +3,7 @@ import englishMessages from 'ra-language-english';
 import { translate as tickets } from '@/containers/tickets/translate';
 import { translate as issues } from "@/containers/issues/translate";
 import { translate as dashboard} from "@/containers/dashboard/translate";
-import { translate as calendar } from "@/containers/calendars/translate";
+import { translate as schedule } from "@/containers/schedules/translate";
 
 const customEnglishMessages: TranslationMessages = {
     ...englishMessages,
@@ -73,14 +73,14 @@ const customEnglishMessages: TranslationMessages = {
         address: "Address",
     },
     breadcrumb: {
-        calendars: "Calendar",
+        schedules: "Schedule",
         tickets: "Tickets",
         issues: "Issues",
         show: "Show",
         create: "Create",
         edit: "Edit",
     },
-    calendar: {...calendar.en},
+    schedule: {...schedule.en},
     ticket: {...tickets.en},
     issue: {...issues.en},
     dashboard: {...dashboard.en}

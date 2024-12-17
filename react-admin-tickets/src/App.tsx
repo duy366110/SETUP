@@ -10,10 +10,11 @@ import store from "@/store/index";
 import Dashboard from "@/containers/dashboard/Dashboard";
 import Login from "@/containers/auth/Login";
 
-import Calendars from "@/containers/calendars/Calendar";
+
 
 import { resource as ResourceTicket } from "@/containers/tickets/Index";
 import { resource as ResourceIssue } from "@/containers/issues/Index";
+import { resource as ResourceSchedule } from "@/containers/schedules/index";
 
 const App = () => {
   const theme: any = useTheme();
@@ -39,11 +40,11 @@ const App = () => {
     >
       <CustomRoutes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/calendars" element={<Calendars />} />
       </CustomRoutes>
 
       <Resource name="tickets" {...ResourceTicket} />
       <Resource name="issues" {...ResourceIssue} />
+      <Resource name="schedules" {...ResourceSchedule} />
     </Admin>
   );
 };

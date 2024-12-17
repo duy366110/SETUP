@@ -2,6 +2,7 @@ export const translate = {
     en: {
         title: "Issues",
         util: {
+            titleStatus: "Title status",
             colorStatus: "Color status"
         },
         form: {
@@ -15,6 +16,7 @@ export const translate = {
     vi: {
         title: "Sự cố",
         util: {
+            titleStatus: "Tiêu đề trạng thái",
             colorStatus: "Màu trạng thái"
         },
         form: {
