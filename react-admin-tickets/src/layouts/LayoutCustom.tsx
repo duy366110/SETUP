@@ -2,18 +2,22 @@ import { useEffect } from "react";
 import { Layout } from "react-admin";
 import { useDispatch } from "react-redux";
 import { useMediaQuery, Theme } from "@mui/material";
+import { useTheme } from '@mui/material/styles';
 
 import { RootDispatch } from "@/store";
 import { verifyScreenSize } from "@/store/slice/sliceMediaQuery";
+import { toggleMode } from "@/store/slice/sliceMode";
 import { usePathUrl } from "@/hooks/usePathUrl";
 import MenuCustom from "./menu/MenuCustom";
 import AppBarCustom from "./appBar/AppBarCustom";
 import Header from "./header/Header";
 import { BreadCrumbs } from "@/components/breadcrumbs/BreadCrumbs";
 
+
 const LayoutCustom = (props: any) => {
-  const dispatch = useDispatch<RootDispatch>();
+  const dispatch: any = useDispatch<RootDispatch>();
   const { paths } = usePathUrl([]);
+  const theme = useTheme();
 
   const screenMediaQuery = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("md"),
@@ -22,6 +26,10 @@ const LayoutCustom = (props: any) => {
   useEffect(() => {
     dispatch(verifyScreenSize({ type: "md", value: screenMediaQuery }));
   }, [screenMediaQuery]);
+
+  useEffect(() => {
+    dispatch(toggleMode({mode: theme.palette.mode}))
+  }, [theme])
 
   return (
     <Layout {...props} menu={MenuCustom} appBar={AppBarCustom}>
