@@ -1,9 +1,11 @@
 import React, { useState, useEffect} from "react";
-import { useGetList } from "react-admin";
+import { useGetList, useRedirect } from "react-admin";
 import { Draggable } from "@hello-pangea/dnd";
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
-import { IssueViewDraggableProps } from "./IssueView.type";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+
 import DivTheme from "@/components/themes/DivTheme";
+import { IssueViewDraggableProps } from "./IssueView.type";
 
 const IssueViewDraggable: React.FC<IssueViewDraggableProps> = ({
   issue,
@@ -11,6 +13,7 @@ const IssueViewDraggable: React.FC<IssueViewDraggableProps> = ({
 }: any) => {
 
   const { data: labels } = useGetList<any>("labels");
+  const redirect = useRedirect();
   const [label, setLabel] = useState<any>(null);
 
   useEffect(() => {
@@ -19,6 +22,10 @@ const IssueViewDraggable: React.FC<IssueViewDraggableProps> = ({
       setLabel(label);
     }
   }, [issue, labels])
+
+  const onRedirectEditPage = () => {
+    redirect(`/issues/${issue.id}`);
+  }
 
   return (
     <Draggable draggableId={`${issue.id}`} index={index}>
@@ -43,6 +50,8 @@ const IssueViewDraggable: React.FC<IssueViewDraggableProps> = ({
                 <div style={{ backgroundColor: label?.color }} className={`absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 rotate-45`}></div>
               </div>
             )}
+
+            <BorderColorIcon onClick={onRedirectEditPage} fontSize="small" />
           </div>
 
           <h4 className="text-sm font-semibold line-clamp-1 mb-3">
@@ -50,7 +59,7 @@ const IssueViewDraggable: React.FC<IssueViewDraggableProps> = ({
           </h4>
 
           <div
-            className="text-sm line-clamp-4"
+            className="text-sm line-clamp-3"
             dangerouslySetInnerHTML={{ __html: issue.description }}
           />
         </DivTheme>

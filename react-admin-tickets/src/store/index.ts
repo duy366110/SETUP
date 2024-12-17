@@ -3,7 +3,7 @@ import sliceMediaQuery from "./slice/sliceMediaQuery";
 
 const store = configureStore({
     reducer: {
-        mediaQuery: sliceMediaQuery
+        mediaQuery: sliceMediaQuery,
     },
 })
 

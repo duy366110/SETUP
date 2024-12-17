@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  
   SaveButton,
   SimpleForm,
   TextInput,
@@ -65,7 +64,7 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
     <SimpleForm
       key={key}
       onSubmit={onCreateHandler}
-      className="grid-col-12 w-full !px-0"
+      className="w-full !px-0"
       toolbar={
         <Toolbar className="!px-[16px]">
           <div className="flex justify-between w-full">
@@ -84,55 +83,57 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
         </Toolbar>
       }
     >
-      <div className="col-span-12 w-full">
-        <TextInput source="title" label="Title" />
-      </div>
+      <div className="grid grid-cols-12">
+        <div className="col-span-12 w-full">
+          <TextInput source="title" label="Title" />
+        </div>
 
-      <div className="col-span-12 w-full">
-        <SelectInput
-          defaultValue={1}
-          source="statusId"
-          choices={isseusStatus}
-          validate={required()}
-          label={t("issue.form.status")}
-          optionValue="id"
-        />
-      </div>
+        <div className="col-span-12 w-full">
+          <SelectInput
+            defaultValue={1}
+            source="statusId"
+            choices={isseusStatus}
+            validate={required()}
+            label={t("issue.form.status")}
+            optionValue="id"
+          />
+        </div>
 
-      <div className="col-span-12 w-full">
-        <SelectInput
-          defaultValue={1}
-          source="priority"
-          choices={priorities}
-          validate={required()}
-          label={t("issue.form.priority")}
-          optionValue="id"
-        />
-      </div>
+        <div className="col-span-12 w-full">
+          <SelectInput
+            defaultValue={1}
+            source="priority"
+            choices={priorities}
+            validate={required()}
+            label={t("issue.form.priority")}
+            optionValue="id"
+          />
+        </div>
 
-      <div className="col-span-12 w-full">
-        <SelectInput
-          defaultValue={1}
-          source="label"
-          choices={labels}
-          validate={required()}
-          label={t("issue.form.label")}
-          optionValue="id"
-        />
-      </div>
+        <div className="col-span-12 w-full">
+          <SelectInput
+            defaultValue={1}
+            source="label"
+            choices={labels}
+            validate={required()}
+            label={t("issue.form.label")}
+            optionValue="id"
+          />
+        </div>
 
-      <div className="col-span-12 w-full">
-        <RichTextInput
-          className="ra-rich-text-editor"
-          source="description"
-          label={t("ticket.common.description")}
-          sx={{
-            "& .ql-container": {
-              minHeight: "350px",
-            },
-          }}
-          fullWidth
-        />
+        <div className="col-span-12 w-full">
+          <RichTextInput
+            className="ra-rich-text-editor"
+            source="description"
+            label={t("ticket.common.description")}
+            sx={{
+              "& .ql-container": {
+                minHeight: "350px",
+              },
+            }}
+            fullWidth
+          />
+        </div>
       </div>
     </SimpleForm>
   );

@@ -72,6 +72,7 @@ const IssuePageList = () => {
   const [issuesDatasLocal, setIssuesDatasLocal] = useState<Array<any>>([]);
   const [issueList, setIssueList] = useState<any>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+  const [openCreateDrawer, setOpenCreateDrawer] = useState<boolean>(false);
 
   const dealFilters = [<></>];
 
@@ -158,11 +159,12 @@ const IssuePageList = () => {
    * Mở Drawer thêm mới issues
    */
   const onOpenDrawerIssue = () => {
-    if(mediaQuery.md) {
+    if (mediaQuery.md) {
       redirect("/issues/create");
-      return
+      return;
     }
     setOpenDrawer(true);
+    setOpenCreateDrawer(true);
   };
 
   /**
@@ -170,15 +172,17 @@ const IssuePageList = () => {
    */
   const onCloseDrawerIssue = () => {
     setOpenDrawer(false);
+    if (openCreateDrawer) {
+      setOpenCreateDrawer(false);
+    }
   };
 
   return (
-    <List
-      resource="issues-datas" title={t("issue.title")}
-      actions={<></>}
-    >
+    <List resource="issues-datas" title={t("issue.title")} actions={<></>}>
       <div className="md:grid md:grid-cols-12 gap-4">
-        <div className={`${openDrawer ? "md:col-span-9" : "md:col-span-12"} p-4 transition-all`}>
+        <div
+          className={`${openDrawer ? "md:col-span-9" : "md:col-span-12"} p-4 transition-all`}
+        >
           <ListToolbar
             className="mb-4"
             filters={dealFilters}
@@ -220,10 +224,12 @@ const IssuePageList = () => {
             open={openDrawer}
             title="Create issue"
           >
-            <IssueViewCreate
-              closeDrawer={onCloseDrawerIssue}
-              issueId={issues?.id}
-            />
+            {openCreateDrawer && (
+              <IssueViewCreate
+                closeDrawer={onCloseDrawerIssue}
+                issueId={issues?.id}
+              />
+            )}
           </DrawerRight>
         )}
       </div>
