@@ -222,7 +222,7 @@ const IssuePageList = () => {
           <DrawerRight
             closeDrawer={onCloseDrawerIssue}
             open={openDrawer}
-            title="Create issue"
+            title={t("issue.form.create")}
           >
             {openCreateDrawer && (
               <IssueViewCreate

@@ -81,7 +81,7 @@ const IssuePageCreate: React.FC<any> = (props: any) => {
       >
         <div className="grid grid-cols-12">
           <div className="col-span-12 w-full">
-            <TextInput source="title" label="Title" />
+            <TextInput source="title" label={t("issue.form.title")} />
           </div>
 
           <div className="col-span-12 w-full">

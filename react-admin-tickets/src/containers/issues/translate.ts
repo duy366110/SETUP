@@ -5,6 +5,8 @@ export const translate = {
             colorStatus: "Color status"
         },
         form: {
+            create: "Create issue",
+            title: "Title",
             status: "Issue status",
             priority: "Priorities",
             label: "Labels",
@@ -16,6 +18,8 @@ export const translate = {
             colorStatus: "Màu trạng thái"
         },
         form: {
+            create: "Tạo mới sự cố",
+            title: "Tiêu đề",
             status: "Trạng thái sự cố",
             priority: "Độ ưu tiên",
             label: "Nhãn",
