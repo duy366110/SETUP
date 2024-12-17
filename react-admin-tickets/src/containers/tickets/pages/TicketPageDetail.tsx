@@ -17,10 +17,14 @@ import {
   ListItemText,
   Avatar,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import ShortTextIcon from "@mui/icons-material/ShortText";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+
+import { RootState } from "@/store";
+import DivTheme from "@/components/Themes/DivTheme";
 import { Comments } from "@/components/comments/Comments";
 
 const Detail = (props: any) => {
@@ -37,6 +41,9 @@ const Detail = (props: any) => {
   const t = useTranslate();
   const redirect = useRedirect();
 
+  const mode: any = useSelector<RootState>(
+    (state: any) => state.mode,
+  );
   const [status, setStatus] = useState<any>(null);
   const [priority, setPriority] = useState<any>(null);
   const [assignee, setAssignee] = useState<any>(null);
@@ -71,7 +78,7 @@ const Detail = (props: any) => {
 
   return (
     <>
-      <div className="bg-white rounded-lg">
+      <DivTheme className="bg-white rounded-lg">
         <div className="space-y-6">
           <h2 className="flex gap-2 items-center text-lg">
             <ArrowBackIosNewIcon
@@ -114,7 +121,7 @@ const Detail = (props: any) => {
             </div>
           </div>
 
-          <div className="bg-slate-50 flex flex-col md:flex-row gap-2 w-full">
+          <div className={`${mode.type === "light"? "bg-slate-50" : "bg-[#4c4c4c]"}  flex flex-col rounded md:flex-row gap-2 p-2 w-full`}>
             {/* REPORTER */}
             <div>
               <p className="mb-2 text-base font-semibold">
@@ -263,7 +270,7 @@ const Detail = (props: any) => {
           {/* FROM COMMENT */}
           <Comments record={record} />
         </div>
-      </div>
+      </DivTheme>
     </>
   );
 };

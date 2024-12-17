@@ -47,7 +47,7 @@ const TicketPageList = (props: any) => {
   const [isRightViewEdit, setIsRightViewEdit] = useState<boolean>(false);
   const [isAssigneDetail, setIsAssigneDetail] = useState<boolean>(false);
   const [idTicket, setIdTicket] = useState<any>(-1);
-  const [idAssigne, setIdAssigne] = useState<any>(-1)
+  const [idAssigne, setIdAssigne] = useState<any>(-1);
 
   const visitorFilters = [
     <SearchInput source="q" alwaysOn />,
@@ -107,6 +107,9 @@ const TicketPageList = (props: any) => {
             theme.transitions.create(["all"], {
               duration: theme.transitions.duration.enteringScreen,
             }),
+          "& .RaList-actions": {
+            marginBottom: "16px",
+          },
           "& .MuiTableCell-root": {
             display: {
               xs: "none",
@@ -137,7 +140,7 @@ const TicketPageList = (props: any) => {
           }}
         >
           <FieldFunction
-            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent !line-clamp-2 !max-w-[130px]"
+            customStyles="flex items-center capitalize !text-sm font-semibold h-[45px] border border-transparent !line-clamp-2 !max-w-[130px]"
             label={translate("ticket.common.title")}
             field="title"
             source="title"
@@ -159,7 +162,7 @@ const TicketPageList = (props: any) => {
           />
 
           <FieldFunction
-            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            customStyles="flex items-center capitalize !text-sm font-semibold h-[45px] border border-transparent"
             label={translate("ticket.common.status")}
             field="status"
             source="status"
@@ -176,7 +179,7 @@ const TicketPageList = (props: any) => {
           />
 
           <FieldFunction
-            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            customStyles="flex items-center capitalize !text-sm font-semibold h-[45px] border border-transparent"
             label={translate("ticket.common.priority")}
             field="priority"
             source="priority"
@@ -195,7 +198,7 @@ const TicketPageList = (props: any) => {
           />
 
           <FieldFunction
-            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            customStyles="flex items-center capitalize !text-sm font-semibold h-[45px] border border-transparent"
             label={translate("ticket.common.assignee")}
             field="assignee"
             source="assignee"
@@ -219,7 +222,7 @@ const TicketPageList = (props: any) => {
           />
 
           <FieldFunction
-            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            customStyles="flex items-center capitalize !text-sm font-semibold h-[45px] border border-transparent"
             label={translate("ticket.common.reporter")}
             field="reporter"
             source="reporter"
@@ -244,7 +247,7 @@ const TicketPageList = (props: any) => {
           />
 
           <FieldFunction
-            customStyles="flex items-center capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent"
+            customStyles="flex items-center capitalize !text-sm font-semibold h-[45px] border border-transparent capitalize"
             label={translate("ticket.common.label")}
             field="labels"
             source="labels"
@@ -287,7 +290,10 @@ const TicketPageList = (props: any) => {
               )}
 
               {isAssigneDetail && (
-                <TicketViewAssigneed assignedId={idAssigne} closeViewEdit={() => setIsRightViewEdit(false)} />
+                <TicketViewAssigneed
+                  assignedId={idAssigne}
+                  closeViewEdit={() => setIsRightViewEdit(false)}
+                />
               )}
             </div>
           </Drawer>
