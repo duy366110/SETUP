@@ -18,16 +18,19 @@ import {
   Avatar,
 } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import ShortTextIcon from '@mui/icons-material/ShortText';
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import ShortTextIcon from "@mui/icons-material/ShortText";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Comments } from "@/components/comments/Comments";
 
 const Detail = (props: any) => {
   const { record, isLoading }: any = useShowContext();
-  const { data: statuses, isLoading: isLoadingStatus }: any = useGetList<any>("statuses");
-  const { data: priorities, isLoading: isLoadingPriority }: any = useGetList<any>("priorities");
-  const { referenceRecord: assigne, isLoading: isLoadingAssignes } = useReference<any>({
+  const { data: statuses, isLoading: isLoadingStatus }: any =
+    useGetList<any>("statuses");
+  const { data: priorities, isLoading: isLoadingPriority }: any =
+    useGetList<any>("priorities");
+  const { referenceRecord: assigne, isLoading: isLoadingAssignes } =
+    useReference<any>({
       reference: "assignes",
       id: record.assignee,
     });
@@ -39,22 +42,24 @@ const Detail = (props: any) => {
   const [assignee, setAssignee] = useState<any>(null);
 
   useEffect(() => {
-    if(statuses && statuses.length > 0) {
+    if (statuses && statuses.length > 0) {
       setStatus(statuses.find((status: any) => status.id === record.status));
     }
-  }, [statuses])
+  }, [statuses]);
 
   useEffect(() => {
-    if(priorities && priorities.length > 0) {
-      setPriority(priorities.find((priority: any) => priority.id === record.priority));
+    if (priorities && priorities.length > 0) {
+      setPriority(
+        priorities.find((priority: any) => priority.id === record.priority),
+      );
     }
-  }, [priorities])
+  }, [priorities]);
 
   useEffect(() => {
-    if(assigne) {
+    if (assigne) {
       setAssignee(assigne);
     }
-  }, [assigne])
+  }, [assigne]);
 
   if (isLoading) {
     return <div className="text-center py-8">Loading...</div>;
@@ -66,10 +71,10 @@ const Detail = (props: any) => {
 
   return (
     <>
-      <div className="p-2 md:p-6 bg-white rounded-lg">
+      <div className="bg-white rounded-lg">
         <div className="space-y-6">
           <h2 className="flex gap-2 items-center text-lg">
-          <ArrowBackIosNewIcon
+            <ArrowBackIosNewIcon
               fontSize="small"
               className="cursor-pointer"
               onClick={() => redirect("/tickets")}
@@ -88,15 +93,20 @@ const Detail = (props: any) => {
             </div>
             <div className="flex items-center gap-4">
               {status && (
-                <div style={{ backgroundColor: status.color }} className="flex items-center gap-2 p-2 rounded text-white">
+                <div
+                  style={{ backgroundColor: status.color }}
+                  className="flex items-center gap-2 p-2 rounded text-white"
+                >
                   <p>{status.name}</p>
                   <DoneAllIcon fontSize="small" />
                 </div>
-                
               )}
-              
+
               {priority && (
-                <div style={{ backgroundColor: priority.color }} className="flex items-center gap-2 p-2 rounded text-white">
+                <div
+                  style={{ backgroundColor: priority.color }}
+                  className="flex items-center gap-2 p-2 rounded text-white"
+                >
                   <p>{priority.name}</p>
                   <ShortTextIcon fontSize="small" />
                 </div>
@@ -104,7 +114,7 @@ const Detail = (props: any) => {
             </div>
           </div>
 
-          <div className="p-2 bg-slate-50 flex flex-col md:flex-row gap-2 w-full">
+          <div className="bg-slate-50 flex flex-col md:flex-row gap-2 w-full">
             {/* REPORTER */}
             <div>
               <p className="mb-2 text-base font-semibold">
@@ -266,7 +276,12 @@ const TicketPageDetail = (props: any) => {
   const t = useTranslate();
 
   return (
-    <Show {...props} actions={<ToolBarTop />} title={t("ticket.page.show")}>
+    <Show
+      className="md:!p-4"
+      {...props}
+      actions={<ToolBarTop />}
+      title={t("ticket.page.show")}
+    >
       <SimpleShowLayout>
         <Detail />
       </SimpleShowLayout>

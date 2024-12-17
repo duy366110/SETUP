@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import {
   List,
   ListToolbar,
+  FilterButton,
   TopToolbar,
   ExportButton,
+  ReferenceInput,
+  SearchInput,
   useUpdate,
   useReference,
   useGetList,
@@ -24,6 +27,7 @@ import IssueViewCreate from "../view/IssueViewCreate";
 const DealActions = () => {
   return (
     <TopToolbar>
+      <FilterButton />
       <ExportButton />
     </TopToolbar>
   );
@@ -74,7 +78,10 @@ const IssuePageList = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [openCreateDrawer, setOpenCreateDrawer] = useState<boolean>(false);
 
-  const dealFilters = [<></>];
+  const dealFilters = [
+    <SearchInput source="q" alwaysOn />,
+    <ReferenceInput source="title" reference="issues-datas" />,
+  ];
 
   const setUpWorkspaces = () => {
     let result: any = {};
@@ -106,7 +113,7 @@ const IssuePageList = () => {
    * Thực hiện setup khi load data lần đầu và filter
    */
   useEffect(() => {
-    if (issuesDatasLocal && issuesDatasLocal?.length) {
+    if (issuesDatasLocal) {
       setUpWorkspaces();
     }
   }, [issuesDatasLocal]);
@@ -184,6 +191,7 @@ const IssuePageList = () => {
           className={`${openDrawer ? "md:col-span-9" : "md:col-span-12"} p-4 transition-all`}
         >
           <ListToolbar
+            resource="issues-datas"
             className="mb-4"
             filters={dealFilters}
             actions={<DealActions />}
@@ -222,7 +230,7 @@ const IssuePageList = () => {
           <DrawerRight
             closeDrawer={onCloseDrawerIssue}
             open={openDrawer}
-            title="Create issue"
+            title={t("issue.form.create")}
           >
             {openCreateDrawer && (
               <IssueViewCreate

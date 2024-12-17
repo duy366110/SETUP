@@ -18,8 +18,8 @@ const DrawerRight: React.FC<DrawersRightProps> = ({
 
   return (
     <Drawer className="relative" open={open} variant="persistent" anchor="right" sx={{ zIndex: 1 }}>
-      <div className={`${mediaQuery.md ? "w-[100%] mt-[60px]" : "w-[350px] mt-[60px]"} h-full  p-4`}>
-        <h2 className="flex justify-between w-full">
+      <div className={`${mediaQuery.md ? "w-[100%] mt-[60px]" : "w-[350px] mt-[60px]"} h-full</CreateBase>`}>
+        <h2 className="flex justify-between w-full px-4 pt-4">
           <span>{title}</span>
           <CloseIcon
             fontSize="small"

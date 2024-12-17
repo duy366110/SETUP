@@ -76,7 +76,7 @@ const IssuePageEdit: React.FC<any> = (props: any) => {
       >
         <div className="grid grid-cols-12 gap-4 w-full">
           <div className="col-span-12 md:col-span-6 lg:col-span-3 w-full">
-            <TextInput source="title" label="Title" />
+            <TextInput source="title" label={t("issue.form.title")} />
           </div>
 
           <div className="col-span-12 md:col-span-6 lg:col-span-3 w-full">
