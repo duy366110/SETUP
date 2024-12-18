@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
   TextInput,
   required,
@@ -9,12 +9,19 @@ import {
   useTranslate,
 } from "react-admin";
 import { InputProps } from "./Input.type";
+import { EInputStyleType } from "./Input.emuns";
+import { InputAdornment } from "@mui/material";
+import ReportIcon from '@mui/icons-material/Report';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export const Input: React.FC<InputProps> = ({
   autoFocus = false,
   className = "",
   defaultValue = "",
   disabled = false,
+  endIcon = false,
+  icon = null,
   isRequired = false,
   label,
   format,
@@ -30,6 +37,7 @@ export const Input: React.FC<InputProps> = ({
   readOnly = false,
   resource,
   source,
+  startIcon = false,
   telMax = 15,
   telMin = 10,
   type = "text",
@@ -38,15 +46,25 @@ export const Input: React.FC<InputProps> = ({
   ...rest
 }) => {
   const t = useTranslate();
+  const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false);
   const regexTel = useMemo(() => {
-    return new RegExp(`/^[0-9]{${telMin},${telMax}}$/`);
+    return new RegExp(`^[0-9]{${telMin},${telMax}}$`);
   }, [telMin, telMax]);
 
   const regexPassword = useMemo(() => {
     return new RegExp(
-      `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{${passwordMin}, ${passwordMax}}$/`,
+      `^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{${passwordMin},${passwordMax}}$`,
     );
   }, [passwordMin, passwordMax]);
+
+  const endIconElm = useMemo(() => {
+    let iconEnd = icon? icon : <ReportIcon />;
+    if(type === EInputStyleType.PASSWORD.toLowerCase()) {
+      iconEnd = icon? icon : isVisiblePassword? <VisibilityIcon onClick={toggleVisiblePassword} /> : <VisibilityOffIcon onClick={toggleVisiblePassword} />
+    }
+
+    return (iconEnd);
+  }, [endIcon, isVisiblePassword])
 
   const defaultValidate = useMemo(() => {
     if (validate) return validate;
@@ -83,7 +101,7 @@ export const Input: React.FC<InputProps> = ({
   }, [type, validate]);
 
   const formatNumeric = (value: any) => {
-    if (type === "numeric" && value) {
+    if (type === EInputStyleType.NUMERIC.toLowerCase() && value) {
       const numValue = value.toString().replace(/\D/g, "");
       if (numValue.length >= 4) {
         return numValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -93,13 +111,17 @@ export const Input: React.FC<InputProps> = ({
     return value ?? "";
   };
 
+  function toggleVisiblePassword() {
+    setIsVisiblePassword(!isVisiblePassword);
+  }
+
   return (
     <TextInput
       autoFocus={autoFocus}
       className={className}
       defaultValue={defaultValue || ""}
       disabled={disabled}
-      format={type === "numeric" && !format ? formatNumeric : format}
+      format={type === EInputStyleType.NUMERIC.toLowerCase() && !format ? formatNumeric : format}
       helperText={helperText}
       label={label}
       onBlur={onBlur}
@@ -108,9 +130,18 @@ export const Input: React.FC<InputProps> = ({
       readOnly={readOnly}
       resource={resource}
       source={source}
-      type={type}
+      type={(type === EInputStyleType.PASSWORD.toLowerCase() && isVisiblePassword)? EInputStyleType.TEXT.toLowerCase() : type}
       validate={defaultValidate}
       {...rest}
+      InputProps={{
+        startAdornment:
+          startIcon || (icon && endIcon === false) ? (
+            <InputAdornment position="start">{icon? icon : <ReportIcon />}</InputAdornment>
+          ) : null,
+        endAdornment: endIcon || type === EInputStyleType.PASSWORD.toLowerCase() ? (
+          <InputAdornment position="end">{endIconElm}</InputAdornment>
+        ) : null,
+      }}
     />
   );
 };
