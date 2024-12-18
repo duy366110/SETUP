@@ -83,16 +83,16 @@ export const defaultLightTheme: RaThemeOptions = deepmerge(
       MuiMenuItem: {
         styleOverrides: {
           root: {
-            color: "#000", // Màu chữ đỏ cho tất cả MenuItemLink
+            color: "#171717",
+            // GLOBAL MENUITEMLINK
             "&.MuiMenuItem-root": {
               color: "#171717!important",
-              textTransform: "uppercase",
-              fontSize: "0.875rem",
               fontWeight: 600,
+              letterSpacing: ".3px",
+              textTransform: "uppercase",
             },
             "& .Mui-selected": {
-              color: "#ee0033", // Màu chữ khi được chọn
-              //   backgroundColor: "#faf6f8", // Nền đỏ khi được chọn
+              color: "#ee0033",
             },
             "&.RaMenuItemLink-active": {
               color: "#ee0033!important",
@@ -100,10 +100,10 @@ export const defaultLightTheme: RaThemeOptions = deepmerge(
             },
             "&:hover": {
               color: "#ee0033",
-              backgroundColor: "#ffe6e6", // Nền khi hover
+              backgroundColor: "#ffe6e6",
             },
             "& .MuiSvgIcon-root": {
-              color: "#ee0033", // Chỉ áp dụng cho icon trong MenuItemLink
+              color: "#ee0033",
             },
           },
         },
@@ -112,11 +112,9 @@ export const defaultLightTheme: RaThemeOptions = deepmerge(
       MuiCssBaseline: {
         styleOverrides: {
           ".RaLayout-content": {
-            paddingLeft: "0px!important", // Set padding-left to 0
+            paddingLeft: "0px!important",
           },
         },
-
-        // CONFIG COLOR TAGE A
         a: {
           color: "#ee0033",
           textDecoration: "none",
@@ -125,11 +123,10 @@ export const defaultLightTheme: RaThemeOptions = deepmerge(
       MuiTableCell: {
         styleOverrides: {
           head: {
-            color: "#ee0033", // Màu đỏ cho label trong Datagrid header
-            fontWeight: "bold", // (Tùy chọn) làm đậm chữ
+            color: "#ee0033",
+            fontWeight: "bold",
             textTransform: "uppercase",
             textAlign: "left",
-            // paddingLeft: "0px",
           },
         },
       },
@@ -145,7 +142,7 @@ export const defaultLightTheme: RaThemeOptions = deepmerge(
       },
       MuiTextField: {
         defaultProps: {
-          variant: "outlined", // Đặt mặc định tất cả TextField dạng "outlined"
+          variant: "outlined",
           fullWidth: true,
         },
       },

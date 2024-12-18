@@ -197,7 +197,7 @@ const IssuePageList = () => {
             actions={<DealActions />}
           />
 
-          <div className="bg-[#e1e1e1] p-4 rounded-md">
+          <div className="bg-[#fbfbfb94] p-4 rounded-md">
             <div className="mb-4">
               <Buttons click={onOpenDrawerIssue}>
                 <AddIcon className="text-gray-700" fontSize="small" />
