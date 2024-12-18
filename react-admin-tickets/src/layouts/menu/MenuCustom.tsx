@@ -37,13 +37,13 @@ const MenuCustom = (props: any) => {
       <h1>
         <MenuItemLink
           to="/"
-          selected={location.pathname === "/"}
-          className={`!border-l-0 !bg-[#3575b7] text-[#ffffff] ${open ? "!px-5" : "!px-1"} h-14 w-[-webkit-fill-available] ease-in-out`}
+          selected={location.pathname === "/null"}
+          className={`!border-l-0 text-[#ffffff] ${open ? "!px-5" : "!px-1"} h-14 w-[-webkit-fill-available] ease-in-out`}
         >
           <span
             className={`${open ? "text-[20px]" : "text-[11px]"} text-white w-full text-center ease-in-out`}
           >
-            <span className="font-semibold">Sconnect</span>
+            <img src="/assets/images/logo-header.png" alt="logo" />
           </span>
         </MenuItemLink>
       </h1>
@@ -53,7 +53,7 @@ const MenuCustom = (props: any) => {
       <div className="border-t-2">
         <Menu className="!py-0">
           <MenuItemLink
-            className="!py-2"
+            className="!py-2 !text-sm"
             to="/tickets"
             primaryText={translate("ticket.title")}
             selected={location.pathname === "/tickets"}
@@ -61,7 +61,7 @@ const MenuCustom = (props: any) => {
           />
 
           <MenuItemLink
-            className="!py-2"
+            className="!py-2 !text-sm"
             to="/issues"
             primaryText={translate("issue.title")}
             selected={location.pathname === "/issues"}
@@ -69,7 +69,7 @@ const MenuCustom = (props: any) => {
           />
 
           <MenuItemLink
-            className="!py-2"
+            className="!py-2 !text-sm"
             to="/schedules"
             primaryText={translate("schedule.title")}
             selected={location.pathname === "/calendars"}

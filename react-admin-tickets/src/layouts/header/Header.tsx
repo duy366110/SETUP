@@ -58,9 +58,9 @@ const Header = (props: any) => {
     <header className="test bg-white h-14 fixed md:relative top-0 left-0  w-[-webkit-fill-available] shadow-sm z-[1000]">
       <DivTheme className="fixed bg-white flex items-center h-14 z-50 w-[-webkit-fill-available] shadow-sm px-4">
         <div className="flex items-center justify-between gap-2 w-full grow shrink">
-          <div className="flex gap-2">
+          <div className="flex gap-1">
             <Button
-              className="!rounded-full !min-w-fit"
+              className="!rounded-full !min-w-fit !pl-0"
               onClick={onToggleSidebar}
             >
               {open ? (
@@ -71,11 +71,11 @@ const Header = (props: any) => {
             </Button>
 
             {mediaQuery && !mediaQuery.md && (
-              <div className="flex items-center !text-sm !text-zinc-500 uppercase tracking-wider">
+              <div className="flex items-center !text-sm !font-semibolduppercase tracking-wider">
                 <span className={`${title ? "" : "hidden"} ease-linear`}>
                   {title ? title : ""}
                 </span>
-                <TitlePortal className="!text-sm text-zinc-500 uppercase tracking-wider" />
+                <TitlePortal className="!text-sm !font-semibold uppercase tracking-wider" />
               </div>
             )}
           </div>
