@@ -53,7 +53,7 @@ const MenuCustom = (props: any) => {
       <div className="border-t-2">
         <Menu className="!py-0">
           <MenuItemLink
-            className="!py-2"
+            className="!py-2 !text-[#171717]"
             to="/tickets"
             primaryText={translate("ticket.title")}
             selected={location.pathname === "/tickets"}
