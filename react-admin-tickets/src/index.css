@@ -39,8 +39,3 @@ li::marker {
     content: "";
     display: none;
 }
-
-/* Array field */
-.RaSimpleFormIterator-line {
-    border-bottom: unset!important;
-}

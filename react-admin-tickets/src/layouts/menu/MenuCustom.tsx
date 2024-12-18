@@ -37,13 +37,13 @@ const MenuCustom = (props: any) => {
       <h1>
         <MenuItemLink
           to="/"
-          selected={location.pathname === "/"}
-          className={`!border-l-0 !bg-[#3575b7] text-[#ffffff] ${open ? "!px-5" : "!px-1"} h-14 w-[-webkit-fill-available] ease-in-out`}
+          // selected={location.pathname === "/"}
+          className={`!border-l-0 text-[#ffffff] ${open ? "!px-5" : "!px-1"} h-14 w-[-webkit-fill-available] ease-in-out`}
         >
           <span
             className={`${open ? "text-[20px]" : "text-[11px]"} text-white w-full text-center ease-in-out`}
           >
-            <span className="font-semibold">Sconnect</span>
+            <img src="/assets/images/logo-header.png" alt="logo" />
           </span>
         </MenuItemLink>
       </h1>
