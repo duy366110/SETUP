@@ -17,11 +17,17 @@ import {
 import { RichTextInput } from "ra-input-rich-text";
 import { Button } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/index";
 import { EmailRegex } from "@/constants/Regexs";
 
 const TicketPageCreate = () => {
   const redirect = useRedirect();
   const t = useTranslate();
+
+  const mode: any = useSelector<RootState>(
+    (state: any) => state.mode,
+  );
 
   const { data: statuses, isLoading: isLoadingStatus }: any =
     useGetList<any>("statuses");
@@ -151,7 +157,7 @@ const TicketPageCreate = () => {
             />
           </div>
 
-          <div className="col-span-12 lg:col-span-8 bg-[#f5f5f5] p-4 rounded-[0.8rem]">
+          <div className={`col-span-12 lg:col-span-8 ${mode.type === "light" ? "bg-[#fbfbfb94]" : "bg-[#42424230]"} p-4 rounded-[0.8rem]`}>
             <ArrayInput source="labels" label={t("ticket.common.label")}>
               <SimpleFormIterator className="mt-2">
                 <TextInput source="" label={t("ticket.common.label")} />

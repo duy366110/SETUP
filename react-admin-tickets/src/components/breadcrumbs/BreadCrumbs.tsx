@@ -18,7 +18,7 @@ export const BreadCrumbs = (props: BreadCrumbsProps) => {
   return (
     <Menu className="my-4 !w-full" role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        <MenuItemLink className="!border-l-0 !px-0 !text-[14px] hover:!bg-transparent !underline flex gap-2" color="inherit" to="/">
+        <MenuItemLink className="!border-l-0 !px-0 !text-xs hover:!bg-transparent !bg-transparent !underline flex gap-2" color="inherit" to="/">
           <RoofingIcon fontSize="small" />
           <span>{t("dashboard.title")}</span>
         </MenuItemLink>
@@ -27,14 +27,14 @@ export const BreadCrumbs = (props: BreadCrumbsProps) => {
           props.paths.map((path: any) => {
             if (path?.last) {
               return (
-                <Typography className="!text-[14px]" key={path.name} sx={{ color: "text.primary" }}>
+                <Typography className="!text-xs uppercase" key={path.name} sx={{ color: "text.primary" }}>
                   {path.name}
                 </Typography>
               );
             }
 
             return (
-              <MenuItemLink className="!border-l-0 !px-0 !text-[14px] hover:!bg-transparent !underline flex gap-2" key={path.name} color="inherit" to={path.link}>
+              <MenuItemLink className="!border-l-0 !px-0 !text-xs hover:!bg-transparent !bg-transparent !underline flex gap-2" key={path.name} color="inherit" to={path.link}>
                 {path.name}
               </MenuItemLink>
             );

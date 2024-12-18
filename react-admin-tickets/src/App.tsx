@@ -20,7 +20,7 @@ const App = () => {
   const theme: any = useTheme();
   const currentTheme = theme.palette?.mode || "light";
 
-  const [themeName] = useStore<ThemeName>("themeName", "normal");
+  const [themeName] = useStore<ThemeName>("themeName", "default");
   const lightTheme = Themes.find((theme) => theme.name === themeName)?.light;
   const darkTheme = Themes.find((theme) => theme.name === themeName)?.dark;
 

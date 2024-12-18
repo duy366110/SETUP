@@ -3,6 +3,7 @@ import {
 } from "react-admin";
 
 import { NormalDarkTheme, NormalLightTheme } from "./ThemeNormal";
+import { defaultDarkTheme, defaultLightTheme } from "./ThemeDefault";
 
 export type ThemeName =
     | 'normal'
@@ -20,5 +21,6 @@ export interface Theme {
 }
 
 export const Themes: Array<Theme> = [
-    {name: 'normal', light: NormalLightTheme, dark: NormalDarkTheme},
+    {name: 'normal', light: NormalLightTheme, dark: NormalDarkTheme },
+    {name: 'default', light: defaultLightTheme, dark: defaultDarkTheme },
 ]

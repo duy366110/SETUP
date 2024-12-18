@@ -36,7 +36,7 @@ const LayoutCustom = (props: any) => {
       <div className="overflow-y-auto h-[100vh] pb-16">
         <Header />
 
-        <div className="mt-16 md:mt-0">
+        <div className="mt-16 md:mt-0 md:pl-4">
           <BreadCrumbs paths={paths} />
           {props.children}
         </div>
