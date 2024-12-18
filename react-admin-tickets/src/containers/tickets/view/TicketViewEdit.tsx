@@ -19,6 +19,8 @@ import {
 import { RichTextInput } from "ra-input-rich-text";
 import { EmailRegex } from "@/constants/Regexs";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/index";
 
 interface TicketViewEditProps {
   id?: string;
@@ -33,6 +35,10 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
   const t = useTranslate();
   const [update] = useUpdate(model);
   const [deleteOne] = useDelete();
+
+  const mode: any = useSelector<RootState>(
+    (state: any) => state.mode,
+  );
 
   const validateReporterEmail = (value: any, allValues: any) => {
     if (allValues.reporter.name) {
@@ -83,7 +89,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
       <SimpleForm
         onSubmit={onSubmitHandler}
         toolbar={
-          <div className="bg-[#f5f5f5] flex justify-between p-4">
+          <div className={`${mode.type === "light" ? "bg-[#f5f5f5]" : "bg-[#42424230]"} flex justify-between p-4`}>
             <SaveButton label={t("common.button.save")} />
             <DeleteButton
               onClick={handleDelete}
@@ -174,7 +180,7 @@ const TicketViewEdit = (props: TicketViewEditProps | any) => {
             />
           </div>
 
-          <div className="col-span-12 bg-[#f5f5f5] mb-2 p-4 rounded-[0.8rem]">
+          <div className={`col-span-12 ${mode.type === "light" ? "bg-[#fbfbfb94]" : "bg-[#42424230]"} mb-2 p-4 rounded-[0.8rem]`}>
             <ArrayInput
               source="labels"
               label={t("ticket.common.label")}

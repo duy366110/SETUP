@@ -73,6 +73,10 @@ const IssuePageList = () => {
     (state: any) => state.mediaQuery,
   );
 
+  const mode: any = useSelector<RootState>(
+    (state: any) => state.mode,
+  );
+
   const [issuesDatasLocal, setIssuesDatasLocal] = useState<Array<any>>([]);
   const [issueList, setIssueList] = useState<any>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
@@ -197,7 +201,7 @@ const IssuePageList = () => {
             actions={<DealActions />}
           />
 
-          <div className="bg-[#fbfbfb94] p-4 rounded-md">
+          <div className={`${mode.type === "light" ? "bg-[#fbfbfb94]" : "bg-[#42424230]"} p-4 rounded-md`}>
             <div className="mb-4">
               <Buttons click={onOpenDrawerIssue}>
                 <AddIcon className="text-gray-700" fontSize="small" />

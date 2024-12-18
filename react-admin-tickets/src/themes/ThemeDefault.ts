@@ -163,10 +163,32 @@ export const defaultDarkTheme: RaThemeOptions = deepmerge(
       },
     },
     components: {
+      MuiMenuItem: {
+        styleOverrides: {
+          root: {
+            color: "#171717",
+            // GLOBAL MENUITEMLINK
+            "&.MuiMenuItem-root": {
+              fontWeight: 600,
+              letterSpacing: ".3px",
+              textTransform: "uppercase",
+            },
+          },
+        },
+      },
       MuiCssBaseline: {
         styleOverrides: {
           ".RaLayout-content": {
             paddingLeft: "0px!important", // Set padding-left to 0
+          },
+        },
+      },
+      MuiTableCell: {
+        styleOverrides: {
+          head: {
+            fontWeight: "bold",
+            textTransform: "uppercase",
+            textAlign: "left",
           },
         },
       },
