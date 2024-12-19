@@ -88,6 +88,7 @@ export const defaultLightTheme: RaThemeOptions = deepmerge(
             "&.MuiMenuItem-root": {
               color: "#171717!important",
               fontWeight: 600,
+              fontSize: "14px",
               letterSpacing: ".3px",
               textTransform: "uppercase",
             },
@@ -169,7 +170,9 @@ export const defaultDarkTheme: RaThemeOptions = deepmerge(
             color: "#171717",
             // GLOBAL MENUITEMLINK
             "&.MuiMenuItem-root": {
+              color: "white",
               fontWeight: 600,
+              fontSize: "14px",
               letterSpacing: ".3px",
               textTransform: "uppercase",
             },

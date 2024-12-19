@@ -122,7 +122,7 @@ const IssuePageCreate: React.FC<any> = (props: any) => {
               source="assigne"
               choices={assignes}
               validate={required()}
-              label={t("issue.form.priority")}
+              label={t("ticket.common.assignee")}
               optionValue="id"
             />
           </div>
