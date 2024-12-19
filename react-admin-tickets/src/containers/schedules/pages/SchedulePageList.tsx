@@ -93,6 +93,40 @@ const SchedulePageList = () => {
           // center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
+        eventDidMount={(info) => {
+          info.el.style.backgroundColor = "#F1F9F6"; // Màu nền đỏ
+          info.el.style.color = "#171717";          // Màu chữ trắng
+          info.el.style.border = "1px solid #d2d9d6";            // Loại bỏ viền
+        }}
+        eventContent={(eventInfo) => {
+
+          const startDate: any = eventInfo.event.start;
+          const endDate: any = eventInfo.event.end;
+
+          // const startDate: any = eventInfo.event.start; // Ngày bắt đầu
+          // const formattedDate = `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
+
+          const formattedStartDate = `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
+          const formattedEndDate = `${endDate.getDate()}/${endDate.getMonth() + 1}/${endDate.getFullYear()}`;
+
+        return (
+          <div
+            style={{
+              // backgroundColor: "red",
+              color: "#171717",
+              padding: "5px",
+              // borderRadius: "5px",
+            }}
+          >
+            <div>
+          {formattedStartDate} - {formattedEndDate}
+        </div>
+            <div>{eventInfo.timeText}</div>
+            <div>{eventInfo.event.title}</div>
+          </div>
+        )
+        } 
+        }
       />
 
       <Dialogs title={t("schedule.dialog.title")}>

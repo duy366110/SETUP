@@ -7,6 +7,7 @@ import DivTheme from "@/components/Themes/DivTheme";
 const IssueViewRenderDragContent = (params: any) => {
   const { data: labels } = useGetList<any>("labels");
   const { data: priorities } = useGetList<any>("priorities");
+  const { data: assignes } = useGetList<any>("assignes");
 
   const [priority, setPriority] = useState<any>(null);
   const [label, setLabel] = useState<any>(null);
@@ -15,10 +16,6 @@ const IssueViewRenderDragContent = (params: any) => {
   useEffect(() => {
     if (params) {
       let label = labels?.find((label: any) => label.id === params.label);
-
-      console.log("Check");
-      console.log(params);
-      console.log(label);
       setLabel(label);
     }
   }, [params, labels]);
@@ -67,10 +64,10 @@ const IssueViewRenderDragContent = (params: any) => {
         )}
         {priority && (
           <p
-            className="text-xs py-1 px-2 rounded-lg"
+            className="text-xs py-1 px-2 rounded-lg capitalize"
             style={{
-              backgroundColor: `${priority.color}75`,
-              color: priority.color,
+              backgroundColor: `${priority.color}`,
+              color: "#ffffff",
             }}
           >
             {priority.name}
