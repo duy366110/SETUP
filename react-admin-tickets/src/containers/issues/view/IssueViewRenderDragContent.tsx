@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useGetList, useRedirect } from "react-admin";
+import { useGetList, useRedirect, useTranslate } from "react-admin";
 import TurnedInIcon from "@mui/icons-material/TurnedIn";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DivTheme from "@/components/Themes/DivTheme";
@@ -11,7 +11,9 @@ const IssueViewRenderDragContent = (params: any) => {
 
   const [priority, setPriority] = useState<any>(null);
   const [label, setLabel] = useState<any>(null);
+  const [assigne, setAssigne] = useState<any>(null);
   const redirect = useRedirect();
+  const t = useTranslate();
 
   useEffect(() => {
     if (params) {
@@ -29,6 +31,13 @@ const IssueViewRenderDragContent = (params: any) => {
     }
   }, [params, priorities]);
 
+  useEffect(() => {
+    if(params) {
+      let assigne = assignes?.find((assigne: any) => assigne.id === params.assigne);
+      setAssigne(assigne);
+    }
+  }, [params, assignes])
+
   return (
     <div>
       <div className="flex items-center justify-end text-gray-700 text-sm capitalize">
@@ -41,11 +50,15 @@ const IssueViewRenderDragContent = (params: any) => {
         </DivTheme>
       </div>
 
-      {/* <h3>{params.assigne}</h3> */}
-
       <h4 className="text-base font-semibold line-clamp-1">
         {params.title}
       </h4>
+
+      <div className="flex gap-2 text-xs">
+        <p>{t("ticket.common.assignee")}:</p>
+        {assigne && (<p>{assigne.name}</p>)}
+        {!assigne && (<p>//</p>)}
+      </div>
 
       {/* LABEL - PRIORITY */}
       <div className="flex items-center justify-between my-3">
@@ -64,7 +77,7 @@ const IssueViewRenderDragContent = (params: any) => {
         )}
         {priority && (
           <p
-            className="text-xs py-1 px-2 rounded-lg capitalize"
+            className="text-xs text-center py-1 px-2 rounded capitalize min-w-16"
             style={{
               backgroundColor: `${priority.color}`,
               color: "#ffffff",
@@ -77,7 +90,7 @@ const IssueViewRenderDragContent = (params: any) => {
 
 
       <div
-        className="text-xs text-left text-gray-400 line-clamp-3"
+        className="text-xs text-left text-gray-700 line-clamp-3"
         dangerouslySetInnerHTML={{ __html: params.description }}
       />
     </div>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Edit,
   SimpleForm,
@@ -22,40 +23,51 @@ const IssueViewConfirmEdit = (props: any) => {
   const dispatch = useDispatch<RootDispatch>();
   const [update] = useUpdate();
   const t = useTranslate();
+  const [key, setKey] = useState<number>(0);
 
   const onSubmitHandler = async (data: any) => {
-    let payload = {
-      ...props.issue,
-      assigne: data.assigne,
-      label: data.label,
-      priority: data.priority,
-      title: data.title,
-    };
+    if (data.id) {
+      let payload = {
+        ...props.issue,
+        assigne: data.assigne,
+        label: data.label,
+        priority: data.priority,
+        title: data.title,
+      };
 
-    try {
-      await update(
-        "issues-datas",
-        { id: data.id, data: payload },
-        {
-          onSuccess: () => {
-            dispatch(toggleDialog());
+      try {
+        await update(
+          "issues-datas",
+          { id: data.id, data: payload },
+          {
+            onSuccess: () => {
+              console.log("Check upload");
+              setKey(key+1);
+              dispatch(toggleDialog());
+            },
           },
-        },
-      );
-    } catch (e) {
-      console.log("Error while saving data.");
+        );
+      } catch (e) {
+        console.log("Error while saving data.");
+      }
     }
   };
 
+  const onCancelHandler = () => {
+    setKey(key+1);
+    props.onCancel(null);
+    dispatch(toggleDialog());
+  };
+
   return (
-    <Edit className="lg:w-[350px]" id={props.issue.id}>
+    <Edit key={key} className="lg:w-[350px]" id={props.issue.id}>
       <SimpleForm
         onSubmit={onSubmitHandler}
         toolbar={
           <Toolbar className="!px-[16px]">
             <div className="flex justify-between w-full">
               <Button
-                onClick={() => dispatch(toggleDialog())}
+                onClick={onCancelHandler}
                 variant="contained"
                 color="error"
               >
@@ -100,7 +112,7 @@ const IssueViewConfirmEdit = (props: any) => {
             source="assigne"
             choices={assignes}
             validate={required()}
-            label={t("issue.form.priority")}
+            label={t("ticket.common.assignee")}
             optionValue="id"
           />
         </div>
