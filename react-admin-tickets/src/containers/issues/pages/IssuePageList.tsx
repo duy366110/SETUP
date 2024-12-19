@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   List,
   ListToolbar,
@@ -7,7 +7,6 @@ import {
   ExportButton,
   ReferenceInput,
   SearchInput,
-  useUpdate,
   useReference,
   useGetList,
   useListContext,
@@ -32,7 +31,10 @@ const DealActions = (props: any) => {
   return (
     <TopToolbar>
       <FilterButton />
-      <Buttons className="!text-[13px] !py-[6px] !px-[8px]" click={props.onOpenDrawerIssue}>
+      <Buttons
+        className="!text-[13px] !py-[6px] !px-[8px]"
+        click={props.onOpenDrawerIssue}
+      >
         <AddIcon fontSize="small" />
         <span className="leading-[100%]">Thêm mới</span>
       </Buttons>
@@ -88,7 +90,7 @@ const IssuePageList = () => {
   const [issueUpdate, setIssueUpdate] = useState<any>(null);
 
   const dealFilters = [
-    <SearchInput source="q" alwaysOn />,
+    <SearchInput source="id" alwaysOn />,
     <ReferenceInput source="title" reference="issues-datas" />,
   ];
 
@@ -137,11 +139,11 @@ const IssuePageList = () => {
 
     if (!destination) return;
     if (source.droppableId !== destination.droppableId) {
-      let workItem = null;
+      let workItem: any = {};
 
       for (let elm of issuesDatasLocal) {
         if (elm.id.toString() === draggableId) {
-          workItem = elm;
+          Object.assign(workItem, elm);
           workItem.statusId = Number(destination.droppableId);
           break;
         }
@@ -202,9 +204,14 @@ const IssuePageList = () => {
           </div>
         </div>
 
-        <Dialogs title="Assign">
-          <IssueViewConfirmEdit issue={issueUpdate} />
-        </Dialogs>
+        {issueUpdate && (
+          <Dialogs title="Assign">
+            <IssueViewConfirmEdit
+              onCancel={setIssueUpdate}
+              issue={issueUpdate}
+            />
+          </Dialogs>
+        )}
 
         {openDrawer && issues && issues?.id && (
           <DrawerRight
