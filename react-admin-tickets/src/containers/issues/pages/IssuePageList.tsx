@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
 import {
-  Edit,
-  SimpleForm,
   List,
   ListToolbar,
   FilterButton,
   TopToolbar,
   ExportButton,
-  required,
   ReferenceInput,
   SearchInput,
-  SelectInput,
   useUpdate,
   useReference,
   useGetList,
@@ -64,17 +60,11 @@ const IssuePageList = () => {
 
   const { data: isseusStaus } = useGetList<any>("issues-status", {
     filter: { issueId: issues?.id },
-    // sort: { field: 'date', order: 'DESC' },
-    // pagination: { page: 1, perPage: 50 },
   });
 
   const { data: isseusDatas } = useGetList<any>("issues-datas", {
     filter: { issueId: issues?.id },
-    // sort: { field: 'date', order: 'DESC' },
-    // pagination: { page: 1, perPage: 50 },
   });
-
-  // const { data: assignes } = useGetList<any>("assignes");
 
   const t = useTranslate();
   const [update] = useUpdate("issues");
@@ -134,26 +124,6 @@ const IssuePageList = () => {
   }, [issuesDatasLocal]);
 
   /**
-   * Upload trạng thái mới của một issues items.
-   * @param data
-   */
-  const upload = async (data: any) => {
-    try {
-      await update(
-        "issues-datas",
-        { id: data.id, data },
-        {
-          onSuccess: () => {
-            setUpWorkspaces();
-          },
-        },
-      );
-    } catch (e) {
-      console.log("Error while saving data.");
-    }
-  };
-
-  /**
    * Sự kiện kéo issue items sang ô trạng thái mới
    * @param result
    * @returns
@@ -164,9 +134,9 @@ const IssuePageList = () => {
     if (!destination) return;
     if (source.droppableId !== destination.droppableId) {
       let workItem = null;
-      
-      for(let elm of issuesDatasLocal) {
-        if(elm.id.toString() === draggableId) {
+
+      for (let elm of issuesDatasLocal) {
+        if (elm.id.toString() === draggableId) {
           workItem = elm;
           workItem.statusId = Number(destination.droppableId);
           break;
@@ -175,10 +145,6 @@ const IssuePageList = () => {
 
       setIssueUpdate(workItem);
       dispatch(toggleDialog());
-
-      
-
-      // upload(workItem);
     }
   };
 

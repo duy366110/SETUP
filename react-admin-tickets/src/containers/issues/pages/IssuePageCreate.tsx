@@ -22,8 +22,6 @@ const IssuePageCreate: React.FC<any> = (props: any) => {
 
   const { data: isseusStatus } = useGetList<any>("issues-status", {
     filter: { issueId: 1 },
-    // sort: { field: 'date', order: 'DESC' },
-    // pagination: { page: 1, perPage: 50 },
   });
 
   const { data: priorities } = useGetList<any>("priorities");
