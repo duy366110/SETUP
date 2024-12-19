@@ -12,29 +12,27 @@ import {
   useGetList,
   useRedirect,
 } from "react-admin";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { RichTextInput } from "ra-input-rich-text";
 import { Button } from "@mui/material";
 
 const IssuePageEdit: React.FC<any> = (props: any) => {
   const [update] = useUpdate();
-  const { id } = useParams(); 
+  const { id } = useParams();
   const t = useTranslate();
   const redirect = useRedirect();
   const [key, setKey] = useState(0);
 
   const { data: isseusStatus } = useGetList<any>("issues-status", {
     filter: { issueId: 1 },
-    // sort: { field: 'date', order: 'DESC' },
-    // pagination: { page: 1, perPage: 50 },
   });
 
   const { data: priorities } = useGetList<any>("priorities");
   const { data: labels } = useGetList<any>("labels");
+  const { data: assignes } = useGetList<any>("assignes");
 
   const onEditHandler = async (data: any) => {
     if (data) {
-
       try {
         await update(
           "issues-datas",
@@ -108,6 +106,17 @@ const IssuePageEdit: React.FC<any> = (props: any) => {
               choices={labels}
               validate={required()}
               label={t("issue.form.label")}
+              optionValue="id"
+            />
+          </div>
+
+          <div className="col-span-12 md:col-span-6 lg:col-span-3 w-full">
+            <SelectInput
+              defaultValue={1}
+              source="assigne"
+              choices={assignes}
+              validate={required()}
+              label={t("issue.form.priority")}
               optionValue="id"
             />
           </div>

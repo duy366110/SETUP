@@ -1,15 +1,18 @@
-import React, { useMemo } from "react";
-import { SimpleForm, TextInput, useUpdate, useTranslate } from "react-admin";
+import React, { useMemo, useState } from "react";
+import {
+  Edit,
+  Form,
+  SimpleForm,
+  TextInput,
+  useUpdate,
+  useTranslate,
+} from "react-admin";
 
-interface IssueUtilDroppableMenuProps {
-  statusIssue?: any;
-}
-
-const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
-  statusIssue = null,
-}) => {
+const IssueViewWorkListMenu: React.FC<any> = (params: any) => {
   const [update] = useUpdate();
   const t = useTranslate();
+  const [title, setTitle] = useState<string>("");
+  const [key, setKey] = useState<number>(0);
   const colors = useMemo(() => {
     return [
       "#4bce97",
@@ -27,7 +30,7 @@ const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
     try {
       await update(
         "issues-status",
-        { id: statusIssue.id, data: payload },
+        { id: params.id, data: payload },
         {
           onSuccess: () => {
             console.log("Update success");
@@ -40,21 +43,32 @@ const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
   };
 
   const onChangeColor = async (color: string) => {
-    let payload = {
-      ...statusIssue,
-      bg: color,
-    };
-    upload(payload);
+    if(color) {
+      let payload = {
+        ...params,
+        bg: color,
+      };
+      upload(payload);
+    }
+  };
+
+  const onLeaveTitle = (event: any) => {
+    if (title) {
+      let payload = {
+        ...params,
+        name: title ?? "",
+        title: title ?? "",
+      };
+
+      setKey(key + 1);
+      setTitle("");
+      upload(payload);
+    }
   };
 
   const onChangeTitle = (event: any) => {
-    let payload = {
-      ...statusIssue,
-      name: event.target.value??"",
-      title: event.target.value??"",
-    };
-    upload(payload);
-  }
+    setTitle(event.target.value);
+  };
 
   return (
     <div className="p-4">
@@ -63,8 +77,13 @@ const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
           <h2 className="text-sm text-gray-500 mb-2">
             {t("issue.util.titleStatus")}
           </h2>
-          <SimpleForm className="!p-0" toolbar={<></>}>
-            <TextInput onBlur={onChangeTitle} source="title" />
+          <SimpleForm key={key} className="!p-0" toolbar={<> </>}>
+            <TextInput
+              onMouseLeave={onLeaveTitle}
+              onKeyUp={onChangeTitle}
+              source="title"
+              label={t("issue.form.title")}
+            />
           </SimpleForm>
         </div>
 
@@ -93,4 +112,4 @@ const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
   );
 };
 
-export default IssueUtilDroppableMenu;
+export default IssueViewWorkListMenu;

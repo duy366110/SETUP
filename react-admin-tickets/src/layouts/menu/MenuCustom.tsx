@@ -53,7 +53,7 @@ const MenuCustom = (props: any) => {
       <div className="border-t-2">
         <Menu className="!py-0">
           <MenuItemLink
-            className="!py-2 !text-sm"
+            className="!py-2 !text-xs"
             to="/tickets"
             primaryText={translate("ticket.title")}
             selected={location.pathname === "/tickets"}
@@ -61,7 +61,7 @@ const MenuCustom = (props: any) => {
           />
 
           <MenuItemLink
-            className="!py-2 !text-sm"
+            className="!py-2 !text-xs"
             to="/issues"
             primaryText={translate("issue.title")}
             selected={location.pathname === "/issues"}
@@ -69,7 +69,7 @@ const MenuCustom = (props: any) => {
           />
 
           <MenuItemLink
-            className="!py-2 !text-sm"
+            className="!py-2 !text-xs"
             to="/schedules"
             primaryText={translate("schedule.title")}
             selected={location.pathname === "/calendars"}

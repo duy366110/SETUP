@@ -1,4 +1,5 @@
 export interface IssuesDatasType {
+  assigne?: number,
   id?: number;
   issueId?: number;
   statusId?: number;
@@ -12,6 +13,7 @@ export interface IssuesDatasType {
 
 export const IssuesDatas: IssuesDatasType[] = [
   {
+    assigne: 1,
     id: 1,
     issueId: 1,
     statusId: 1,
@@ -24,6 +26,7 @@ export const IssuesDatas: IssuesDatasType[] = [
     updated_at: new Date("2024-12-13T09:00:00Z"),
   },
   {
+    assigne: 2,
     id: 2,
     issueId: 1,
     statusId: 1,
@@ -36,6 +39,7 @@ export const IssuesDatas: IssuesDatasType[] = [
     updated_at: new Date("2024-12-13T09:15:00Z"),
   },
   {
+    assigne: 1,
     id: 3,
     issueId: 1,
     statusId: 2,
@@ -48,6 +52,7 @@ export const IssuesDatas: IssuesDatasType[] = [
     updated_at: new Date("2024-12-12T17:00:00Z"),
   },
   {
+    assigne: 2,
     id: 4,
     issueId: 1,
     statusId: 2,
@@ -60,6 +65,7 @@ export const IssuesDatas: IssuesDatasType[] = [
     updated_at: new Date("2024-12-13T10:00:00Z"),
   },
   {
+    assigne: 2,
     id: 5,
     issueId: 1,
     statusId: 3,
