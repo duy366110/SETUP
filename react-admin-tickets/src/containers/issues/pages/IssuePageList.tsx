@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   List,
   ListToolbar,
@@ -28,10 +28,14 @@ import IssueViewRenderDragContent from "../view/IssueViewRenderDragContent";
 import IssueViewWorkListMenu from "../view/IssueViewWorkListMenu";
 import IssueViewConfirmEdit from "../view/IssueViewConfirmEdit";
 
-const DealActions = () => {
+const DealActions = (props: any) => {
   return (
     <TopToolbar>
       <FilterButton />
+      <Buttons className="!text-[13px] !py-[6px] !px-[8px]" click={props.onOpenDrawerIssue}>
+        <AddIcon fontSize="small" />
+        <span className="leading-[100%]">Thêm mới</span>
+      </Buttons>
       <ExportButton />
     </TopToolbar>
   );
@@ -67,7 +71,7 @@ const IssuePageList = () => {
   });
 
   const t = useTranslate();
-  const [update] = useUpdate("issues");
+  // const [update] = useUpdate("issues");
   const redirect = useRedirect();
 
   const mediaQuery: any = useSelector<RootState>(
@@ -180,19 +184,12 @@ const IssuePageList = () => {
             resource="issues-datas"
             className="mb-4"
             filters={dealFilters}
-            actions={<DealActions />}
+            actions={<DealActions onOpenDrawerIssue={onOpenDrawerIssue} />}
           />
 
           <div
             className={`${mode.type === "light" ? "bg-[#fbfbfb94]" : "bg-[#42424230]"} p-4 rounded-md`}
           >
-            <div className="mb-4">
-              <Buttons click={onOpenDrawerIssue}>
-                <AddIcon fontSize="small" />
-                <span className="leading-[100%]">Thêm mới</span>
-              </Buttons>
-            </div>
-
             <IssuePageListFilterBox setIssueDataLocal={setIssuesDatasLocal} />
 
             <PangeaList
