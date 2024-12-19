@@ -1,11 +1,8 @@
 import React, { useMemo } from "react";
 import { SimpleForm, TextInput, useUpdate, useTranslate } from "react-admin";
 
-interface IssueUtilDroppableMenuProps {
-  statusIssue?: any;
-}
 
-const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
+const IssueViewWorkListMenu: React.FC<any> = ({
   statusIssue = null,
 }) => {
   const [update] = useUpdate();
@@ -93,4 +90,4 @@ const IssueUtilDroppableMenu: React.FC<IssueUtilDroppableMenuProps> = ({
   );
 };
 
-export default IssueUtilDroppableMenu;
+export default IssueViewWorkListMenu;

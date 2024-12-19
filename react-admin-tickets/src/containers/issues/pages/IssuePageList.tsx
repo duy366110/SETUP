@@ -15,14 +15,15 @@ import {
   useRedirect,
 } from "react-admin";
 import { useSelector } from "react-redux";
-import { DragDropContext } from "@hello-pangea/dnd";
 import AddIcon from "@mui/icons-material/Add";
 
 import { RootState } from "@/store";
 import Buttons from "@/components/Buttons/Buttons";
 import DrawerRight from "@/components/Drawers/DrawerRight";
-import IssueViewDroppable from "../view/IssueViewDroppable";
 import IssueViewCreate from "../view/IssueViewCreate";
+import PangeaList from "@/components/Pangeas/PangeaList/index";
+import IssueViewRenderDragContent from "../view/IssueViewRenderDragContent";
+import IssueViewWorkListMenu from "../view/IssueViewWorkListMenu";
 
 const DealActions = () => {
   return (
@@ -73,9 +74,7 @@ const IssuePageList = () => {
     (state: any) => state.mediaQuery,
   );
 
-  const mode: any = useSelector<RootState>(
-    (state: any) => state.mode,
-  );
+  const mode: any = useSelector<RootState>((state: any) => state.mode);
 
   const [issuesDatasLocal, setIssuesDatasLocal] = useState<Array<any>>([]);
   const [issueList, setIssueList] = useState<any>(null);
@@ -201,32 +200,25 @@ const IssuePageList = () => {
             actions={<DealActions />}
           />
 
-          <div className={`${mode.type === "light" ? "bg-[#fbfbfb94]" : "bg-[#42424230]"} p-4 rounded-md`}>
+          <div
+            className={`${mode.type === "light" ? "bg-[#fbfbfb94]" : "bg-[#42424230]"} p-4 rounded-md`}
+          >
             <div className="mb-4">
               <Buttons click={onOpenDrawerIssue}>
-                <AddIcon className="text-gray-700" fontSize="small" />
-                <span className="leading-[100%]">Thêm mới sự cố</span>
+                <AddIcon fontSize="small" />
+                <span className="leading-[100%]">Thêm mới</span>
               </Buttons>
             </div>
 
-            <DragDropContext onDragEnd={onDragEnd}>
-              <div style={{ display: "flex", gap: "1rem" }}>
-                <IssuePageListFilterBox
-                  setIssueDataLocal={setIssuesDatasLocal}
-                />
-                {isseusStaus
-                  ?.sort((one, two) => one.order - two.order)
-                  ?.map((statusIssue: any) => {
-                    return (
-                      <IssueViewDroppable
-                        key={statusIssue?.id}
-                        statusIssue={statusIssue}
-                        issueList={issueList}
-                      />
-                    );
-                  })}
-              </div>
-            </DragDropContext>
+            <IssuePageListFilterBox setIssueDataLocal={setIssuesDatasLocal} />
+
+            <PangeaList
+              dragEnd={onDragEnd}
+              workList={isseusStaus}
+              workListMenu={IssueViewWorkListMenu}
+              workItems={issueList}
+              dragContent={IssueViewRenderDragContent}
+            />
           </div>
         </div>
 
