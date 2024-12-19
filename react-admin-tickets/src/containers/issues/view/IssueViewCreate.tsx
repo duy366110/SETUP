@@ -130,7 +130,7 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
               source="assigne"
               choices={assignes}
               validate={required()}
-              label={t("issue.form.priority")}
+              label={t("ticket.common.assignee")}
               optionValue="id"
             />
           </div>

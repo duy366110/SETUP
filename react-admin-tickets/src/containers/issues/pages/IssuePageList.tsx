@@ -29,7 +29,7 @@ import IssueViewConfirmEdit from "../view/IssueViewConfirmEdit";
 
 const DealActions = (props: any) => {
   return (
-    <TopToolbar>
+    <TopToolbar className="flex items-center gap-2">
       <FilterButton />
       <Buttons
         className="!text-[13px] !py-[6px] !px-[8px]"

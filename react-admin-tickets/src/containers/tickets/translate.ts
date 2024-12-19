@@ -32,7 +32,7 @@ export const translate = {
             title: "Tiêu đề",
             status: "Trạng thái",
             priority: "Độ ưu tiên",
-            assignee: "Người Phụ trách",
+            assignee: "Phụ trách",
             assigneeEmail: "Email người phụ trách",
             reporter: "Người báo cáo",
             reporterEmail: "Email người báo cáo",
