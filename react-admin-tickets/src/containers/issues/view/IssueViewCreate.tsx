@@ -31,6 +31,7 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
 
   const { data: priorities } = useGetList<any>("priorities");
   const { data: labels } = useGetList<any>("labels");
+  const { data: assignes } = useGetList<any>("assignes");
 
   const onCreateHandler = async (data: any) => {
     console.log(isseusStatus);
@@ -119,6 +120,17 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
               choices={labels}
               validate={required()}
               label={t("issue.form.label")}
+              optionValue="id"
+            />
+          </div>
+
+          <div className="col-span-12 w-full">
+            <SelectInput
+              defaultValue={1}
+              source="assigne"
+              choices={assignes}
+              validate={required()}
+              label={t("issue.form.priority")}
               optionValue="id"
             />
           </div>

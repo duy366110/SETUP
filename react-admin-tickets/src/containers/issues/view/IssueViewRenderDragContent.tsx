@@ -42,6 +42,10 @@ const IssueViewRenderDragContent = (parmas: any) => {
         </DivTheme>
       </div>
 
+      <h3>
+        {parmas.assigne}
+      </h3>
+
       <h4 className="text-sm font-semibold line-clamp-1 mb-3">
         {parmas.title}
       </h4>

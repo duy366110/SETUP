@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import {
+  Edit,
+  SimpleForm,
   List,
   ListToolbar,
   FilterButton,
   TopToolbar,
   ExportButton,
+  required,
   ReferenceInput,
   SearchInput,
+  SelectInput,
   useUpdate,
   useReference,
   useGetList,
@@ -14,16 +18,19 @@ import {
   useTranslate,
   useRedirect,
 } from "react-admin";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 
-import { RootState } from "@/store";
+import { RootState, RootDispatch } from "@/store";
+import { toggleDialog } from "@/store/slice/sliceDialog";
 import Buttons from "@/components/Buttons/Buttons";
+import Dialogs from "@/components/Dialogs/index";
 import DrawerRight from "@/components/Drawers/DrawerRight";
 import IssueViewCreate from "../view/IssueViewCreate";
 import PangeaList from "@/components/Pangeas/PangeaList/index";
 import IssueViewRenderDragContent from "../view/IssueViewRenderDragContent";
 import IssueViewWorkListMenu from "../view/IssueViewWorkListMenu";
+import IssueViewConfirmEdit from "../view/IssueViewConfirmEdit";
 
 const DealActions = () => {
   return (
@@ -66,6 +73,9 @@ const IssuePageList = () => {
     // sort: { field: 'date', order: 'DESC' },
     // pagination: { page: 1, perPage: 50 },
   });
+
+  // const { data: assignes } = useGetList<any>("assignes");
+
   const t = useTranslate();
   const [update] = useUpdate("issues");
   const redirect = useRedirect();
@@ -75,11 +85,13 @@ const IssuePageList = () => {
   );
 
   const mode: any = useSelector<RootState>((state: any) => state.mode);
+  const dispatch = useDispatch<RootDispatch>();
 
   const [issuesDatasLocal, setIssuesDatasLocal] = useState<Array<any>>([]);
   const [issueList, setIssueList] = useState<any>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [openCreateDrawer, setOpenCreateDrawer] = useState<boolean>(false);
+  const [issueUpdate, setIssueUpdate] = useState<any>(null);
 
   const dealFilters = [
     <SearchInput source="q" alwaysOn />,
@@ -128,8 +140,8 @@ const IssuePageList = () => {
   const upload = async (data: any) => {
     try {
       await update(
-        "issues",
-        { id: issues.id, data },
+        "issues-datas",
+        { id: data.id, data },
         {
           onSuccess: () => {
             setUpWorkspaces();
@@ -151,17 +163,22 @@ const IssuePageList = () => {
 
     if (!destination) return;
     if (source.droppableId !== destination.droppableId) {
-      let payload: any = {};
-      Object.assign(payload, issues);
-
-      payload.items = issuesDatasLocal?.map((item: any) => {
-        if (item.id === Number(draggableId)) {
-          item.statusId = Number(destination.droppableId);
+      let workItem = null;
+      
+      for(let elm of issuesDatasLocal) {
+        if(elm.id.toString() === draggableId) {
+          workItem = elm;
+          workItem.statusId = Number(destination.droppableId);
+          break;
         }
-        return item;
-      });
+      }
 
-      upload(payload);
+      setIssueUpdate(workItem);
+      dispatch(toggleDialog());
+
+      
+
+      // upload(workItem);
     }
   };
 
@@ -221,6 +238,10 @@ const IssuePageList = () => {
             />
           </div>
         </div>
+
+        <Dialogs title="Assign">
+          <IssueViewConfirmEdit issue={issueUpdate} />
+        </Dialogs>
 
         {openDrawer && issues && issues?.id && (
           <DrawerRight
