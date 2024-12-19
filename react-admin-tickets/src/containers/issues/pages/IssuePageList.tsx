@@ -14,15 +14,19 @@ import {
   useTranslate,
   useRedirect,
 } from "react-admin";
-import { useSelector } from "react-redux";
-import { DragDropContext } from "@hello-pangea/dnd";
+import { useSelector, useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 
-import { RootState } from "@/store";
+import { RootState, RootDispatch } from "@/store";
+import { toggleDialog } from "@/store/slice/sliceDialog";
 import Buttons from "@/components/Buttons/Buttons";
+import Dialogs from "@/components/Dialogs/index";
 import DrawerRight from "@/components/Drawers/DrawerRight";
-import IssueViewDroppable from "../view/IssueViewDroppable";
 import IssueViewCreate from "../view/IssueViewCreate";
+import PangeaList from "@/components/Pangeas/PangeaList/index";
+import IssueViewRenderDragContent from "../view/IssueViewRenderDragContent";
+import IssueViewWorkListMenu from "../view/IssueViewWorkListMenu";
+import IssueViewConfirmEdit from "../view/IssueViewConfirmEdit";
 
 const DealActions = () => {
   return (
@@ -56,15 +60,12 @@ const IssuePageList = () => {
 
   const { data: isseusStaus } = useGetList<any>("issues-status", {
     filter: { issueId: issues?.id },
-    // sort: { field: 'date', order: 'DESC' },
-    // pagination: { page: 1, perPage: 50 },
   });
 
   const { data: isseusDatas } = useGetList<any>("issues-datas", {
     filter: { issueId: issues?.id },
-    // sort: { field: 'date', order: 'DESC' },
-    // pagination: { page: 1, perPage: 50 },
   });
+
   const t = useTranslate();
   const [update] = useUpdate("issues");
   const redirect = useRedirect();
@@ -73,14 +74,14 @@ const IssuePageList = () => {
     (state: any) => state.mediaQuery,
   );
 
-  const mode: any = useSelector<RootState>(
-    (state: any) => state.mode,
-  );
+  const mode: any = useSelector<RootState>((state: any) => state.mode);
+  const dispatch = useDispatch<RootDispatch>();
 
   const [issuesDatasLocal, setIssuesDatasLocal] = useState<Array<any>>([]);
   const [issueList, setIssueList] = useState<any>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [openCreateDrawer, setOpenCreateDrawer] = useState<boolean>(false);
+  const [issueUpdate, setIssueUpdate] = useState<any>(null);
 
   const dealFilters = [
     <SearchInput source="q" alwaysOn />,
@@ -123,26 +124,6 @@ const IssuePageList = () => {
   }, [issuesDatasLocal]);
 
   /**
-   * Upload trạng thái mới của một issues items.
-   * @param data
-   */
-  const upload = async (data: any) => {
-    try {
-      await update(
-        "issues",
-        { id: issues.id, data },
-        {
-          onSuccess: () => {
-            setUpWorkspaces();
-          },
-        },
-      );
-    } catch (e) {
-      console.log("Error while saving data.");
-    }
-  };
-
-  /**
    * Sự kiện kéo issue items sang ô trạng thái mới
    * @param result
    * @returns
@@ -152,17 +133,18 @@ const IssuePageList = () => {
 
     if (!destination) return;
     if (source.droppableId !== destination.droppableId) {
-      let payload: any = {};
-      Object.assign(payload, issues);
+      let workItem = null;
 
-      payload.items = issuesDatasLocal?.map((item: any) => {
-        if (item.id === Number(draggableId)) {
-          item.statusId = Number(destination.droppableId);
+      for (let elm of issuesDatasLocal) {
+        if (elm.id.toString() === draggableId) {
+          workItem = elm;
+          workItem.statusId = Number(destination.droppableId);
+          break;
         }
-        return item;
-      });
+      }
 
-      upload(payload);
+      setIssueUpdate(workItem);
+      dispatch(toggleDialog());
     }
   };
 
@@ -201,34 +183,31 @@ const IssuePageList = () => {
             actions={<DealActions />}
           />
 
-          <div className={`${mode.type === "light" ? "bg-[#fbfbfb94]" : "bg-[#42424230]"} p-4 rounded-md`}>
+          <div
+            className={`${mode.type === "light" ? "bg-[#fbfbfb94]" : "bg-[#42424230]"} p-4 rounded-md`}
+          >
             <div className="mb-4">
               <Buttons click={onOpenDrawerIssue}>
-                <AddIcon className="text-gray-700" fontSize="small" />
-                <span className="leading-[100%]">Thêm mới sự cố</span>
+                <AddIcon fontSize="small" />
+                <span className="leading-[100%]">Thêm mới</span>
               </Buttons>
             </div>
 
-            <DragDropContext onDragEnd={onDragEnd}>
-              <div style={{ display: "flex", gap: "1rem" }}>
-                <IssuePageListFilterBox
-                  setIssueDataLocal={setIssuesDatasLocal}
-                />
-                {isseusStaus
-                  ?.sort((one, two) => one.order - two.order)
-                  ?.map((statusIssue: any) => {
-                    return (
-                      <IssueViewDroppable
-                        key={statusIssue?.id}
-                        statusIssue={statusIssue}
-                        issueList={issueList}
-                      />
-                    );
-                  })}
-              </div>
-            </DragDropContext>
+            <IssuePageListFilterBox setIssueDataLocal={setIssuesDatasLocal} />
+
+            <PangeaList
+              dragEnd={onDragEnd}
+              workList={isseusStaus}
+              workListMenu={IssueViewWorkListMenu}
+              workItems={issueList}
+              dragContent={IssueViewRenderDragContent}
+            />
           </div>
         </div>
+
+        <Dialogs title="Assign">
+          <IssueViewConfirmEdit issue={issueUpdate} />
+        </Dialogs>
 
         {openDrawer && issues && issues?.id && (
           <DrawerRight

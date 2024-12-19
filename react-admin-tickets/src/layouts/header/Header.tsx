@@ -60,7 +60,7 @@ const Header = (props: any) => {
         <div className="flex items-center justify-between gap-2 w-full grow shrink">
           <div className="flex gap-1">
             <Button
-              className="!rounded-full !min-w-fit !pl-0"
+              className="!rounded-full !min-w-fit !p-1"
               onClick={onToggleSidebar}
             >
               {open ? (
