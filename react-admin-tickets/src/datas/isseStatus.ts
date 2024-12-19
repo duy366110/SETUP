@@ -9,7 +9,7 @@ export interface IssueStatusType {
 
 export const IssueStatus: IssueStatusType[] = [
   {
-    bg: "#f4f5f7",
+    bg: "#F1F9F6",
     id: 1,
     issueId: 1,
     name: "New",
@@ -17,7 +17,7 @@ export const IssueStatus: IssueStatusType[] = [
     title: "New",
   },
   {
-    bg: "#f4f5f7",
+    bg: "#F1F9F6",
     id: 2,
     issueId: 1,
     name: "In progress",
@@ -25,7 +25,7 @@ export const IssueStatus: IssueStatusType[] = [
     title: "In progress",
   },
   {
-    bg: "#f4f5f7",
+    bg: "#F1F9F6",
     id: 3,
     issueId: 1,
     name: "Done",
