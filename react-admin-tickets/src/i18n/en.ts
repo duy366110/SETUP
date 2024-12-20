@@ -1,4 +1,5 @@
 import { TranslationMessages } from 'react-admin';
+import { mergeTranslations  } from 'ra-core';
 import englishMessages from 'ra-language-english';
 import { translate as tickets } from '@/containers/tickets/translate';
 import { translate as issues } from "@/containers/issues/translate";
@@ -7,6 +8,7 @@ import { translate as schedule } from "@/containers/schedules/translate";
 
 const customEnglishMessages: TranslationMessages = {
     ...englishMessages,
+    ...mergeTranslations,
     pos: {
         home: "Home",
         search: 'Search',
@@ -83,8 +85,7 @@ const customEnglishMessages: TranslationMessages = {
     schedule: {...schedule.en},
     ticket: {...tickets.en},
     issue: {...issues.en},
-    dashboard: {...dashboard.en}
-    
+    dashboard: {...dashboard.en},
 };
 
 export default customEnglishMessages;

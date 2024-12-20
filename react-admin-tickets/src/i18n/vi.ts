@@ -1,4 +1,5 @@
 import { TranslationMessages } from 'react-admin';
+import { mergeTranslations  } from 'ra-core';
 import vietnameseMessages from 'ra-language-vietnamese';
 import { translate as tickets } from '@/containers/tickets/translate';
 import { translate as issues } from "@/containers/issues/translate";
@@ -7,6 +8,7 @@ import { translate as schedule } from "@/containers/schedules/translate";
 
 const customVietnameseMessages: TranslationMessages = {
     ...vietnameseMessages,
+    ...mergeTranslations,
     pos: {
         home: "Trang chủ",
         search: 'Tìm kiếm',
