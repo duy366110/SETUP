@@ -1,0 +1,335 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: Home IOT API
+  description: The API for the EatBacon IOT project
+servers:
+  - url: https://virtserver.swaggerhub.com/DUY377110/tickets/1.0.0
+    description: SwaggerHub API Auto Mocking
+paths:
+  /issues:
+    get:
+      tags:
+        - Issues
+      summary: Get all issues with filters and sorting
+      description: Returns all registered issues with optional pagination, filters, and sorting.
+      operationId: getIssuesWithFilters
+      parameters:
+        - in: query
+          name: displayedFilters
+          description: Filters to display in the issue list (e.g., title, status, priority, createdAt).
+          required: false
+          schema:
+            type: string
+            example: '{"title":true,"status":true,"priority":true,"createdAt":true}'
+        - in: query
+          name: filter
+          description: Query to filter issues based on specific fields (e.g., search term, status, priority).
+          required: false
+          schema:
+            type: string
+            example: '{"q":"t","status":1,"priority":1}'
+        - in: query
+          name: order
+          description: Sorting order of the results (e.g., ASC or DESC).
+          required: false
+          schema:
+            type: string
+            example: "DESC"
+        - in: query
+          name: page
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            format: int32
+            example: 1
+        - in: query
+          name: perPage
+          description: Number of items per page for pagination.
+          required: false
+          schema:
+            type: integer
+            format: int32
+            example: 25
+        - in: query
+          name: sort
+          description: Field to sort the results by.
+          required: false
+          schema:
+            type: string
+            example: "title"
+      responses:
+        "200":
+          description: A list of registered issues with applied filters, sorting, and pagination
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Issue"
+                  total:
+                    type: integer
+                    format: int32
+                    example: 2
+
+    post:
+      tags:
+        - Issues
+      summary: Create a new issue
+      description: Creates a new issue and returns the created issue's details.
+      operationId: createIssue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Issue"
+      responses:
+        "200":
+          description: The created issue
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Issue"
+
+  /issues/{id}:
+    get:
+      tags:
+        - Issues
+      summary: Get an issue by ID
+      description: Returns a single issue based on the provided ID.
+      operationId: getOneIssue
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the issue to retrieve.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: The requested issue
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Issue"
+
+    put:
+      tags:
+        - Issues
+      summary: Update an issue by ID
+      description: Updates the details of an existing issue and returns the updated issue.
+      operationId: updateIssue
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the issue to update.
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Issue"
+      responses:
+        "200":
+          description: The updated issue
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Issue"
+
+    delete:
+      tags:
+        - Issues
+      summary: Delete an issue
+      description: Deletes an issue by its ID and returns a success response.
+      operationId: deleteIssue
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the issue to be deleted.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: Issue deletion successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    example: {}
+
+  /issues/updateMany:
+    put:
+      tags:
+        - Issues
+      summary: Update multiple issues
+      description: Updates multiple issues based on a list of IDs and new data, and returns the updated issues.
+      operationId: updateManyIssues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: integer
+                    format: int32
+                  example: [1, 2, 3]
+                updates:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Issue"
+                  description: The list of issue updates to apply.
+      responses:
+        "200":
+          description: A list of updated issues
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Issue"
+
+  /issues/deleteMany:
+    delete:
+      tags:
+        - Issues
+      summary: Delete many issues
+      description: Deletes multiple issues based on a list of IDs.
+      operationId: deleteManyIssues
+      parameters:
+        - in: query
+          name: ids
+          description: A comma-separated list of issue IDs to delete.
+          required: true
+          schema:
+            type: string
+            example: "1,2,3"
+      responses:
+        "200":
+          description: Multiple issues deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    example: {}
+
+  /issues/getMany:
+    get:
+      tags:
+        - Issues
+      summary: Get many issues by their IDs
+      description: Returns issues based on a list of IDs.
+      operationId: getManyIssues
+      parameters:
+        - in: query
+          name: ids
+          description: A comma-separated list of issue IDs to fetch.
+          required: true
+          schema:
+            type: string
+            example: "1,2,3"
+      responses:
+        "200":
+          description: A list of issues
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Issue"
+
+  /issues/getManyReference:
+    get:
+      tags:
+        - Issues
+      summary: Get many issues related to a specific entity by reference ID
+      description: Returns issues associated with a specific reference ID (e.g., related to a project or category).
+      operationId: getManyReferenceIssues
+      parameters:
+        - in: query
+          name: referenceId
+          description: The ID of the reference entity to fetch related issues for
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - in: query
+          name: skip
+          description: Number of records to skip
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: limit
+          description: Maximum number of records to return
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: A list of issues related to the specified reference entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Issue"
+
+components:
+  schemas:
+    Issue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        title:
+          type: string
+          example: "Issue 1"
+        bg:
+          type: string
+          example: "#FFFFFF"
+      required:
+        - id
+        - title
+
