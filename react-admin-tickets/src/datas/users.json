@@ -2,16 +2,22 @@
   "users": [
     {
       "id": 1,
-      "username": "janedoe",
-      "password": "password",
-      "fullName": "Jane Doe",
+      "username": "admin",
+      "password": "admin",
+      "fullName": "Hiêp Lê",
+      "email": "hieple@gmail.com",
+      "phone": "0352538745",
+      "address": "377-379 Điện Biên Phủ, Phường 25, Bình Thạnh, Hồ Chí Minh 700000, Vietnam",
       "avatar": "https://yt3.ggpht.com/hBMUkAvP8cvh1TolYP3gGeKlwawAqlPx_RZLz_Gat5xt9eh24x5GMq-w7NKdC8btoHUPEW9Hfw=s88-c-k-c0x00ffffff-no-rj"
     },
     {
       "id": 2,
-      "username": "johndoe",
-      "password": "password",
-      "fullName": "John Doe",
+      "username": "user",
+      "password": "user",
+      "fullName": "Duy Nguyễn",
+      "email": "duynguyen@gmail.com",
+      "phone": "0353336782",
+      "address": "29 Đường số 1, Phường 26, Bình Thạnh, Hồ Chí Minh, Vietnam",
       "avatar": "https://yt3.ggpht.com/5WF--1IGivVelIOAkJbGTIMFhari_buwIIo5aPWrfiqlpXpR4lqRvGNyQpiMXijlsz3LISDnNQ=s88-c-k-c0x00ffffff-no-rj"
     }
   ]

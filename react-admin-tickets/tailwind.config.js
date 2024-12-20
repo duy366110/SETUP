@@ -4,7 +4,11 @@ module.exports = {
       "./src/**/*.{js,jsx,ts,tsx}", // Chỉ định các file để Tailwind có thể áp dụng
   ],
   theme: {
-      extend: {},
+      extend: {
+        colors: {
+          main: "#ee0033"
+        }
+      },
   },
   plugins: [],
 };

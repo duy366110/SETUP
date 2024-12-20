@@ -79,8 +79,8 @@ const Login = () => {
                             justifyContent: 'center',
                         }}
                     >
-                        <Avatar sx={{ bgcolor: 'secondary.main' }}>
-                            <LockIcon />
+                        <Avatar className="!bg-white border border-main flex items-center justify-center p-2" sx={{ bgcolor: 'secondary.main' }}>
+                            <img src="./assets/images/favicon.png" alt="logo magazine" />
                         </Avatar>
                     </Box>
                     <Box
@@ -91,7 +91,7 @@ const Login = () => {
                             color: theme => theme.palette.grey[500],
                         }}
                     >
-                        Hint: demo / demo
+                        Hint: admin / admin
                     </Box>
                     <Box sx={{ padding: '0 1em 1em 1em' }}>
                         <Box sx={{ marginTop: '1em' }}>

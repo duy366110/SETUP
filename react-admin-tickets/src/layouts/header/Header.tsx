@@ -86,14 +86,16 @@ const Header = (props: any) => {
               <LocalesMenuButton />
               <UserMenu icon={<AccountCircleIcon />}>
                 <div className="w-[250px]">
-                  <div className="border-b px-6 py-2">
-                    <p className="text-sm font-semibold mb-1">
-                      {identity?.username}
-                    </p>
-                    <p className="text-sm text-slate-400">
-                      @{identity?.username}
-                    </p>
-                  </div>
+                  {identity && (
+                    <div className="border-b px-6 py-2">
+                      <p className="text-sm font-semibold mb-1">
+                        {identity?.fullName}
+                      </p>
+                      <p className="text-sm text-slate-400">
+                        {identity?.email}
+                      </p>
+                    </div>
+                  )}
 
                   <div className="flex flex-col gap-2 py-2">
                     <MenuItemLink
