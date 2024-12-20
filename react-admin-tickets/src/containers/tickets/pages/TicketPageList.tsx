@@ -93,7 +93,7 @@ const TicketPageList = (props: any) => {
   };
 
   return (
-    <div className="grid grid-cols-12">
+    <div className="grid grid-cols-12 w-full overflow-y-auto">
       <List
         title={translate("ticket.title")}
         filters={visitorFilters}
