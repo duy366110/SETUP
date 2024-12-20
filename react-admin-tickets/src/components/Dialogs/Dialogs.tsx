@@ -24,7 +24,7 @@ const Dialogs: React.FC<DialogsProps> = ({ children = null, title = "" }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+        <DialogTitle className="!px-[15px]" id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent className="!px-4 !pb-4">{children}</DialogContent>
       </Dialog>
     </React.Fragment>

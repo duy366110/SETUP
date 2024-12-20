@@ -205,7 +205,7 @@ const IssuePageList = () => {
         </div>
 
         {issueUpdate && (
-          <Dialogs title="Assign">
+          <Dialogs title={t("issue.form.confirmEdit")}>
             <IssueViewConfirmEdit
               onCancel={setIssueUpdate}
               issue={issueUpdate}
