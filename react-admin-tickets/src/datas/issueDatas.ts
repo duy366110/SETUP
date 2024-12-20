@@ -9,6 +9,7 @@ export interface IssuesDatasType {
   priority?: number;
   created_at?: Date;
   updated_at?: Date;
+  dule_date?: Date;
 }
 
 export const IssuesDatas: IssuesDatasType[] = [
@@ -24,6 +25,7 @@ export const IssuesDatas: IssuesDatasType[] = [
     priority: 1,
     created_at: new Date("2024-12-10T14:30:00Z"),
     updated_at: new Date("2024-12-13T09:00:00Z"),
+    dule_date: new Date("2024-12-25T09:00:00Z"),
   },
   {
     assigne: 2,
@@ -37,6 +39,7 @@ export const IssuesDatas: IssuesDatasType[] = [
     priority: 2,
     created_at: new Date("2024-12-11T10:15:00Z"),
     updated_at: new Date("2024-12-13T09:15:00Z"),
+    dule_date: new Date("2024-12-13T09:00:00Z"),
   },
   {
     assigne: 1,
@@ -50,6 +53,7 @@ export const IssuesDatas: IssuesDatasType[] = [
     priority: 3,
     created_at: new Date("2024-12-09T16:45:00Z"),
     updated_at: new Date("2024-12-12T17:00:00Z"),
+    dule_date: new Date("2024-12-13T09:00:00Z"),
   },
   {
     assigne: 2,
@@ -63,6 +67,7 @@ export const IssuesDatas: IssuesDatasType[] = [
     priority: 3,
     created_at: new Date("2024-12-10T09:00:00Z"),
     updated_at: new Date("2024-12-13T10:00:00Z"),
+    dule_date: new Date("2024-12-13T09:00:00Z"),
   },
   {
     assigne: 2,
@@ -76,5 +81,6 @@ export const IssuesDatas: IssuesDatasType[] = [
     priority: 2,
     created_at: new Date("2024-12-12T08:00:00Z"),
     updated_at: new Date("2024-12-13T11:30:00Z"),
+    dule_date: new Date("2024-12-13T09:00:00Z"),
   },
 ];

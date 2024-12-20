@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   CreateBase,
+  DateTimeInput,
   SaveButton,
   SimpleForm,
   TextInput,
@@ -32,6 +33,9 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
   const { data: priorities } = useGetList<any>("priorities");
   const { data: labels } = useGetList<any>("labels");
   const { data: assignes } = useGetList<any>("assignes");
+  const currentDate = useMemo(() => {
+    return new Date().toISOString();
+  }, []);
 
   const onCreateHandler = async (data: any) => {
     console.log(isseusStatus);
@@ -132,6 +136,14 @@ const IssueViewCreate: React.FC<IssueViewCreateProps> = ({
               validate={required()}
               label={t("ticket.common.assignee")}
               optionValue="id"
+            />
+          </div>
+
+          <div className="col-span-12 w-full">
+            <DateTimeInput
+              source="dule_date"
+              label={t("issue.form.dueDate")}
+              defaultValue={currentDate}
             />
           </div>
 

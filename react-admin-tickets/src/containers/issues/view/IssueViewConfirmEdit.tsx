@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Edit,
   SimpleForm,
   SelectInput,
+  DateTimeInput,
   required,
   SaveButton,
   TextInput,
@@ -21,6 +22,9 @@ const IssueViewConfirmEdit = (props: any) => {
   const { data: labels } = useGetList<any>("labels");
   const { data: assignes } = useGetList<any>("assignes");
   const dispatch = useDispatch<RootDispatch>();
+  const currentDate = useMemo(() => {
+    return new Date().toISOString();
+  }, []);
   const [update] = useUpdate();
   const t = useTranslate();
   const [key, setKey] = useState<number>(0);
@@ -33,6 +37,7 @@ const IssueViewConfirmEdit = (props: any) => {
         label: data.label,
         priority: data.priority,
         title: data.title,
+        dule_date: data.dule_date,
       };
 
       try {
@@ -42,7 +47,7 @@ const IssueViewConfirmEdit = (props: any) => {
           {
             onSuccess: () => {
               console.log("Check upload");
-              setKey(key+1);
+              setKey(key + 1);
               dispatch(toggleDialog());
             },
           },
@@ -54,7 +59,7 @@ const IssueViewConfirmEdit = (props: any) => {
   };
 
   const onCancelHandler = () => {
-    setKey(key+1);
+    setKey(key + 1);
     props.onCancel(null);
     dispatch(toggleDialog());
   };
@@ -114,6 +119,14 @@ const IssueViewConfirmEdit = (props: any) => {
             validate={required()}
             label={t("ticket.common.assignee")}
             optionValue="id"
+          />
+        </div>
+
+        <div className="w-full">
+          <DateTimeInput
+            source="dule_date"
+            label={t("issue.form.dueDate")}
+            defaultValue={currentDate}
           />
         </div>
       </SimpleForm>

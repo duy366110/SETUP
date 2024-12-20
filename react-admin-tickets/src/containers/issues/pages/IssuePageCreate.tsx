@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Create,
+  DateTimeInput,
   SimpleForm,
   SaveButton,
   TextInput,
@@ -28,6 +29,10 @@ const IssuePageCreate: React.FC<any> = (props: any) => {
   const { data: labels } = useGetList<any>("labels");
   const { data: assignes } = useGetList<any>("assignes");
   const redirect = useRedirect();
+
+  const currentDate = useMemo(() => {
+    return new Date().toISOString();
+  }, []);
 
   const onCreateHandler = async (data: any) => {
     if (1) {
@@ -124,6 +129,14 @@ const IssuePageCreate: React.FC<any> = (props: any) => {
               validate={required()}
               label={t("ticket.common.assignee")}
               optionValue="id"
+            />
+          </div>
+
+          <div className="col-span-12 md:col-span-6 lg:col-span-3 w-full">
+            <DateTimeInput
+              source="dule_date"
+              label={t("issue.form.dueDate")}
+              defaultValue={currentDate}
             />
           </div>
 
