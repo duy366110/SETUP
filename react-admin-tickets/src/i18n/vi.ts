@@ -73,6 +73,8 @@ const customVietnameseMessages: TranslationMessages = {
         phone: "Số điện thoại",
         department: "Phòng bang",
         address: "Địa chỉ",
+        editProfile: "Cập nhật thông tin",
+        setting: "Cài đặt",
     },
     breadcrumb: {
         schedules: "Lịch trình",

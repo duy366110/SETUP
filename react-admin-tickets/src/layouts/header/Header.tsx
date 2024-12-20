@@ -24,7 +24,7 @@ import { RootState } from "@/store";
 const Header = (props: any) => {
   const location = useLocation();
   const [title, setTitle] = useState("");
-  const translate = useTranslate();
+  const t = useTranslate();
   const [open, setOpen] = useSidebarState();
   const { isPending, identity }: any = useGetIdentity();
 
@@ -46,7 +46,7 @@ const Header = (props: any) => {
       switch (pathname) {
         case "/":
         default:
-          setTitle(translate("dashboard.title"));
+          setTitle(t("dashboard.title"));
           break;
       }
     } else {
@@ -101,23 +101,42 @@ const Header = (props: any) => {
                     <MenuItemLink
                       className="!text-sm"
                       to="/profile"
-                      primaryText={translate("user.editProfile", {
-                        _: "Edit profile",
-                      })}
+                      primaryText={t("common.editProfile")}
                       leftIcon={<PersonIcon fontSize="small" />}
+                      sx={{
+                        "& .MuiListItemIcon-root": {
+                          marginRight: "10px",
+                          minWidth: "fit-content",
+                        },
+                      }}
                     />
                     <MenuItemLink
                       className="!text-sm"
                       to="/preferences"
-                      primaryText={translate("user.preferences", {
-                        _: "Preferences",
-                      })}
+                      primaryText={t("common.setting")}
                       leftIcon={<SettingsIcon fontSize="small" />}
+                      sx={{
+                        "& .MuiListItemIcon-root": {
+                          marginRight: "10px",
+                          minWidth: "fit-content",
+                        },
+                      }}
                     />
                   </div>
 
                   <div className="border-t">
-                    <Logout className="!text-sm" />
+                    <Logout
+                      sx={{
+                        "& .RaLogout-icon": {
+                          marginRight: "10px",
+                          minWidth: "fit-content",
+                        },
+                        "& .MuiTypography-root": {
+                          fontSize: " 0.875rem",
+                          fontWeight: "600",
+                        },
+                      }}
+                    />
                   </div>
                 </div>
               </UserMenu>

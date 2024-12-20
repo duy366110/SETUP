@@ -73,6 +73,8 @@ const customEnglishMessages: TranslationMessages = {
         phone: "Phone",
         department: "Department",
         address: "Address",
+        editProfile: "Edit profile",
+        setting: "Setting",
     },
     breadcrumb: {
         schedules: "Schedule",
