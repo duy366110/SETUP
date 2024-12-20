@@ -190,7 +190,7 @@ const IssuePageList = () => {
           />
 
           <div
-            className={`${mode.type === "light" ? "bg-[#fbfbfb94]" : "bg-[#42424230]"} p-4 rounded-md`}
+            className={`${mode.type === "light" ? "bg-[#fbfbfb94]" : "bg-[#42424230]"} p-4 rounded-md w-full overflow-y-auto`}
           >
             <IssuePageListFilterBox setIssueDataLocal={setIssuesDatasLocal} />
 
