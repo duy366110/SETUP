@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Edit,
   SaveButton,
+  DateTimeInput,
   SimpleForm,
   TextInput,
   SelectInput,
@@ -30,6 +31,10 @@ const IssuePageEdit: React.FC<any> = (props: any) => {
   const { data: priorities } = useGetList<any>("priorities");
   const { data: labels } = useGetList<any>("labels");
   const { data: assignes } = useGetList<any>("assignes");
+
+  const currentDate = useMemo(() => {
+    return new Date().toISOString();
+  }, []);
 
   const onEditHandler = async (data: any) => {
     if (data) {
@@ -118,6 +123,14 @@ const IssuePageEdit: React.FC<any> = (props: any) => {
               validate={required()}
               label={t("ticket.common.assignee")}
               optionValue="id"
+            />
+          </div>
+
+          <div className="col-span-12 md:col-span-6 lg:col-span-3 w-full">
+            <DateTimeInput
+              source="dule_date"
+              label={t("issue.form.dueDate")}
+              defaultValue={currentDate}
             />
           </div>
 

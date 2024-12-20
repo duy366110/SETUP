@@ -11,6 +11,7 @@ export const translate = {
             status: "Issue status",
             priority: "Priorities",
             label: "Labels",
+            dueDate: "Due date",
             confirmEdit: "Adjust information",
         }
     },
@@ -26,6 +27,7 @@ export const translate = {
             status: "Trạng thái sự cố",
             priority: "Độ ưu tiên",
             label: "Nhãn",
+            dueDate: "Ngày hết hạn",
             confirmEdit: "Điều chỉnh thông tin",
         }
     }
