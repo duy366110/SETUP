@@ -5,6 +5,7 @@ import { translate as tickets } from '@/containers/tickets/translate';
 import { translate as issues } from "@/containers/issues/translate";
 import { translate as dashboard} from "@/containers/dashboard/translate";
 import { translate as schedule } from "@/containers/schedules/translate";
+import { translate as stepper } from "@/components/Steppers/locales";
 
 const customEnglishMessages: TranslationMessages = {
     ...englishMessages,
@@ -88,6 +89,7 @@ const customEnglishMessages: TranslationMessages = {
     ticket: {...tickets.en},
     issue: {...issues.en},
     dashboard: {...dashboard.en},
+    stepper: {...stepper.en}
 };
 
 export default customEnglishMessages;

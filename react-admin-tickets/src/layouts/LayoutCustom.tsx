@@ -11,7 +11,7 @@ import { usePathUrl } from "@/hooks/usePathUrl";
 import MenuCustom from "./menu/MenuCustom";
 import AppBarCustom from "./appBar/AppBarCustom";
 import Header from "./header/Header";
-import { BreadCrumbs } from "@/components/breadcrumbs/BreadCrumbs";
+import { BreadCrumbs } from "@/components/Breadcrumbs/BreadCrumbs";
 
 
 const LayoutCustom = (props: any) => {
