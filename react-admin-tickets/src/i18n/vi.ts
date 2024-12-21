@@ -5,6 +5,7 @@ import { translate as tickets } from '@/containers/tickets/translate';
 import { translate as issues } from "@/containers/issues/translate";
 import { translate as dashboard} from "@/containers/dashboard/translate";
 import { translate as schedule } from "@/containers/schedules/translate";
+import { translate as stepper } from "@/components/Steppers/locales";
 
 const customVietnameseMessages: TranslationMessages = {
     ...vietnameseMessages,
@@ -87,7 +88,8 @@ const customVietnameseMessages: TranslationMessages = {
     schedule: {...schedule.vi},
     ticket:{...tickets.vi},
     issue: {...issues.vi},
-    dashboard: {...dashboard.vi}
+    dashboard: {...dashboard.vi},
+    stepper: {...stepper.vi}
 };
 
 export default customVietnameseMessages;
