@@ -1,12 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import * as countries from 'world-countries';
+import { CountryService } from "./country.service";
 import * as _ from 'lodash';
+import { Country } from "../countries.type";
 
 
 @Injectable()
 export class CountriesService {
 
+    constructor(private readonly countryService: CountryService) { }
+
     getAllCountries(fields: Array<string>, page: number = 1, limit: number = 10, sortBy: Array<string> = ['id'], order: string = 'asc') {
+        let countries: Array<Country> = this.countryService.getContries();
         let data:any = [];
 
         let pagination: any = {
@@ -18,28 +22,28 @@ export class CountriesService {
 
         
         if(Array.isArray(countries)) {
-            let countriesList = [];
+            let countrys = [];
 
-            countriesList = [...countries];
+            countrys = [...countries];
             if(fields.length) {
-                countriesList = [];
-                countriesList = countries?.map((country: any) => {
-                    let countryData: any = {};
+                countrys = [];
+                countrys = countries?.map((country: any) => {
+                    let data: any = {};
 
                     for(let key of fields) {
-                        countryData[key] = country[key];
+                        data[key] = country[key];
                     }
 
-                    countryData.title = countryData.name.common;
-                    countryData.id = countryData.name.common.split(/\s+/).join("")?.toUpperCase();
-                    return countryData;
+                    data.title = country.title;
+                    data.id = country.id;
+                    return data;
                 })
             }
 
             const start = (page - 1) * limit;
             const limited = page * limit;
 
-            data = countriesList.slice(start, limited);
+            data = countrys.slice(start, limited);
             pagination.total = countries.length;
             pagination.totalPages = Math.ceil(countries.length / limit);
         }
@@ -51,5 +55,16 @@ export class CountriesService {
         return {
             data, pagination
         };
+    }
+
+
+    getCountryById(id: string) {
+        let countries: Array<Country> = this.countryService.getContries();
+        if(countries.length) {
+            let country = countries.find((country: Country) => country.id.toLowerCase() === id.toLocaleLowerCase());
+            return country;
+        }
+
+        return null;
     }
 }
